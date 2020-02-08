@@ -1,0 +1,17 @@
+[package]
+name = "libevent-sys"
+version = "0.1.0"
+authors = ["Alekos Filini <alekos.filini@gmail.com>"]
+edition = "2018"
+build = "build.rs"
+links = "event"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[build-dependencies]
+cc = "1.0"
+autotools = "0.2"
+
+[lib]
+name = "event_sys"
+path = "src/lib.rs"
