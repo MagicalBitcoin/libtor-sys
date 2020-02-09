@@ -29,6 +29,7 @@ fn main() {
     let event_dir = PathBuf::from(env::var("DEP_EVENT_ROOT").unwrap());
     let openssl_dir = PathBuf::from(env::var("DEP_OPENSSL_ROOT").unwrap());
     let mut zlib_dir = PathBuf::from(env::var("DEP_Z_ROOT").unwrap());
+    let zlib_include_dir = zlib_dir.join("include");
     zlib_dir.push("build");
 
     let full_version = env!("CARGO_PKG_VERSION");
@@ -45,6 +46,8 @@ fn main() {
         .enable("static-tor", None)
         .enable("static-openssl", None)
         .enable("static-libevent", None)
+        .enable("static-zlib", None)
+        .cflag(format!("-I{}", zlib_include_dir.display()))
         .disable("system-torrc", None)
         .disable("asciidoc", None)
         .disable("systemd", None)
@@ -53,7 +56,7 @@ fn main() {
         .disable("largefile", None)
         .disable("unittests", None)
         .disable("tool-name-check", None)
-        .disable("module-relay", None)
+        .disable("module-dirauth", None)
         .disable("rust", None)
         .build();
     //println!("{:?}", tor);

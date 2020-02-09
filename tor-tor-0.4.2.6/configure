@@ -9777,7 +9777,7 @@ struct ssl_cipher_st;
 int
 main ()
 {
-                        if (getenv("THIS_SHOULDNT_BE_SET_X201803")) SSL_CIPHER_get_id((void *)0);
+
   ;
   return 0;
 }
@@ -9800,7 +9800,7 @@ rm -f core conftest.err conftest.$ac_objext \
 int
 main ()
 {
-                        if (getenv("THIS_SHOULDNT_BE_SET_X201803")) SSL_CIPHER_get_id((void *)0);
+
   ;
   return 0;
 }
@@ -9988,7 +9988,7 @@ struct ssl_cipher_st;
 int
 main ()
 {
-                        if (getenv("THIS_SHOULDNT_BE_SET_X201803")) SSL_CIPHER_get_id((void *)0);
+
   ;
   return 0;
 }

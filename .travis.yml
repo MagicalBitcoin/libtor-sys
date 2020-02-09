@@ -10,7 +10,7 @@ before_script:
   - autoreconf --force --install
   - cd ../../
   - cd tor-tor-*
-  - sh autogen.sh
+  - autoreconf --force --install
   - cd ../
 script:
   - cargo fmt -- --check --verbose
@@ -18,3 +18,7 @@ script:
 
 notifications:
   email: false
+
+before_cache:
+  - rm -rf "$TRAVIS_HOME/.cargo/registry/src"
+cache: cargo
