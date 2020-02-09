@@ -5,13 +5,16 @@ rust:
 #  - 1.22.0
 before_script:
   - rustup component add rustfmt
+  - aclocal --version
+  - cd libevent-sys/libevent-*
+  - autoreconf --force --install
+  - cd ../../
+  - cd tor-tor-*
+  - sh autogen.sh
+  - cd ../
 script:
   - cargo fmt -- --check --verbose
   - cargo test -vv
 
 notifications:
   email: false
-
-before_cache:
-  - rm -rf "$TRAVIS_HOME/.cargo/registry/src"
-cache: cargo

@@ -1,3 +1,5 @@
+#![allow(non_camel_case_types)]
+
 use std::os::raw::{c_char, c_int, c_void};
 
 type tor_main_configuration_t = c_void;
@@ -20,7 +22,7 @@ mod tests {
     #[test]
     fn test_start() {
         unsafe {
-            let mut config = tor_main_configuration_new();
+            let config = tor_main_configuration_new();
             let argv = vec![
                 CString::new("tor").unwrap(),
                 CString::new("--version").unwrap(),
