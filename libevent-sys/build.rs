@@ -17,8 +17,12 @@ use buildutils::*;
 fn main() {
     // TODO: cmake on windows
 
-    let full_version = env!("CARGO_PKG_VERSION"); 
-    let path = source_dir(env!("CARGO_MANIFEST_DIR"), "libevent", &get_version(full_version));
+    let full_version = env!("CARGO_PKG_VERSION");
+    let path = source_dir(
+        env!("CARGO_MANIFEST_DIR"),
+        "libevent",
+        &get_version(full_version),
+    );
     let libevent = autotools::Config::new(path)
         .enable_static()
         .disable_shared()

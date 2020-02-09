@@ -31,8 +31,12 @@ fn main() {
     let mut zlib_dir = PathBuf::from(env::var("DEP_Z_ROOT").unwrap());
     zlib_dir.push("build");
 
-    let full_version = env!("CARGO_PKG_VERSION"); 
-    let path = source_dir(env!("CARGO_MANIFEST_DIR"), "tor-tor", &get_version(full_version));
+    let full_version = env!("CARGO_PKG_VERSION");
+    let path = source_dir(
+        env!("CARGO_MANIFEST_DIR"),
+        "tor-tor",
+        &get_version(full_version),
+    );
     let tor = autotools::Config::new(path.clone())
         .with("libevent-dir", event_dir.to_str())
         .with("openssl-dir", openssl_dir.to_str())

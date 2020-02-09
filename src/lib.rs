@@ -21,13 +21,12 @@ mod tests {
     fn test_start() {
         unsafe {
             let mut config = tor_main_configuration_new();
-            let argv = vec![CString::new("tor").unwrap(), CString::new("SocksPort").unwrap(), CString::new("9051").unwrap()];
+            let argv = vec![
+                CString::new("tor").unwrap(),
+                CString::new("--version").unwrap(),
+            ];
             let argv: Vec<_> = argv.iter().map(|s| s.as_ptr()).collect();
-            tor_main_configuration_set_command_line(
-                config,
-                argv.len() as i32,
-                argv.as_ptr(),
-            );
+            tor_main_configuration_set_command_line(config, argv.len() as i32, argv.as_ptr());
 
             tor_run_main(config);
         }

@@ -1,0 +1,17 @@
+language: rust
+rust:
+  - stable
+#  - 1.31.0
+#  - 1.22.0
+before_script:
+  - rustup component add rustfmt
+script:
+  - cargo fmt -- --check --verbose
+  - cargo test -vv
+
+notifications:
+  email: false
+
+before_cache:
+  - rm -rf "$TRAVIS_HOME/.cargo/registry/src"
+cache: cargo
