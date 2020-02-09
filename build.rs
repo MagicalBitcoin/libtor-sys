@@ -10,14 +10,18 @@
 extern crate autotools;
 extern crate cc;
 
+extern crate buildutils;
+
 use std::env;
 use std::fs;
 use std::path::PathBuf;
 
+use buildutils::*;
+
 fn main() {
     //println!("cargo:version_number={:x}", openssl_version);
 
-    /*for (key, value) in std::env::vars() {
+    /* for (key, value) in std::env::vars() {
         println!("{}: {}", key, value);
     } */
 
@@ -27,9 +31,9 @@ fn main() {
     let mut zlib_dir = PathBuf::from(env::var("DEP_Z_ROOT").unwrap());
     zlib_dir.push("build");
 
-    // Apply fix from https://github.com/Blockstream/gdk/blob/master/tools/buildtor.sh#L65
-    // autogen.sh
-    let tor = autotools::Config::new("tor")
+    let full_version = env!("CARGO_PKG_VERSION"); 
+    let path = source_dir(env!("CARGO_MANIFEST_DIR"), "tor-tor", &get_version(full_version));
+    let tor = autotools::Config::new(path.clone())
         .with("libevent-dir", event_dir.to_str())
         .with("openssl-dir", openssl_dir.to_str())
         .with("zlib-dir", zlib_dir.to_str())
@@ -50,10 +54,6 @@ fn main() {
         .build();
     //println!("{:?}", tor);
 
-    println!(
-        "cargo:rustc-link-search=native={}",
-        event_dir.join("lib/").display()
-    );
     println!(
         "cargo:rustc-link-search=native={}",
         openssl_dir.join("lib/").display()
@@ -136,7 +136,7 @@ fn main() {
 
     fs::create_dir_all(tor.join("include")).unwrap();
     fs::copy(
-        "tor/src/feature/api/tor_api.h",
+        path.join("src/feature/api/tor_api.h"),
         tor.join("include/tor_api.h"),
     )
     .unwrap();

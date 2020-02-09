@@ -1,9 +1,10 @@
-tor/
 /target
 Cargo.lock
 
-libevent-sys/libevent/
 libevent-sys/target
 libevent-sys/Cargo.lock
+
+buildutils/target
+buildutils/Cargo.lock
 
 *.swp
