@@ -4,7 +4,7 @@ version = "0.1.0"
 authors = ["Alekos Filini <alekos.filini@gmail.com>"]
 edition = "2018"
 build = "build.rs"
-links = "tor"
+# links = "tor"
 
 [dependencies]
 openssl-sys = { version = "0.9.53", features = ["vendored"] }

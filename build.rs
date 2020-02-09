@@ -10,8 +10,8 @@
 extern crate autotools;
 extern crate cc;
 
-use std::fs;
 use std::env;
+use std::fs;
 use std::path::PathBuf;
 
 fn main() {
@@ -48,54 +48,100 @@ fn main() {
         .disable("module-relay", None)
         .disable("rust", None)
         .build();
-    println!("{:?}", tor);
+    //println!("{:?}", tor);
 
-    // package everything into one archive
-    cc::Build::new()
-        .object(tor.join("build/src/tools/libtorrunner.a"))
-        .object(tor.join("build/src/core/libtor-app.a"))
-        .object(tor.join("build/src/lib/libtor-compress.a"))
-        .object(tor.join("build/src/lib/libtor-evloop.a"))
-        .object(tor.join("build/src/lib/libtor-tls.a"))
-        .object(tor.join("build/src/lib/libtor-crypt-ops.a"))
-        .object(tor.join("build/src/ext/keccak-tiny/libkeccak-tiny.a"))
-        .object(tor.join("build/src/lib/libcurve25519_donna.a"))
-        .object(tor.join("build/src/ext/ed25519/ref10/libed25519_ref10.a"))
-        .object(tor.join("build/src/ext/ed25519/donna/libed25519_donna.a"))
-        .object(tor.join("build/src/lib/libtor-geoip.a"))
-        .object(tor.join("build/src/lib/libtor-buf.a"))
-        .object(tor.join("build/src/lib/libtor-process.a"))
-        .object(tor.join("build/src/lib/libtor-confmgt.a"))
-        .object(tor.join("build/src/lib/libtor-pubsub.a"))
-        .object(tor.join("build/src/lib/libtor-dispatch.a"))
-        .object(tor.join("build/src/lib/libtor-time.a"))
-        .object(tor.join("build/src/lib/libtor-fs.a"))
-        .object(tor.join("build/src/lib/libtor-encoding.a"))
-        .object(tor.join("build/src/lib/libtor-sandbox.a"))
-        .object(tor.join("build/src/lib/libtor-container.a"))
-        .object(tor.join("build/src/lib/libtor-net.a"))
-        .object(tor.join("build/src/lib/libtor-thread.a"))
-        .object(tor.join("build/src/lib/libtor-memarea.a"))
-        .object(tor.join("build/src/lib/libtor-math.a"))
-        .object(tor.join("build/src/lib/libtor-meminfo.a"))
-        .object(tor.join("build/src/lib/libtor-osinfo.a"))
-        .object(tor.join("build/src/lib/libtor-log.a"))
-        .object(tor.join("build/src/lib/libtor-lock.a"))
-        .object(tor.join("build/src/lib/libtor-fdio.a"))
-        .object(tor.join("build/src/lib/libtor-term.a"))
-        .object(tor.join("build/src/lib/libtor-string.a"))
-        .object(tor.join("build/src/lib/libtor-smartlist-core.a"))
-        .object(tor.join("build/src/lib/libtor-malloc.a"))
-        .object(tor.join("build/src/lib/libtor-wallclock.a"))
-        .object(tor.join("build/src/lib/libtor-err.a"))
-        .object(tor.join("build/src/lib/libtor-intmath.a"))
-        .object(tor.join("build/src/lib/libtor-version.a"))
-        .object(tor.join("build/src/lib/libtor-ctime.a"))
-        .object(tor.join("build/src/trunnel/libor-trunnel.a"))
-        .object(tor.join("build/src/lib/libtor-trace.a"))
-        .compile("tor");
+    println!(
+        "cargo:rustc-link-search=native={}",
+        event_dir.join("lib/").display()
+    );
+    println!(
+        "cargo:rustc-link-search=native={}",
+        openssl_dir.join("lib/").display()
+    );
+    println!("cargo:rustc-link-search=native={}", zlib_dir.display());
+
+    println!(
+        "cargo:rustc-link-search=native={}",
+        tor.join("build/src/core").display()
+    );
+    println!(
+        "cargo:rustc-link-search=native={}",
+        tor.join("build/src/lib").display()
+    );
+    println!(
+        "cargo:rustc-link-search=native={}",
+        tor.join("build/src/trunnel").display()
+    );
+    println!(
+        "cargo:rustc-link-search=native={}",
+        tor.join("build/src/ext/ed25519/ref10").display()
+    );
+    println!(
+        "cargo:rustc-link-search=native={}",
+        tor.join("build/src/ext/ed25519/donna").display()
+    );
+    println!(
+        "cargo:rustc-link-search=native={}",
+        tor.join("build/src/ext/keccak-tiny").display()
+    );
+
+    println!("cargo:rustc-link-lib=static={}", "event");
+    println!("cargo:rustc-link-lib=static={}", "event_pthreads");
+
+    println!("cargo:rustc-link-lib=static={}", "crypto");
+    println!("cargo:rustc-link-lib=static={}", "ssl");
+
+    println!("cargo:rustc-link-lib=static={}", "z");
+
+    println!("cargo:rustc-link-lib=static={}", "curve25519_donna");
+    println!("cargo:rustc-link-lib=static={}", "ed25519_donna");
+    println!("cargo:rustc-link-lib=static={}", "ed25519_ref10");
+    println!("cargo:rustc-link-lib=static={}", "tor-confmgt");
+    println!("cargo:rustc-link-lib=static={}", "tor-app");
+    println!("cargo:rustc-link-lib=static={}", "keccak-tiny");
+    println!("cargo:rustc-link-lib=static={}", "or-trunnel");
+    println!("cargo:rustc-link-lib=static={}", "tor-intmath");
+    println!("cargo:rustc-link-lib=static={}", "tor-lock");
+    println!("cargo:rustc-link-lib=static={}", "tor-malloc");
+    println!("cargo:rustc-link-lib=static={}", "tor-math");
+    println!("cargo:rustc-link-lib=static={}", "tor-memarea");
+    println!("cargo:rustc-link-lib=static={}", "tor-meminfo");
+    println!("cargo:rustc-link-lib=static={}", "tor-osinfo");
+    println!("cargo:rustc-link-lib=static={}", "tor-process");
+    println!("cargo:rustc-link-lib=static={}", "tor-sandbox");
+    println!("cargo:rustc-link-lib=static={}", "tor-smartlist-core");
+    println!("cargo:rustc-link-lib=static={}", "tor-string");
+    println!("cargo:rustc-link-lib=static={}", "tor-term");
+    println!("cargo:rustc-link-lib=static={}", "tor-time");
+    println!("cargo:rustc-link-lib=static={}", "tor-thread");
+    println!("cargo:rustc-link-lib=static={}", "tor-wallclock");
+    println!("cargo:rustc-link-lib=static={}", "tor-log");
+    println!("cargo:rustc-link-lib=static={}", "tor-tls");
+    println!("cargo:rustc-link-lib=static={}", "tor-compress");
+    println!("cargo:rustc-link-lib=static={}", "tor-container");
+    println!("cargo:rustc-link-lib=static={}", "tor-crypt-ops");
+    println!("cargo:rustc-link-lib=static={}", "tor-ctime");
+    println!("cargo:rustc-link-lib=static={}", "tor-encoding");
+    println!("cargo:rustc-link-lib=static={}", "tor-net");
+    println!("cargo:rustc-link-lib=static={}", "tor-err");
+    println!("cargo:rustc-link-lib=static={}", "tor-evloop");
+    println!("cargo:rustc-link-lib=static={}", "tor-fdio");
+    println!("cargo:rustc-link-lib=static={}", "tor-fs");
+    println!("cargo:rustc-link-lib=static={}", "tor-geoip");
+    println!("cargo:rustc-link-lib=static={}", "tor-version");
+    println!("cargo:rustc-link-lib=static={}", "tor-buf");
+    println!("cargo:rustc-link-lib=static={}", "tor-pubsub");
+    println!("cargo:rustc-link-lib=static={}", "tor-dispatch");
+    println!("cargo:rustc-link-lib=static={}", "tor-trace");
 
     fs::create_dir_all(tor.join("include")).unwrap();
-    fs::copy("tor/src/feature/api/tor_api.h", tor.join("include/tor_api.h")).unwrap();
+    fs::copy(
+        "tor/src/feature/api/tor_api.h",
+        tor.join("include/tor_api.h"),
+    )
+    .unwrap();
     println!("cargo:include={}/include", tor.to_str().unwrap());
+
+    // TODO: remove
+    println!("cargo:rerun-if-changed=build.rs");
 }
