@@ -19,6 +19,13 @@ use std::path::PathBuf;
 use buildutils::*;
 
 fn main() {
+    let target = env::var("TARGET").unwrap();
+    let host = env::var("HOST").unwrap();
+
+    let mut cc = cc::Build::new();
+    cc.target(&target).host(&host);
+    let compiler = cc.get_compiler();
+
     //println!("cargo:version_number={:x}", openssl_version);
 
     /* for (key, value) in std::env::vars() {
@@ -28,9 +35,6 @@ fn main() {
     // TODO https://github.com/arlolra/tor/blob/master/INSTALL#L32
     let event_dir = PathBuf::from(env::var("DEP_EVENT_ROOT").unwrap());
     let openssl_dir = PathBuf::from(env::var("DEP_OPENSSL_ROOT").unwrap());
-    let mut zlib_dir = PathBuf::from(env::var("DEP_Z_ROOT").unwrap());
-    let zlib_include_dir = zlib_dir.join("include");
-    zlib_dir.push("build");
 
     let full_version = env!("CARGO_PKG_VERSION");
     let path = source_dir(
@@ -38,16 +42,16 @@ fn main() {
         "tor-tor",
         &get_version(full_version),
     );
-    let tor = autotools::Config::new(path.clone())
+    let mut config = autotools::Config::new(path.clone());
+    config
+        .env("CC", compiler.path())
         .with("libevent-dir", event_dir.to_str())
         .with("openssl-dir", openssl_dir.to_str())
-        .with("zlib-dir", zlib_dir.to_str())
         .enable("pic", None)
         .enable("static-tor", None)
         .enable("static-openssl", None)
         .enable("static-libevent", None)
         .enable("static-zlib", None)
-        .cflag(format!("-I{}", zlib_include_dir.display()))
         .disable("system-torrc", None)
         .disable("asciidoc", None)
         .disable("systemd", None)
@@ -57,16 +61,40 @@ fn main() {
         .disable("unittests", None)
         .disable("tool-name-check", None)
         .disable("module-dirauth", None)
-        .disable("rust", None)
-        .build();
+        .disable("rust", None);
+
+    if target.contains("android") {
+        // Apparently zlib is already there on Android https://github.com/rust-lang/libz-sys/blob/master/build.rs#L42
+
+        config
+            .enable("android", None)
+            .env(
+                "LDFLAGS",
+                format!("-L{}/usr/lib", env::var("SYSROOT").unwrap()),
+            )
+            .with(
+                "zlib-dir",
+                Some(&format!("{}/usr/lib", env::var("SYSROOT").unwrap())),
+            );
+    } else {
+        let mut zlib_dir = PathBuf::from(env::var("DEP_Z_ROOT").unwrap());
+        let zlib_include_dir = zlib_dir.join("include");
+        zlib_dir.push("build");
+
+        config
+            .with("zlib-dir", zlib_dir.to_str())
+            .cflag(format!("-I{}", zlib_include_dir.display()));
+
+        println!("cargo:rustc-link-search=native={}", zlib_dir.display());
+    }
+
+    let tor = config.build();
     //println!("{:?}", tor);
 
     println!(
         "cargo:rustc-link-search=native={}",
         openssl_dir.join("lib/").display()
     );
-    println!("cargo:rustc-link-search=native={}", zlib_dir.display());
-
     println!(
         "cargo:rustc-link-search=native={}",
         tor.join("build/src/core").display()

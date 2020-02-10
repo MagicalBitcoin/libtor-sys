@@ -4,10 +4,7 @@
 cd tor-tor-*
 
 # Apply fix from https://github.com/Blockstream/gdk/blob/master/tools/buildtor.sh#L65
-sed -i "740a TOR_LIB_PTHREAD=-lpthread" configure.ac
-sed -i "741s!^TOR_LIB.*!  TOR_LIB_PTHREAD=-lpthread!" configure.ac
-sed -i "764a AC_SUBST(TOR_LIB_PTHREAD)" configure.ac
-sed -i "912s!^TOR_SEARCH.*!TOR_SEARCH_LIBRARY(openssl, \$tryssldir, \[-lssl -lcrypto \$TOR_LIB_GDI \$TOR_LIB_WS32 \$TOR_LIB_CRYPT32\ -ldl \$TOR_LIB_PTHREAD\],!" configure.ac
+sed -i "912s!^TOR_SEARCH.*!TOR_SEARCH_LIBRARY(openssl, \$tryssldir, \[-lssl -lcrypto \$TOR_LIB_GDI \$TOR_LIB_WS32 \$LIBS\],!" configure.ac
 # extra fix for openssl, broken on ubuntu ??
 sed -i "922s!\[.*SSL_CIPHER_get_id((void \*)0);]![]!g" configure.ac
 # remove configure from .gitignore

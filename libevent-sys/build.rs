@@ -12,10 +12,21 @@ extern crate cc;
 
 extern crate buildutils;
 
+use std::env;
+
 use buildutils::*;
 
 fn main() {
     // TODO: cmake on windows
+
+    let target = env::var("TARGET").unwrap();
+    let host = env::var("HOST").unwrap();
+
+    let mut cc = cc::Build::new();
+    cc.target(&target).host(&host);
+    let compiler = cc.get_compiler();
+    //println!("CC: {:?}", compiler.path());
+    //return;
 
     let full_version = env!("CARGO_PKG_VERSION");
     let path = source_dir(
@@ -23,7 +34,10 @@ fn main() {
         "libevent",
         &get_version(full_version),
     );
-    let libevent = autotools::Config::new(path)
+    let mut config = autotools::Config::new(path);
+    config
+        .env("CC", compiler.path())
+        .host(&target)
         .enable_static()
         .disable_shared()
         .with("pic", None)
@@ -31,9 +45,9 @@ fn main() {
         .disable("openssl", None)
         .disable("libevent-regress", None)
         .disable("debug-mode", None)
-        .disable("dependency-tracking", None)
-        .build();
+        .disable("dependency-tracking", None);
 
+    let libevent = config.build();
     let artifacts = Artifacts {
         lib_dir: libevent.join("lib"),
         include_dir: libevent.join("include"),

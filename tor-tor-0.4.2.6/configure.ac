@@ -738,7 +738,6 @@ free(p);
 [free_null_ok=false; AC_MSG_RESULT(no)],
 [free_null_ok=cross; AC_MSG_RESULT(cross)])
 
-  TOR_LIB_PTHREAD=-lpthread
 if test "$free_null_ok" = "false"; then
    AC_MSG_ERROR([Your libc implementation doesn't allow free(NULL), as required by C99.])
 fi
@@ -762,7 +761,6 @@ AC_SUBST(TOR_LIB_WS32)
 AC_SUBST(TOR_LIB_GDI)
 AC_SUBST(TOR_LIB_IPHLPAPI)
 AC_SUBST(TOR_LIB_USERENV)
-AC_SUBST(TOR_LIB_PTHREAD)
 
 tor_libevent_pkg_redhat="libevent"
 tor_libevent_pkg_debian="libevent-dev"
@@ -909,7 +907,7 @@ AC_ARG_WITH(ssl-dir,
   ])
 
 AC_MSG_NOTICE([Now, we'll look for OpenSSL >= 1.0.1])
-TOR_SEARCH_LIBRARY(openssl, $tryssldir, [-lssl -lcrypto $TOR_LIB_GDI $TOR_LIB_WS32 $TOR_LIB_CRYPT32 -ldl $TOR_LIB_PTHREAD],
+TOR_SEARCH_LIBRARY(openssl, $tryssldir, [-lssl -lcrypto $TOR_LIB_GDI $TOR_LIB_WS32 $LIBS],
     [#include <openssl/ssl.h>
      char *getenv(const char *);],
     [struct ssl_cipher_st;
@@ -921,7 +919,7 @@ TOR_SEARCH_LIBRARY(openssl, $tryssldir, [-lssl -lcrypto $TOR_LIB_GDI $TOR_LIB_WS
     dnl We look for SSL_cipher_get_id() because it is present in
     dnl OpenSSL >=1.0.1, because it is not deprecated, and because Tor
     dnl depends on it.
-    [], [],
+    [if (getenv("THIS_SHOULDNT_BE_SET_X201803")) SSL_CIPHER_get_id((void *)0);], [],
     [/usr/local/opt/openssl /usr/local/openssl /usr/lib/openssl /usr/local/ssl /usr/lib/ssl /usr/local /opt/openssl])
 
 dnl XXXX check for OPENSSL_VERSION_NUMBER == SSLeay()

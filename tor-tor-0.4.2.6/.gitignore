@@ -46,7 +46,7 @@ uptime-*.json
 /build-stamp
 /compile
 /config.rust
-
+/configure
 /Doxyfile
 /orconfig.h
 /orconfig.h.in

@@ -668,7 +668,6 @@ TOR_LIB_MATH
 TOR_LIBEVENT_LIBS
 TOR_LDFLAGS_libevent
 TOR_CPPFLAGS_libevent
-TOR_LIB_PTHREAD
 TOR_LIB_USERENV
 TOR_LIB_IPHLPAPI
 TOR_LIB_GDI
@@ -8950,7 +8949,6 @@ rm -f core *.core core.conftest.* gmon.out bb.out conftest$ac_exeext \
 fi
 
 
-  TOR_LIB_PTHREAD=-lpthread
 if test "$free_null_ok" = "false"; then
    as_fn_error $? "Your libc implementation doesn't allow free(NULL), as required by C99." "$LINENO" 5
 fi
@@ -8968,7 +8966,6 @@ else
   TOR_LIB_GDI=
   TOR_LIB_USERENV=
 fi
-
 
 
 
@@ -9738,7 +9735,7 @@ else
 
   for tor_trydir in "$tryopenssldir" "(system)" "$prefix" /usr/local /usr/pkg /usr/local/opt/openssl /usr/local/openssl /usr/lib/openssl /usr/local/ssl /usr/lib/ssl /usr/local /opt/openssl; do
     LDFLAGS="$tor_saved_LDFLAGS"
-    LIBS="$tor_saved_LIBS -lssl -lcrypto $TOR_LIB_GDI $TOR_LIB_WS32 $TOR_LIB_CRYPT32 -ldl $TOR_LIB_PTHREAD"
+    LIBS="$tor_saved_LIBS -lssl -lcrypto $TOR_LIB_GDI $TOR_LIB_WS32 $LIBS"
     CPPFLAGS="$tor_saved_CPPFLAGS"
 
     if test -z "$tor_trydir" ; then
@@ -9777,7 +9774,7 @@ struct ssl_cipher_st;
 int
 main ()
 {
-
+                        if (getenv("THIS_SHOULDNT_BE_SET_X201803")) SSL_CIPHER_get_id((void *)0);
   ;
   return 0;
 }
@@ -9800,7 +9797,7 @@ rm -f core conftest.err conftest.$ac_objext \
 int
 main ()
 {
-
+                        if (getenv("THIS_SHOULDNT_BE_SET_X201803")) SSL_CIPHER_get_id((void *)0);
   ;
   return 0;
 }
@@ -9900,7 +9897,7 @@ fi
 fi
 { $as_echo "$as_me:${as_lineno-$LINENO}: result: $tor_cv_library_openssl_dir" >&5
 $as_echo "$tor_cv_library_openssl_dir" >&6; }
-LIBS="$LIBS -lssl -lcrypto $TOR_LIB_GDI $TOR_LIB_WS32 $TOR_LIB_CRYPT32 -ldl $TOR_LIB_PTHREAD"
+LIBS="$LIBS -lssl -lcrypto $TOR_LIB_GDI $TOR_LIB_WS32 $LIBS"
 if test "$tor_cv_library_openssl_dir" != "(system)"; then
 
   if test -d "$tor_cv_library_openssl_dir/lib"; then
@@ -9988,7 +9985,7 @@ struct ssl_cipher_st;
 int
 main ()
 {
-
+                        if (getenv("THIS_SHOULDNT_BE_SET_X201803")) SSL_CIPHER_get_id((void *)0);
   ;
   return 0;
 }
