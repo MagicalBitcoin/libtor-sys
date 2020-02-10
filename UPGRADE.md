@@ -10,6 +10,9 @@ sed -i "922s!\[.*SSL_CIPHER_get_id((void \*)0);]![]!g" configure.ac
 # remove configure from .gitignore
 sed -i "s/^\/configure//g" .gitignore
 
+# remove the tor-gencert section in src/tools/include.am
+# fails to compile on android and we don't need it
+
 sh autogen.sh
 
 cd ../

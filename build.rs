@@ -66,16 +66,18 @@ fn main() {
     if target.contains("android") {
         // Apparently zlib is already there on Android https://github.com/rust-lang/libz-sys/blob/master/build.rs#L42
 
+        let sysroot_lib = format!("{}/usr/lib", env::var("SYSROOT").unwrap());
+
+        // Enabling "android" adds support for liblog from the sysroot. only issue is that there's
+        // only `liblog.so`, not a static version of the library, so it fails to link. disable it
+        // for now (we can still log to file, which sucks, but at leaast it works). we'll figure it
+        // out later
         config
-            .enable("android", None)
-            .env(
-                "LDFLAGS",
-                format!("-L{}/usr/lib", env::var("SYSROOT").unwrap()),
-            )
-            .with(
-                "zlib-dir",
-                Some(&format!("{}/usr/lib", env::var("SYSROOT").unwrap())),
-            );
+            //.enable("android", None)
+            .env("LDFLAGS", format!("-L{}", sysroot_lib))
+            .with("zlib-dir", Some(&sysroot_lib));
+
+        println!("cargo:rustc-link-search=native={}", sysroot_lib);
     } else {
         let mut zlib_dir = PathBuf::from(env::var("DEP_Z_ROOT").unwrap());
         let zlib_include_dir = zlib_dir.join("include");
