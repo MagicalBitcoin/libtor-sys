@@ -1,27 +1,11 @@
---- ./tor-tor-0.4.2.6/configure.ac	2020-01-30 16:05:09.000000000 +0100
-+++ ./tor-tor-0.4.2.6/configure.ac	2020-02-09 11:04:30.636000000 +0100
-@@ -738,6 +738,7 @@
- [free_null_ok=false; AC_MSG_RESULT(no)],
- [free_null_ok=cross; AC_MSG_RESULT(cross)])
- 
-+  TOR_LIB_PTHREAD=-lpthread
- if test "$free_null_ok" = "false"; then
-    AC_MSG_ERROR([Your libc implementation doesn't allow free(NULL), as required by C99.])
- fi
-@@ -761,6 +762,7 @@
- AC_SUBST(TOR_LIB_GDI)
- AC_SUBST(TOR_LIB_IPHLPAPI)
- AC_SUBST(TOR_LIB_USERENV)
-+AC_SUBST(TOR_LIB_PTHREAD)
- 
- tor_libevent_pkg_redhat="libevent"
- tor_libevent_pkg_debian="libevent-dev"
-@@ -907,7 +909,7 @@
+--- ./configure.ac	2020-01-30 16:05:09.000000000 +0100
++++ ./configure.ac	2020-03-07 12:14:26.394000000 +0100
+@@ -907,7 +907,7 @@
    ])
  
  AC_MSG_NOTICE([Now, we'll look for OpenSSL >= 1.0.1])
 -TOR_SEARCH_LIBRARY(openssl, $tryssldir, [-lssl -lcrypto $TOR_LIB_GDI $TOR_LIB_WS32],
-+TOR_SEARCH_LIBRARY(openssl, $tryssldir, [-lssl -lcrypto $TOR_LIB_GDI $TOR_LIB_WS32 $TOR_LIB_CRYPT32 -ldl $TOR_LIB_PTHREAD],
++TOR_SEARCH_LIBRARY(openssl, $tryssldir, [-lssl -lcrypto $TOR_LIB_GDI $TOR_LIB_WS32 $LIBS],
      [#include <openssl/ssl.h>
       char *getenv(const char *);],
      [struct ssl_cipher_st;

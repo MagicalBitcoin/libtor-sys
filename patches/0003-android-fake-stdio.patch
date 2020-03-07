@@ -1,0 +1,10 @@
+--- ./configure.ac  	2020-01-30 16:05:09.000000000 +0100
++++ ./configure.ac	2020-03-07 15:05:25.356000000 +0100
+@@ -251,6 +251,7 @@
+   AC_CHECK_HEADERS([android/log.h])
+   AC_SEARCH_LIBS(__android_log_write, [log])
+ 
++  AC_SEARCH_LIBS(stdin, [fakestdio])
+ fi
+ 
+ dnl ---

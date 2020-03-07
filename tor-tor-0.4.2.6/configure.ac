@@ -251,6 +251,7 @@ if test "x$enable_android" = "xyes"; then
   AC_CHECK_HEADERS([android/log.h])
   AC_SEARCH_LIBS(__android_log_write, [log])
 
+  AC_SEARCH_LIBS(stdin, [fakestdio])
 fi
 
 dnl ---

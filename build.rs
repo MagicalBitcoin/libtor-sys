@@ -19,8 +19,8 @@ use std::path::PathBuf;
 use buildutils::*;
 
 fn main() {
-    let target = env::var("TARGET").unwrap();
-    let host = env::var("HOST").unwrap();
+    let target = env::var("TARGET").expect("TARGET expected");
+    let host = env::var("HOST").expect("HOST expected");
 
     let mut cc = cc::Build::new();
     cc.target(&target).host(&host);
@@ -30,11 +30,13 @@ fn main() {
 
     /* for (key, value) in std::env::vars() {
         println!("{}: {}", key, value);
-    } */
+    }
+    return; */
 
     // TODO https://github.com/arlolra/tor/blob/master/INSTALL#L32
-    let event_dir = PathBuf::from(env::var("DEP_EVENT_ROOT").unwrap());
-    let openssl_dir = PathBuf::from(env::var("DEP_OPENSSL_ROOT").unwrap());
+    let event_dir = PathBuf::from(env::var("DEP_EVENT_ROOT").expect("DEP_EVENT_ROOT expected"));
+    let openssl_dir =
+        PathBuf::from(env::var("DEP_OPENSSL_ROOT").expect("DEP_OPENSSL_ROOT expected"));
 
     let full_version = env!("CARGO_PKG_VERSION");
     let path = source_dir(
@@ -48,7 +50,7 @@ fn main() {
         .with("libevent-dir", event_dir.to_str())
         .with("openssl-dir", openssl_dir.to_str())
         .enable("pic", None)
-        .enable("static-tor", None)
+        //.enable("static-tor", None)
         .enable("static-openssl", None)
         .enable("static-libevent", None)
         .enable("static-zlib", None)
@@ -66,20 +68,28 @@ fn main() {
     if target.contains("android") {
         // Apparently zlib is already there on Android https://github.com/rust-lang/libz-sys/blob/master/build.rs#L42
 
-        let sysroot_lib = format!("{}/usr/lib", env::var("SYSROOT").unwrap());
+        let sysroot_lib = format!("{}/usr/lib", env::var("SYSROOT").expect("SYSROOT expected"));
 
-        // Enabling "android" adds support for liblog from the sysroot. only issue is that there's
-        // only `liblog.so`, not a static version of the library, so it fails to link. disable it
-        // for now (we can still log to file, which sucks, but at leaast it works). we'll figure it
-        // out later
+        // provides stdin and stderr
+        cc::Build::new()
+            .file("fake-stdio/stdio.c")
+            .compile("libfakestdio.a");
+
         config
-            //.enable("android", None)
-            .env("LDFLAGS", format!("-L{}", sysroot_lib))
+            .enable("android", None)
+            .env(
+                "LDFLAGS",
+                format!(
+                    "-L{} -L{}",
+                    sysroot_lib,
+                    env::var("OUT_DIR").expect("OUT_DIR expected")
+                ),
+            )
             .with("zlib-dir", Some(&sysroot_lib));
 
         println!("cargo:rustc-link-search=native={}", sysroot_lib);
     } else {
-        let mut zlib_dir = PathBuf::from(env::var("DEP_Z_ROOT").unwrap());
+        let mut zlib_dir = PathBuf::from(env::var("DEP_Z_ROOT").expect("DEP_Z_ROOT expected"));
         let zlib_include_dir = zlib_dir.join("include");
         zlib_dir.push("build");
 
