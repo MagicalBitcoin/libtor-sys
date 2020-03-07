@@ -6,12 +6,6 @@ rust:
 before_script:
   - rustup component add rustfmt
   - aclocal --version
-  - cd libevent-sys/libevent-*
-  - autoreconf --force --install
-  - cd ../../
-  - cd tor-tor-*
-  - autoreconf --force --install
-  - cd ../
 script:
   - cargo fmt -- --check --verbose
   - cargo test -vv

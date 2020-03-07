@@ -39,22 +39,16 @@ uptime-*.json
 
 # /
 /Makefile
-/Makefile.in
 /aclocal.m4
-/ar-lib
 /autom4te.cache
 /build-stamp
-/compile
 /config.rust
 /configure
 /Doxyfile
 /orconfig.h
-/orconfig.h.in
 /config.cache
 /config.log
 /config.status
-/config.guess
-/config.sub
 /conftest*
 /link_rust.sh
 /micro-revision.*
@@ -63,12 +57,8 @@ uptime-*.json
 /stamp-h.in
 /stamp-h1
 /TAGS
-/test-driver
 /tor.sh
 /tor.spec
-/depcomp
-/install-sh
-/missing
 /mkinstalldirs
 /Tor*Bundle.dmg
 /tor-*-win32.exe
@@ -97,7 +87,6 @@ uptime-*.json
 
 # /doc/
 /doc/Makefile
-/doc/Makefile.in
 /doc/doxygen
 /doc/tor.1
 /doc/tor.1.in
@@ -127,7 +116,6 @@ uptime-*.json
 
 # /doc/spec/
 /doc/spec/Makefile
-/doc/spec/Makefile.in
 
 # /scripts
 /scripts/maint/checkOptionDocs.pl
@@ -135,14 +123,12 @@ uptime-*.json
 
 # /src/
 /src/Makefile
-/src/Makefile.in
 
 # /src/trace
 /src/trace/libor-trace.a
 
 # /src/config/
 /src/config/Makefile
-/src/config/Makefile.in
 /src/config/sample-server-torrc
 /src/config/torrc
 /src/config/torrc.sample
@@ -244,7 +230,6 @@ uptime-*.json
 
 # /src/test
 /src/test/Makefile
-/src/test/Makefile.in
 /src/test/bench
 /src/test/bench.exe
 /src/test/test
@@ -289,7 +274,6 @@ uptime-*.json
 /src/tools/tor-gencert.exe
 /src/tools/tor-cov-gencert.exe
 /src/tools/Makefile
-/src/tools/Makefile.in
 
 # /src/trunnel/
 /src/trunnel/libor-trunnel-testing.a
@@ -297,4 +281,3 @@ uptime-*.json
 
 # /src/win32/
 /src/win32/Makefile
-/src/win32/Makefile.in
