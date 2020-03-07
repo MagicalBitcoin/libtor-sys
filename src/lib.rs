@@ -30,7 +30,7 @@ mod tests {
             let argv: Vec<_> = argv.iter().map(|s| s.as_ptr()).collect();
             tor_main_configuration_set_command_line(config, argv.len() as i32, argv.as_ptr());
 
-            tor_run_main(config);
+            assert_eq!(tor_run_main(config), 0);
         }
     }
 }

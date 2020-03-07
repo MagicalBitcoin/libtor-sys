@@ -26,8 +26,6 @@ fn main() {
     cc.target(&target).host(&host);
     let compiler = cc.get_compiler();
 
-    //println!("cargo:version_number={:x}", openssl_version);
-
     /* for (key, value) in std::env::vars() {
         println!("{}: {}", key, value);
     }
