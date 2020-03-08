@@ -69,7 +69,9 @@ fn build_libevent() -> Artifacts {
         .disable("dependency-tracking", None);
 
     let libevent = config.build();
-    std::fs::remove_dir_all(path.join("autom4te.cache")).expect("cannot remove autom4te.cache");
+    if let Err(e) = std::fs::remove_dir_all(path.join("autom4te.cache")) {
+        println!("cargo:warning=Cannot remove `autom4te.cache: {:?}`", e);
+    }
 
     let artifacts = Artifacts {
         lib_dir: libevent.join("lib"),
@@ -163,7 +165,9 @@ fn build_tor(libevent: Artifacts) {
     }
 
     let tor = config.build();
-    std::fs::remove_dir_all(path.join("autom4te.cache")).expect("cannot remove autom4te.cache");
+    if let Err(e) = std::fs::remove_dir_all(path.join("autom4te.cache")) {
+        println!("cargo:warning=Cannot remove `autom4te.cache: {:?}`", e);
+    }
 
     println!(
         "cargo:rustc-link-search=native={}",
