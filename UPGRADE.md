@@ -9,9 +9,9 @@ cd ../
 ```
 
 ```
-patch -d libevent-sys/libevent-* -p0 < patches/libevent-*
+patch -d libevent-* -p0 < patches/libevent-*
 
-cd libevent-sys/libevent-*
+cd libevent-*
 sh autogen.sh
-cd ../../
+cd ../
 ```

@@ -26,7 +26,7 @@ Coming Soon :tm::
 
 Building on a Linux pc shouldn't be too hard, a `cargo build` should normally work. Keep in mind that you will need all the "usual" build tools, like a compiler, automake, autoconf, make, in your PATH.
 
-If you get an `aclocal-1.15 not found` or something similar, try to cd into `libevent-sys/libevent-<version>` and run `autoreconf --force --install`. Repeat in `tor-tor-<version>` if you get the
+If you get an `aclocal-1.15 not found` or something similar, try to cd into `libevent-<version>` and run `autoreconf --force --install`. Repeat in `tor-tor-<version>` if you get the
 same issue there, and then re-`cargo build`.
 
 ### Android

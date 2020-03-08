@@ -12,7 +12,3 @@ script:
 
 notifications:
   email: false
-
-before_cache:
-  - rm -rf "$TRAVIS_HOME/.cargo/registry/src"
-cache: cargo

@@ -2,19 +2,16 @@
 name = "libtor-sys"
 version = "426.0.1+0.4.2.6"
 authors = ["Alekos Filini <alekos.filini@gmail.com>"]
-edition = "2018"
 build = "build.rs"
 links = "tor"
 
 [dependencies]
-libevent-sys = { version = "2111", path = "./libevent-sys" }
 openssl-sys = { version = "0.9", features = ["vendored"] }
 libz-sys = { version = "1.0", features = ["static"] }
 
 [build-dependencies]
 cc = "1.0"
 autotools = "0.2"
-buildutils = { version = "0.1", path = "./buildutils" }
 
 [lib]
 name = "tor_sys"

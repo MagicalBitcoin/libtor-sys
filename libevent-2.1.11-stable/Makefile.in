@@ -20,6 +20,12 @@
 #
 # See LICENSE for copying information.
 
+# include/include.am for libevent
+# Copyright 2000-2007 Niels Provos
+# Copyright 2007-2012 Niels Provos and Nick Mathewson
+#
+# See LICENSE for copying information.
+
 
 
 
@@ -104,16 +110,18 @@ host_triplet = @host@
 @OPENSSL_TRUE@am__append_4 = libevent_openssl.pc
 noinst_PROGRAMS =
 EXTRA_PROGRAMS =
-@BUILD_WIN32_TRUE@@THREADS_TRUE@am__append_5 = evthread_win32.c
-@STRLCPY_IMPL_TRUE@am__append_6 = strlcpy.c
-@SELECT_BACKEND_TRUE@am__append_7 = select.c
-@POLL_BACKEND_TRUE@am__append_8 = poll.c
-@DEVPOLL_BACKEND_TRUE@am__append_9 = devpoll.c
-@KQUEUE_BACKEND_TRUE@am__append_10 = kqueue.c
-@EPOLL_BACKEND_TRUE@am__append_11 = epoll.c
-@EVPORT_BACKEND_TRUE@am__append_12 = evport.c
-@SIGNAL_SUPPORT_TRUE@am__append_13 = signal.c
-@INSTALL_LIBEVENT_FALSE@am__append_14 = $(EVENT1_HDRS)
+@OPENSSL_TRUE@am__append_5 = include/event2/bufferevent_ssl.h
+@INSTALL_LIBEVENT_FALSE@am__append_6 = $(EVENT2_EXPORT)
+@BUILD_WIN32_TRUE@@THREADS_TRUE@am__append_7 = evthread_win32.c
+@STRLCPY_IMPL_TRUE@am__append_8 = strlcpy.c
+@SELECT_BACKEND_TRUE@am__append_9 = select.c
+@POLL_BACKEND_TRUE@am__append_10 = poll.c
+@DEVPOLL_BACKEND_TRUE@am__append_11 = devpoll.c
+@KQUEUE_BACKEND_TRUE@am__append_12 = kqueue.c
+@EPOLL_BACKEND_TRUE@am__append_13 = epoll.c
+@EVPORT_BACKEND_TRUE@am__append_14 = evport.c
+@SIGNAL_SUPPORT_TRUE@am__append_15 = signal.c
+@INSTALL_LIBEVENT_FALSE@am__append_16 = $(EVENT1_HDRS)
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/ac_backport_259_ssizet.m4 \
@@ -127,8 +135,8 @@ am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 DIST_COMMON = $(srcdir)/Makefile.am $(top_srcdir)/configure \
 	$(am__configure_deps) $(am__dist_bin_SCRIPTS_DIST) \
-	$(am__include_HEADERS_DIST) $(am__noinst_HEADERS_DIST) \
-	$(am__DIST_COMMON)
+	$(am__include_HEADERS_DIST) $(am__include_event2_HEADERS_DIST) \
+	$(am__noinst_HEADERS_DIST) $(am__DIST_COMMON)
 am__CONFIG_DISTCLEAN_FILES = config.status config.cache config.log \
  configure.lineno config.status.lineno
 mkinstalldirs = $(install_sh) -d
@@ -164,7 +172,9 @@ am__uninstall_files_from_dir = { \
          $(am__cd) "$$dir" && rm -f $$files; }; \
   }
 am__installdirs = "$(DESTDIR)$(libdir)" "$(DESTDIR)$(bindir)" \
-	"$(DESTDIR)$(pkgconfigdir)" "$(DESTDIR)$(includedir)"
+	"$(DESTDIR)$(pkgconfigdir)" "$(DESTDIR)$(includedir)" \
+	"$(DESTDIR)$(include_event2dir)" \
+	"$(DESTDIR)$(include_event2dir)"
 LTLIBRARIES = $(lib_LTLIBRARIES) $(noinst_LTLIBRARIES)
 am__DEPENDENCIES_1 =
 libevent_la_DEPENDENCIES = @LTLIBOBJS@ $(am__DEPENDENCIES_1)
@@ -316,7 +326,35 @@ am__can_run_installinfo = \
 DATA = $(pkgconfig_DATA)
 am__include_HEADERS_DIST = include/evdns.h include/event.h \
 	include/evhttp.h include/evrpc.h include/evutil.h
-am__noinst_HEADERS_DIST = WIN32-Code/nmake/evconfig-private.h \
+am__include_event2_HEADERS_DIST = include/event2/buffer.h \
+	include/event2/buffer_compat.h include/event2/bufferevent.h \
+	include/event2/bufferevent_compat.h \
+	include/event2/bufferevent_struct.h include/event2/dns.h \
+	include/event2/dns_compat.h include/event2/dns_struct.h \
+	include/event2/event.h include/event2/event_compat.h \
+	include/event2/event_struct.h include/event2/http.h \
+	include/event2/http_compat.h include/event2/http_struct.h \
+	include/event2/keyvalq_struct.h include/event2/listener.h \
+	include/event2/rpc.h include/event2/rpc_compat.h \
+	include/event2/rpc_struct.h include/event2/tag.h \
+	include/event2/tag_compat.h include/event2/thread.h \
+	include/event2/util.h include/event2/visibility.h \
+	include/event2/bufferevent_ssl.h
+am__noinst_HEADERS_DIST = include/event2/buffer.h \
+	include/event2/buffer_compat.h include/event2/bufferevent.h \
+	include/event2/bufferevent_compat.h \
+	include/event2/bufferevent_struct.h include/event2/dns.h \
+	include/event2/dns_compat.h include/event2/dns_struct.h \
+	include/event2/event.h include/event2/event_compat.h \
+	include/event2/event_struct.h include/event2/http.h \
+	include/event2/http_compat.h include/event2/http_struct.h \
+	include/event2/keyvalq_struct.h include/event2/listener.h \
+	include/event2/rpc.h include/event2/rpc_compat.h \
+	include/event2/rpc_struct.h include/event2/tag.h \
+	include/event2/tag_compat.h include/event2/thread.h \
+	include/event2/util.h include/event2/visibility.h \
+	include/event2/bufferevent_ssl.h \
+	WIN32-Code/nmake/evconfig-private.h \
 	WIN32-Code/nmake/event2/event-config.h WIN32-Code/getopt.h \
 	WIN32-Code/getopt.c WIN32-Code/getopt_long.c WIN32-Code/tree.h \
 	bufferevent-internal.h changelist-internal.h \
@@ -329,7 +367,9 @@ am__noinst_HEADERS_DIST = WIN32-Code/nmake/evconfig-private.h \
 	time-internal.h util-internal.h openssl-compat.h \
 	include/evdns.h include/event.h include/evhttp.h \
 	include/evrpc.h include/evutil.h
-HEADERS = $(include_HEADERS) $(noinst_HEADERS)
+HEADERS = $(include_HEADERS) $(include_event2_HEADERS) \
+	$(nodist_include_event2_HEADERS) $(nodist_noinst_HEADERS) \
+	$(noinst_HEADERS)
 am__tagged_files = $(HEADERS) $(SOURCES) $(TAGS_FILES) \
 	$(LISP)config.h.in evconfig-private.h.in
 # Read a list of newline-separated strings from the standard input,
@@ -353,8 +393,9 @@ CTAGS = ctags
 CSCOPE = cscope
 AM_RECURSIVE_TARGETS = cscope
 am__DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/config.h.in \
-	$(srcdir)/evconfig-private.h.in $(srcdir)/libevent.pc.in \
-	$(srcdir)/libevent_core.pc.in $(srcdir)/libevent_extra.pc.in \
+	$(srcdir)/evconfig-private.h.in $(srcdir)/include/include.am \
+	$(srcdir)/libevent.pc.in $(srcdir)/libevent_core.pc.in \
+	$(srcdir)/libevent_extra.pc.in \
 	$(srcdir)/libevent_openssl.pc.in \
 	$(srcdir)/libevent_pthreads.pc.in ChangeLog compile \
 	config.guess config.sub depcomp epoll_sub.c install-sh \
@@ -650,7 +691,7 @@ LIBEVENT_LIBS_LA = libevent.la libevent_core.la libevent_extra.la \
 @INSTALL_LIBEVENT_TRUE@pkgconfig_DATA = $(LIBEVENT_PKGCONFIG)
 @INSTALL_LIBEVENT_FALSE@noinst_LTLIBRARIES = $(LIBEVENT_LIBS_LA)
 EXTRA_SOURCE = 
-noinst_HEADERS = WIN32-Code/nmake/evconfig-private.h \
+noinst_HEADERS = $(am__append_6) WIN32-Code/nmake/evconfig-private.h \
 	WIN32-Code/nmake/event2/event-config.h WIN32-Code/getopt.h \
 	WIN32-Code/getopt.c WIN32-Code/getopt_long.c WIN32-Code/tree.h \
 	bufferevent-internal.h changelist-internal.h \
@@ -661,23 +702,41 @@ noinst_HEADERS = WIN32-Code/nmake/evconfig-private.h \
 	kqueue-internal.h log-internal.h minheap-internal.h \
 	mm-internal.h ratelim-internal.h ratelim-internal.h \
 	strlcpy-internal.h time-internal.h util-internal.h \
-	openssl-compat.h $(am__append_14)
+	openssl-compat.h $(am__append_16)
 CLEANFILES = 
 DISTCLEANFILES = *~ libevent.pc libevent_core.pc libevent_extra.pc \
 	./include/event2/event-config.h
 BUILT_SOURCES = include/event2/event-config.h
+include_event2dir = $(includedir)/event2
+EVENT2_EXPORT = include/event2/buffer.h include/event2/buffer_compat.h \
+	include/event2/bufferevent.h \
+	include/event2/bufferevent_compat.h \
+	include/event2/bufferevent_struct.h include/event2/dns.h \
+	include/event2/dns_compat.h include/event2/dns_struct.h \
+	include/event2/event.h include/event2/event_compat.h \
+	include/event2/event_struct.h include/event2/http.h \
+	include/event2/http_compat.h include/event2/http_struct.h \
+	include/event2/keyvalq_struct.h include/event2/listener.h \
+	include/event2/rpc.h include/event2/rpc_compat.h \
+	include/event2/rpc_struct.h include/event2/tag.h \
+	include/event2/tag_compat.h include/event2/thread.h \
+	include/event2/util.h include/event2/visibility.h \
+	$(am__append_5)
+@INSTALL_LIBEVENT_TRUE@include_event2_HEADERS = $(EVENT2_EXPORT)
+@INSTALL_LIBEVENT_TRUE@nodist_include_event2_HEADERS = include/event2/event-config.h
+@INSTALL_LIBEVENT_FALSE@nodist_noinst_HEADERS = include/event2/event-config.h
 @BUILD_WIN32_FALSE@SYS_LIBS = 
 @BUILD_WIN32_TRUE@SYS_LIBS = -lws2_32 -lshell32 -ladvapi32
-@BUILD_WIN32_FALSE@SYS_SRC = $(am__append_6) $(am__append_7) \
-@BUILD_WIN32_FALSE@	$(am__append_8) $(am__append_9) \
+@BUILD_WIN32_FALSE@SYS_SRC = $(am__append_8) $(am__append_9) \
 @BUILD_WIN32_FALSE@	$(am__append_10) $(am__append_11) \
-@BUILD_WIN32_FALSE@	$(am__append_12) $(am__append_13)
+@BUILD_WIN32_FALSE@	$(am__append_12) $(am__append_13) \
+@BUILD_WIN32_FALSE@	$(am__append_14) $(am__append_15)
 @BUILD_WIN32_TRUE@SYS_SRC = win32select.c buffer_iocp.c event_iocp.c \
-@BUILD_WIN32_TRUE@	bufferevent_async.c $(am__append_5) \
-@BUILD_WIN32_TRUE@	$(am__append_6) $(am__append_7) \
+@BUILD_WIN32_TRUE@	bufferevent_async.c $(am__append_7) \
 @BUILD_WIN32_TRUE@	$(am__append_8) $(am__append_9) \
 @BUILD_WIN32_TRUE@	$(am__append_10) $(am__append_11) \
-@BUILD_WIN32_TRUE@	$(am__append_12) $(am__append_13)
+@BUILD_WIN32_TRUE@	$(am__append_12) $(am__append_13) \
+@BUILD_WIN32_TRUE@	$(am__append_14) $(am__append_15)
 @BUILD_WIN32_FALSE@SYS_INCLUDES = 
 @BUILD_WIN32_TRUE@SYS_INCLUDES = -IWIN32-Code -IWIN32-Code/nmake
 CORE_SRC = \
@@ -742,7 +801,7 @@ all: $(BUILT_SOURCES) config.h evconfig-private.h
 .SUFFIXES: .c .lo .o .obj
 am--refresh: Makefile
 	@:
-$(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
+$(srcdir)/Makefile.in:  $(srcdir)/Makefile.am $(srcdir)/include/include.am $(am__configure_deps)
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
 	    *$$dep*) \
@@ -764,6 +823,7 @@ Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	    echo ' cd $(top_builddir) && $(SHELL) ./config.status $@ $(am__depfiles_maybe)'; \
 	    cd $(top_builddir) && $(SHELL) ./config.status $@ $(am__depfiles_maybe);; \
 	esac;
+$(srcdir)/include/include.am $(am__empty):
 
 $(top_builddir)/config.status: $(top_srcdir)/configure $(CONFIG_STATUS_DEPENDENCIES)
 	$(SHELL) ./config.status --recheck
@@ -1034,6 +1094,48 @@ uninstall-includeHEADERS:
 	@list='$(include_HEADERS)'; test -n "$(includedir)" || list=; \
 	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
 	dir='$(DESTDIR)$(includedir)'; $(am__uninstall_files_from_dir)
+install-include_event2HEADERS: $(include_event2_HEADERS)
+	@$(NORMAL_INSTALL)
+	@list='$(include_event2_HEADERS)'; test -n "$(include_event2dir)" || list=; \
+	if test -n "$$list"; then \
+	  echo " $(MKDIR_P) '$(DESTDIR)$(include_event2dir)'"; \
+	  $(MKDIR_P) "$(DESTDIR)$(include_event2dir)" || exit 1; \
+	fi; \
+	for p in $$list; do \
+	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
+	  echo "$$d$$p"; \
+	done | $(am__base_list) | \
+	while read files; do \
+	  echo " $(INSTALL_HEADER) $$files '$(DESTDIR)$(include_event2dir)'"; \
+	  $(INSTALL_HEADER) $$files "$(DESTDIR)$(include_event2dir)" || exit $$?; \
+	done
+
+uninstall-include_event2HEADERS:
+	@$(NORMAL_UNINSTALL)
+	@list='$(include_event2_HEADERS)'; test -n "$(include_event2dir)" || list=; \
+	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
+	dir='$(DESTDIR)$(include_event2dir)'; $(am__uninstall_files_from_dir)
+install-nodist_include_event2HEADERS: $(nodist_include_event2_HEADERS)
+	@$(NORMAL_INSTALL)
+	@list='$(nodist_include_event2_HEADERS)'; test -n "$(include_event2dir)" || list=; \
+	if test -n "$$list"; then \
+	  echo " $(MKDIR_P) '$(DESTDIR)$(include_event2dir)'"; \
+	  $(MKDIR_P) "$(DESTDIR)$(include_event2dir)" || exit 1; \
+	fi; \
+	for p in $$list; do \
+	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
+	  echo "$$d$$p"; \
+	done | $(am__base_list) | \
+	while read files; do \
+	  echo " $(INSTALL_HEADER) $$files '$(DESTDIR)$(include_event2dir)'"; \
+	  $(INSTALL_HEADER) $$files "$(DESTDIR)$(include_event2dir)" || exit $$?; \
+	done
+
+uninstall-nodist_include_event2HEADERS:
+	@$(NORMAL_UNINSTALL)
+	@list='$(nodist_include_event2_HEADERS)'; test -n "$(include_event2dir)" || list=; \
+	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
+	dir='$(DESTDIR)$(include_event2dir)'; $(am__uninstall_files_from_dir)
 
 ID: $(am__tagged_files)
 	$(am__define_uniq_tagged_files); mkid -fID $$unique
@@ -1263,7 +1365,7 @@ check: $(BUILT_SOURCES)
 all-am: Makefile $(LTLIBRARIES) $(PROGRAMS) $(SCRIPTS) $(DATA) \
 		$(HEADERS) config.h evconfig-private.h
 installdirs:
-	for dir in "$(DESTDIR)$(libdir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(pkgconfigdir)" "$(DESTDIR)$(includedir)"; do \
+	for dir in "$(DESTDIR)$(libdir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(pkgconfigdir)" "$(DESTDIR)$(includedir)" "$(DESTDIR)$(include_event2dir)" "$(DESTDIR)$(include_event2dir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
 install: $(BUILT_SOURCES)
@@ -1324,7 +1426,8 @@ info: info-am
 
 info-am:
 
-install-data-am: install-includeHEADERS install-pkgconfigDATA
+install-data-am: install-includeHEADERS install-include_event2HEADERS \
+	install-nodist_include_event2HEADERS install-pkgconfigDATA
 
 install-dvi: install-dvi-am
 
@@ -1373,7 +1476,8 @@ ps: ps-am
 ps-am:
 
 uninstall-am: uninstall-dist_binSCRIPTS uninstall-includeHEADERS \
-	uninstall-libLTLIBRARIES uninstall-pkgconfigDATA
+	uninstall-include_event2HEADERS uninstall-libLTLIBRARIES \
+	uninstall-nodist_include_event2HEADERS uninstall-pkgconfigDATA
 
 .MAKE: all check install install-am install-strip
 
@@ -1388,15 +1492,17 @@ uninstall-am: uninstall-dist_binSCRIPTS uninstall-includeHEADERS \
 	info-am install install-am install-data install-data-am \
 	install-dist_binSCRIPTS install-dvi install-dvi-am \
 	install-exec install-exec-am install-html install-html-am \
-	install-includeHEADERS install-info install-info-am \
-	install-libLTLIBRARIES install-man install-pdf install-pdf-am \
-	install-pkgconfigDATA install-ps install-ps-am install-strip \
-	installcheck installcheck-am installdirs maintainer-clean \
-	maintainer-clean-generic mostlyclean mostlyclean-compile \
-	mostlyclean-generic mostlyclean-libtool pdf pdf-am ps ps-am \
-	tags tags-am uninstall uninstall-am uninstall-dist_binSCRIPTS \
-	uninstall-includeHEADERS uninstall-libLTLIBRARIES \
-	uninstall-pkgconfigDATA
+	install-includeHEADERS install-include_event2HEADERS \
+	install-info install-info-am install-libLTLIBRARIES \
+	install-man install-nodist_include_event2HEADERS install-pdf \
+	install-pdf-am install-pkgconfigDATA install-ps install-ps-am \
+	install-strip installcheck installcheck-am installdirs \
+	maintainer-clean maintainer-clean-generic mostlyclean \
+	mostlyclean-compile mostlyclean-generic mostlyclean-libtool \
+	pdf pdf-am ps ps-am tags tags-am uninstall uninstall-am \
+	uninstall-dist_binSCRIPTS uninstall-includeHEADERS \
+	uninstall-include_event2HEADERS uninstall-libLTLIBRARIES \
+	uninstall-nodist_include_event2HEADERS uninstall-pkgconfigDATA
 
 .PRECIOUS: Makefile
 

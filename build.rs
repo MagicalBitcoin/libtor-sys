@@ -10,15 +10,77 @@
 extern crate autotools;
 extern crate cc;
 
-extern crate buildutils;
-
 use std::env;
 use std::fs;
-use std::path::PathBuf;
+use std::path::{Path, PathBuf};
 
-use buildutils::*;
+pub fn source_dir(var: &str, package: &str, version: &str) -> PathBuf {
+    Path::new(var).join(format!("{}-{}", package, version))
+}
 
-fn main() {
+pub fn get_version(full_version: &str) -> String {
+    let parts: Vec<_> = full_version.split('+').collect();
+    parts[1].into()
+}
+
+pub struct Artifacts {
+    pub root: PathBuf,
+    pub include_dir: PathBuf,
+    pub lib_dir: PathBuf,
+    pub libs: Vec<String>,
+}
+
+impl Artifacts {
+    pub fn print_cargo_metadata(&self) {
+        println!("cargo:rustc-link-search=native={}", self.lib_dir.display());
+        for lib in self.libs.iter() {
+            println!("cargo:rustc-link-lib=static={}", lib);
+        }
+        println!("cargo:include={}", self.include_dir.display());
+        println!("cargo:lib={}", self.lib_dir.display());
+    }
+}
+
+fn build_libevent() -> Artifacts {
+    // TODO: cmake on windows
+
+    let target = env::var("TARGET").unwrap();
+    let host = env::var("HOST").unwrap();
+
+    let mut cc = cc::Build::new();
+    cc.target(&target).host(&host);
+    let compiler = cc.get_compiler();
+    let root = PathBuf::from(env::var("OUT_DIR").expect("OUT_DIR expected")).join("libevent");
+    fs::create_dir_all(&root).unwrap();
+
+    let path = source_dir(env!("CARGO_MANIFEST_DIR"), "libevent", "2.1.11-stable");
+    let mut config = autotools::Config::new(path.clone());
+    config
+        .out_dir(&root)
+        .env("CC", compiler.path())
+        .host(&target)
+        .enable_static()
+        .disable_shared()
+        .with("pic", None)
+        .disable("samples", None)
+        .disable("openssl", None)
+        .disable("libevent-regress", None)
+        .disable("debug-mode", None)
+        .disable("dependency-tracking", None);
+
+    let libevent = config.build();
+    let artifacts = Artifacts {
+        lib_dir: libevent.join("lib"),
+        include_dir: root.join("include"),
+        libs: vec!["event".to_string(), "event_pthreads".to_string()], // TODO: on windows re-add the `lib` prefix
+        root,
+    };
+    artifacts.print_cargo_metadata();
+
+    artifacts
+}
+
+fn build_tor(libevent: Artifacts) {
     let target = env::var("TARGET").expect("TARGET expected");
     let host = env::var("HOST").expect("HOST expected");
 
@@ -32,7 +94,6 @@ fn main() {
     return; */
 
     // TODO https://github.com/arlolra/tor/blob/master/INSTALL#L32
-    let event_dir = PathBuf::from(env::var("DEP_EVENT_ROOT").expect("DEP_EVENT_ROOT expected"));
     let openssl_dir =
         PathBuf::from(env::var("DEP_OPENSSL_ROOT").expect("DEP_OPENSSL_ROOT expected"));
 
@@ -45,7 +106,8 @@ fn main() {
     let mut config = autotools::Config::new(path.clone());
     config
         .env("CC", compiler.path())
-        .with("libevent-dir", event_dir.to_str())
+        .with("libevent-dir", libevent.root.to_str())
+        .cflag(format!("-I{}", libevent.include_dir.display()))
         .with("openssl-dir", openssl_dir.to_str())
         .enable("pic", None)
         //.enable("static-tor", None)
@@ -189,4 +251,9 @@ fn main() {
 
     // TODO: remove
     println!("cargo:rerun-if-changed=build.rs");
+}
+
+fn main() {
+    let libevent = build_libevent();
+    build_tor(libevent);
 }
