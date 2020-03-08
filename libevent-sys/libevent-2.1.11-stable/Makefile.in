@@ -20,24 +20,6 @@
 #
 # See LICENSE for copying information.
 
-# include/include.am for libevent
-# Copyright 2000-2007 Niels Provos
-# Copyright 2007-2012 Niels Provos and Nick Mathewson
-#
-# See LICENSE for copying information.
-
-# sample/include.am for libevent
-# Copyright 2000-2007 Niels Provos
-# Copyright 2007-2012 Niels Provos and Nick Mathewson
-#
-# See LICENSE for copying information.
-
-# test/Makefile.am for libevent
-# Copyright 2000-2007 Niels Provos
-# Copyright 2007-2012 Niels Provos and Nick Mathewson
-#
-# See LICENSE for copying information.
-
 
 
 
@@ -120,34 +102,18 @@ host_triplet = @host@
 @PTHREADS_TRUE@am__append_2 = libevent_pthreads.pc
 @OPENSSL_TRUE@am__append_3 = libevent_openssl.la
 @OPENSSL_TRUE@am__append_4 = libevent_openssl.pc
-noinst_PROGRAMS = $(am__EXEEXT_4) $(am__EXEEXT_6)
-EXTRA_PROGRAMS = $(am__EXEEXT_1)
-@OPENSSL_TRUE@am__append_5 = include/event2/bufferevent_ssl.h
-@INSTALL_LIBEVENT_FALSE@am__append_6 = $(EVENT2_EXPORT)
-@OPENSSL_TRUE@am__append_7 = sample/le-proxy sample/https-client
-@OPENSSL_TRUE@am__append_8 = \
-@OPENSSL_TRUE@	sample/hostcheck.h \
-@OPENSSL_TRUE@	sample/openssl_hostname_validation.h
-
-@BUILD_SAMPLES_TRUE@am__append_9 = $(SAMPLES)
-@BUILD_REGRESS_TRUE@am__append_10 = $(TESTPROGRAMS)
-@BUILD_REGRESS_TRUE@am__append_11 = test/regress
-@BUILD_REGRESS_TRUE@am__append_12 = test/regress.gen.c test/regress.gen.h
-@PTHREADS_TRUE@am__append_13 = libevent_pthreads.la
-@BUILD_WIN32_TRUE@am__append_14 = test/regress_iocp.c
-@OPENSSL_TRUE@am__append_15 = test/regress_ssl.c
-@OPENSSL_TRUE@am__append_16 = $(OPENSSL_INCS)
-@OPENSSL_TRUE@am__append_17 = libevent_openssl.la $(OPENSSL_LIBS) ${OPENSSL_LIBADD}
-@BUILD_WIN32_TRUE@@THREADS_TRUE@am__append_18 = evthread_win32.c
-@STRLCPY_IMPL_TRUE@am__append_19 = strlcpy.c
-@SELECT_BACKEND_TRUE@am__append_20 = select.c
-@POLL_BACKEND_TRUE@am__append_21 = poll.c
-@DEVPOLL_BACKEND_TRUE@am__append_22 = devpoll.c
-@KQUEUE_BACKEND_TRUE@am__append_23 = kqueue.c
-@EPOLL_BACKEND_TRUE@am__append_24 = epoll.c
-@EVPORT_BACKEND_TRUE@am__append_25 = evport.c
-@SIGNAL_SUPPORT_TRUE@am__append_26 = signal.c
-@INSTALL_LIBEVENT_FALSE@am__append_27 = $(EVENT1_HDRS)
+noinst_PROGRAMS =
+EXTRA_PROGRAMS =
+@BUILD_WIN32_TRUE@@THREADS_TRUE@am__append_5 = evthread_win32.c
+@STRLCPY_IMPL_TRUE@am__append_6 = strlcpy.c
+@SELECT_BACKEND_TRUE@am__append_7 = select.c
+@POLL_BACKEND_TRUE@am__append_8 = poll.c
+@DEVPOLL_BACKEND_TRUE@am__append_9 = devpoll.c
+@KQUEUE_BACKEND_TRUE@am__append_10 = kqueue.c
+@EPOLL_BACKEND_TRUE@am__append_11 = epoll.c
+@EVPORT_BACKEND_TRUE@am__append_12 = evport.c
+@SIGNAL_SUPPORT_TRUE@am__append_13 = signal.c
+@INSTALL_LIBEVENT_FALSE@am__append_14 = $(EVENT1_HDRS)
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/ac_backport_259_ssizet.m4 \
@@ -161,8 +127,8 @@ am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 DIST_COMMON = $(srcdir)/Makefile.am $(top_srcdir)/configure \
 	$(am__configure_deps) $(am__dist_bin_SCRIPTS_DIST) \
-	$(am__include_HEADERS_DIST) $(am__include_event2_HEADERS_DIST) \
-	$(am__noinst_HEADERS_DIST) $(am__DIST_COMMON)
+	$(am__include_HEADERS_DIST) $(am__noinst_HEADERS_DIST) \
+	$(am__DIST_COMMON)
 am__CONFIG_DISTCLEAN_FILES = config.status config.cache config.log \
  configure.lineno config.status.lineno
 mkinstalldirs = $(install_sh) -d
@@ -198,9 +164,7 @@ am__uninstall_files_from_dir = { \
          $(am__cd) "$$dir" && rm -f $$files; }; \
   }
 am__installdirs = "$(DESTDIR)$(libdir)" "$(DESTDIR)$(bindir)" \
-	"$(DESTDIR)$(pkgconfigdir)" "$(DESTDIR)$(includedir)" \
-	"$(DESTDIR)$(include_event2dir)" \
-	"$(DESTDIR)$(include_event2dir)"
+	"$(DESTDIR)$(pkgconfigdir)" "$(DESTDIR)$(includedir)"
 LTLIBRARIES = $(lib_LTLIBRARIES) $(noinst_LTLIBRARIES)
 am__DEPENDENCIES_1 =
 libevent_la_DEPENDENCIES = @LTLIBOBJS@ $(am__DEPENDENCIES_1)
@@ -299,147 +263,7 @@ libevent_pthreads_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC \
 @INSTALL_LIBEVENT_FALSE@@PTHREADS_TRUE@am_libevent_pthreads_la_rpath =
 @INSTALL_LIBEVENT_TRUE@@PTHREADS_TRUE@am_libevent_pthreads_la_rpath =  \
 @INSTALL_LIBEVENT_TRUE@@PTHREADS_TRUE@	-rpath $(libdir)
-@BUILD_REGRESS_TRUE@am__EXEEXT_1 = test/regress$(EXEEXT)
-@OPENSSL_TRUE@am__EXEEXT_2 = sample/le-proxy$(EXEEXT) \
-@OPENSSL_TRUE@	sample/https-client$(EXEEXT)
-am__EXEEXT_3 = sample/dns-example$(EXEEXT) \
-	sample/event-read-fifo$(EXEEXT) sample/hello-world$(EXEEXT) \
-	sample/http-server$(EXEEXT) sample/http-connect$(EXEEXT) \
-	sample/signal-test$(EXEEXT) sample/time-test$(EXEEXT) \
-	$(am__EXEEXT_2)
-@BUILD_SAMPLES_TRUE@am__EXEEXT_4 = $(am__EXEEXT_3)
-am__EXEEXT_5 = test/bench$(EXEEXT) test/bench_cascade$(EXEEXT) \
-	test/bench_http$(EXEEXT) test/bench_httpclient$(EXEEXT) \
-	test/test-changelist$(EXEEXT) test/test-dumpevents$(EXEEXT) \
-	test/test-eof$(EXEEXT) test/test-closed$(EXEEXT) \
-	test/test-fdleak$(EXEEXT) test/test-init$(EXEEXT) \
-	test/test-ratelim$(EXEEXT) test/test-time$(EXEEXT) \
-	test/test-weof$(EXEEXT) test/regress$(EXEEXT)
-@BUILD_REGRESS_TRUE@am__EXEEXT_6 = $(am__EXEEXT_5)
 PROGRAMS = $(noinst_PROGRAMS)
-am__dirstamp = $(am__leading_dot)dirstamp
-am_sample_dns_example_OBJECTS = sample/dns-example.$(OBJEXT)
-sample_dns_example_OBJECTS = $(am_sample_dns_example_OBJECTS)
-sample_dns_example_DEPENDENCIES = $(am__DEPENDENCIES_1) libevent.la
-am_sample_event_read_fifo_OBJECTS = sample/event-read-fifo.$(OBJEXT)
-sample_event_read_fifo_OBJECTS = $(am_sample_event_read_fifo_OBJECTS)
-sample_event_read_fifo_DEPENDENCIES = $(am__DEPENDENCIES_1) \
-	libevent.la
-am_sample_hello_world_OBJECTS = sample/hello-world.$(OBJEXT)
-sample_hello_world_OBJECTS = $(am_sample_hello_world_OBJECTS)
-sample_hello_world_DEPENDENCIES = $(am__DEPENDENCIES_1) libevent.la
-am_sample_http_connect_OBJECTS = sample/http-connect.$(OBJEXT)
-sample_http_connect_OBJECTS = $(am_sample_http_connect_OBJECTS)
-sample_http_connect_DEPENDENCIES = $(am__DEPENDENCIES_1) libevent.la
-am_sample_http_server_OBJECTS = sample/http-server.$(OBJEXT)
-sample_http_server_OBJECTS = $(am_sample_http_server_OBJECTS)
-sample_http_server_DEPENDENCIES = $(am__DEPENDENCIES_1) libevent.la
-am__sample_https_client_SOURCES_DIST = sample/https-client.c \
-	sample/hostcheck.c sample/openssl_hostname_validation.c
-@OPENSSL_TRUE@am_sample_https_client_OBJECTS = sample/sample_https_client-https-client.$(OBJEXT) \
-@OPENSSL_TRUE@	sample/sample_https_client-hostcheck.$(OBJEXT) \
-@OPENSSL_TRUE@	sample/sample_https_client-openssl_hostname_validation.$(OBJEXT)
-sample_https_client_OBJECTS = $(am_sample_https_client_OBJECTS)
-@OPENSSL_TRUE@sample_https_client_DEPENDENCIES = libevent.la \
-@OPENSSL_TRUE@	libevent_openssl.la $(am__DEPENDENCIES_1) \
-@OPENSSL_TRUE@	$(am__DEPENDENCIES_1)
-am__sample_le_proxy_SOURCES_DIST = sample/le-proxy.c
-@OPENSSL_TRUE@am_sample_le_proxy_OBJECTS =  \
-@OPENSSL_TRUE@	sample/sample_le_proxy-le-proxy.$(OBJEXT)
-sample_le_proxy_OBJECTS = $(am_sample_le_proxy_OBJECTS)
-@OPENSSL_TRUE@sample_le_proxy_DEPENDENCIES = libevent.la \
-@OPENSSL_TRUE@	libevent_openssl.la $(am__DEPENDENCIES_1) \
-@OPENSSL_TRUE@	$(am__DEPENDENCIES_1)
-am_sample_signal_test_OBJECTS = sample/signal-test.$(OBJEXT)
-sample_signal_test_OBJECTS = $(am_sample_signal_test_OBJECTS)
-sample_signal_test_DEPENDENCIES = $(am__DEPENDENCIES_1) libevent.la
-am_sample_time_test_OBJECTS = sample/time-test.$(OBJEXT)
-sample_time_test_OBJECTS = $(am_sample_time_test_OBJECTS)
-sample_time_test_DEPENDENCIES = $(am__DEPENDENCIES_1) libevent.la
-am_test_bench_OBJECTS = test/bench.$(OBJEXT)
-test_bench_OBJECTS = $(am_test_bench_OBJECTS)
-test_bench_DEPENDENCIES = $(am__DEPENDENCIES_1) libevent.la
-am_test_bench_cascade_OBJECTS = test/bench_cascade.$(OBJEXT)
-test_bench_cascade_OBJECTS = $(am_test_bench_cascade_OBJECTS)
-test_bench_cascade_DEPENDENCIES = $(am__DEPENDENCIES_1) libevent.la
-am_test_bench_http_OBJECTS = test/bench_http.$(OBJEXT)
-test_bench_http_OBJECTS = $(am_test_bench_http_OBJECTS)
-test_bench_http_DEPENDENCIES = $(am__DEPENDENCIES_1) libevent.la
-am_test_bench_httpclient_OBJECTS = test/bench_httpclient.$(OBJEXT)
-test_bench_httpclient_OBJECTS = $(am_test_bench_httpclient_OBJECTS)
-test_bench_httpclient_DEPENDENCIES = $(am__DEPENDENCIES_1) \
-	libevent_core.la
-am__test_regress_SOURCES_DIST = test/regress.c test/regress.gen.c \
-	test/regress.gen.h test/regress_buffer.c \
-	test/regress_bufferevent.c test/regress_dns.c \
-	test/regress_et.c test/regress_finalize.c test/regress_http.c \
-	test/regress_listener.c test/regress_main.c \
-	test/regress_minheap.c test/regress_rpc.c \
-	test/regress_testutils.c test/regress_testutils.h \
-	test/regress_util.c test/tinytest.c test/regress_thread.c \
-	test/regress_zlib.c test/regress_iocp.c test/regress_ssl.c
-@BUILD_WIN32_FALSE@@PTHREADS_TRUE@am__objects_13 = test/test_regress-regress_thread.$(OBJEXT)
-@BUILD_WIN32_TRUE@@THREADS_TRUE@am__objects_13 = test/test_regress-regress_thread.$(OBJEXT)
-@PTHREADS_TRUE@@THREADS_FALSE@am__objects_13 = test/test_regress-regress_thread.$(OBJEXT)
-@ZLIB_REGRESS_TRUE@am__objects_14 =  \
-@ZLIB_REGRESS_TRUE@	test/test_regress-regress_zlib.$(OBJEXT)
-@BUILD_WIN32_TRUE@am__objects_15 =  \
-@BUILD_WIN32_TRUE@	test/test_regress-regress_iocp.$(OBJEXT)
-@OPENSSL_TRUE@am__objects_16 =  \
-@OPENSSL_TRUE@	test/test_regress-regress_ssl.$(OBJEXT)
-am_test_regress_OBJECTS = test/test_regress-regress.$(OBJEXT) \
-	test/test_regress-regress.gen.$(OBJEXT) \
-	test/test_regress-regress_buffer.$(OBJEXT) \
-	test/test_regress-regress_bufferevent.$(OBJEXT) \
-	test/test_regress-regress_dns.$(OBJEXT) \
-	test/test_regress-regress_et.$(OBJEXT) \
-	test/test_regress-regress_finalize.$(OBJEXT) \
-	test/test_regress-regress_http.$(OBJEXT) \
-	test/test_regress-regress_listener.$(OBJEXT) \
-	test/test_regress-regress_main.$(OBJEXT) \
-	test/test_regress-regress_minheap.$(OBJEXT) \
-	test/test_regress-regress_rpc.$(OBJEXT) \
-	test/test_regress-regress_testutils.$(OBJEXT) \
-	test/test_regress-regress_util.$(OBJEXT) \
-	test/test_regress-tinytest.$(OBJEXT) $(am__objects_13) \
-	$(am__objects_14) $(am__objects_15) $(am__objects_16)
-test_regress_OBJECTS = $(am_test_regress_OBJECTS)
-am__DEPENDENCIES_3 = $(am__append_13)
-@OPENSSL_TRUE@am__DEPENDENCIES_4 = libevent_openssl.la \
-@OPENSSL_TRUE@	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
-test_regress_DEPENDENCIES = $(am__DEPENDENCIES_1) libevent_core.la \
-	libevent_extra.la $(am__DEPENDENCIES_3) $(am__DEPENDENCIES_1) \
-	$(am__DEPENDENCIES_4)
-test_regress_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
-	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
-	$(test_regress_LDFLAGS) $(LDFLAGS) -o $@
-am_test_test_changelist_OBJECTS = test/test-changelist.$(OBJEXT)
-test_test_changelist_OBJECTS = $(am_test_test_changelist_OBJECTS)
-test_test_changelist_DEPENDENCIES = libevent_core.la
-am_test_test_closed_OBJECTS = test/test-closed.$(OBJEXT)
-test_test_closed_OBJECTS = $(am_test_test_closed_OBJECTS)
-test_test_closed_DEPENDENCIES = libevent_core.la
-am_test_test_dumpevents_OBJECTS = test/test-dumpevents.$(OBJEXT)
-test_test_dumpevents_OBJECTS = $(am_test_test_dumpevents_OBJECTS)
-test_test_dumpevents_DEPENDENCIES = libevent_core.la
-am_test_test_eof_OBJECTS = test/test-eof.$(OBJEXT)
-test_test_eof_OBJECTS = $(am_test_test_eof_OBJECTS)
-test_test_eof_DEPENDENCIES = libevent_core.la
-am_test_test_fdleak_OBJECTS = test/test-fdleak.$(OBJEXT)
-test_test_fdleak_OBJECTS = $(am_test_test_fdleak_OBJECTS)
-test_test_fdleak_DEPENDENCIES = libevent_core.la
-am_test_test_init_OBJECTS = test/test-init.$(OBJEXT)
-test_test_init_OBJECTS = $(am_test_test_init_OBJECTS)
-test_test_init_DEPENDENCIES = libevent_core.la
-am_test_test_ratelim_OBJECTS = test/test-ratelim.$(OBJEXT)
-test_test_ratelim_OBJECTS = $(am_test_test_ratelim_OBJECTS)
-test_test_ratelim_DEPENDENCIES = libevent_core.la
-am_test_test_time_OBJECTS = test/test-time.$(OBJEXT)
-test_test_time_OBJECTS = $(am_test_test_time_OBJECTS)
-test_test_time_DEPENDENCIES = libevent_core.la
-am_test_test_weof_OBJECTS = test/test-weof.$(OBJEXT)
-test_test_weof_OBJECTS = $(am_test_test_weof_OBJECTS)
-test_test_weof_DEPENDENCIES = libevent_core.la
 am__dist_bin_SCRIPTS_DIST = event_rpcgen.py
 SCRIPTS = $(dist_bin_SCRIPTS)
 AM_V_P = $(am__v_P_@AM_V@)
@@ -478,39 +302,12 @@ am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
 SOURCES = $(libevent_la_SOURCES) $(libevent_core_la_SOURCES) \
 	$(libevent_extra_la_SOURCES) $(libevent_openssl_la_SOURCES) \
-	$(libevent_pthreads_la_SOURCES) $(sample_dns_example_SOURCES) \
-	$(sample_event_read_fifo_SOURCES) \
-	$(sample_hello_world_SOURCES) $(sample_http_connect_SOURCES) \
-	$(sample_http_server_SOURCES) $(sample_https_client_SOURCES) \
-	$(sample_le_proxy_SOURCES) $(sample_signal_test_SOURCES) \
-	$(sample_time_test_SOURCES) $(test_bench_SOURCES) \
-	$(test_bench_cascade_SOURCES) $(test_bench_http_SOURCES) \
-	$(test_bench_httpclient_SOURCES) $(test_regress_SOURCES) \
-	$(test_test_changelist_SOURCES) $(test_test_closed_SOURCES) \
-	$(test_test_dumpevents_SOURCES) $(test_test_eof_SOURCES) \
-	$(test_test_fdleak_SOURCES) $(test_test_init_SOURCES) \
-	$(test_test_ratelim_SOURCES) $(test_test_time_SOURCES) \
-	$(test_test_weof_SOURCES)
+	$(libevent_pthreads_la_SOURCES)
 DIST_SOURCES = $(am__libevent_la_SOURCES_DIST) \
 	$(am__libevent_core_la_SOURCES_DIST) \
 	$(libevent_extra_la_SOURCES) \
 	$(am__libevent_openssl_la_SOURCES_DIST) \
-	$(am__libevent_pthreads_la_SOURCES_DIST) \
-	$(sample_dns_example_SOURCES) \
-	$(sample_event_read_fifo_SOURCES) \
-	$(sample_hello_world_SOURCES) $(sample_http_connect_SOURCES) \
-	$(sample_http_server_SOURCES) \
-	$(am__sample_https_client_SOURCES_DIST) \
-	$(am__sample_le_proxy_SOURCES_DIST) \
-	$(sample_signal_test_SOURCES) $(sample_time_test_SOURCES) \
-	$(test_bench_SOURCES) $(test_bench_cascade_SOURCES) \
-	$(test_bench_http_SOURCES) $(test_bench_httpclient_SOURCES) \
-	$(am__test_regress_SOURCES_DIST) \
-	$(test_test_changelist_SOURCES) $(test_test_closed_SOURCES) \
-	$(test_test_dumpevents_SOURCES) $(test_test_eof_SOURCES) \
-	$(test_test_fdleak_SOURCES) $(test_test_init_SOURCES) \
-	$(test_test_ratelim_SOURCES) $(test_test_time_SOURCES) \
-	$(test_test_weof_SOURCES)
+	$(am__libevent_pthreads_la_SOURCES_DIST)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -519,37 +316,7 @@ am__can_run_installinfo = \
 DATA = $(pkgconfig_DATA)
 am__include_HEADERS_DIST = include/evdns.h include/event.h \
 	include/evhttp.h include/evrpc.h include/evutil.h
-am__include_event2_HEADERS_DIST = include/event2/buffer.h \
-	include/event2/buffer_compat.h include/event2/bufferevent.h \
-	include/event2/bufferevent_compat.h \
-	include/event2/bufferevent_struct.h include/event2/dns.h \
-	include/event2/dns_compat.h include/event2/dns_struct.h \
-	include/event2/event.h include/event2/event_compat.h \
-	include/event2/event_struct.h include/event2/http.h \
-	include/event2/http_compat.h include/event2/http_struct.h \
-	include/event2/keyvalq_struct.h include/event2/listener.h \
-	include/event2/rpc.h include/event2/rpc_compat.h \
-	include/event2/rpc_struct.h include/event2/tag.h \
-	include/event2/tag_compat.h include/event2/thread.h \
-	include/event2/util.h include/event2/visibility.h \
-	include/event2/bufferevent_ssl.h
-am__noinst_HEADERS_DIST = include/event2/buffer.h \
-	include/event2/buffer_compat.h include/event2/bufferevent.h \
-	include/event2/bufferevent_compat.h \
-	include/event2/bufferevent_struct.h include/event2/dns.h \
-	include/event2/dns_compat.h include/event2/dns_struct.h \
-	include/event2/event.h include/event2/event_compat.h \
-	include/event2/event_struct.h include/event2/http.h \
-	include/event2/http_compat.h include/event2/http_struct.h \
-	include/event2/keyvalq_struct.h include/event2/listener.h \
-	include/event2/rpc.h include/event2/rpc_compat.h \
-	include/event2/rpc_struct.h include/event2/tag.h \
-	include/event2/tag_compat.h include/event2/thread.h \
-	include/event2/util.h include/event2/visibility.h \
-	include/event2/bufferevent_ssl.h sample/hostcheck.h \
-	sample/openssl_hostname_validation.h test/regress.h \
-	test/regress_thread.h test/tinytest.h test/tinytest_local.h \
-	test/tinytest_macros.h WIN32-Code/nmake/evconfig-private.h \
+am__noinst_HEADERS_DIST = WIN32-Code/nmake/evconfig-private.h \
 	WIN32-Code/nmake/event2/event-config.h WIN32-Code/getopt.h \
 	WIN32-Code/getopt.c WIN32-Code/getopt_long.c WIN32-Code/tree.h \
 	bufferevent-internal.h changelist-internal.h \
@@ -562,9 +329,7 @@ am__noinst_HEADERS_DIST = include/event2/buffer.h \
 	time-internal.h util-internal.h openssl-compat.h \
 	include/evdns.h include/event.h include/evhttp.h \
 	include/evrpc.h include/evutil.h
-HEADERS = $(include_HEADERS) $(include_event2_HEADERS) \
-	$(nodist_include_event2_HEADERS) $(nodist_noinst_HEADERS) \
-	$(noinst_HEADERS)
+HEADERS = $(include_HEADERS) $(noinst_HEADERS)
 am__tagged_files = $(HEADERS) $(SOURCES) $(TAGS_FILES) \
 	$(LISP)config.h.in evconfig-private.h.in
 # Read a list of newline-separated strings from the standard input,
@@ -586,192 +351,14 @@ am__define_uniq_tagged_files = \
 ETAGS = etags
 CTAGS = ctags
 CSCOPE = cscope
-AM_RECURSIVE_TARGETS = cscope check recheck
-am__tty_colors_dummy = \
-  mgn= red= grn= lgn= blu= brg= std=; \
-  am__color_tests=no
-am__tty_colors = { \
-  $(am__tty_colors_dummy); \
-  if test "X$(AM_COLOR_TESTS)" = Xno; then \
-    am__color_tests=no; \
-  elif test "X$(AM_COLOR_TESTS)" = Xalways; then \
-    am__color_tests=yes; \
-  elif test "X$$TERM" != Xdumb && { test -t 1; } 2>/dev/null; then \
-    am__color_tests=yes; \
-  fi; \
-  if test $$am__color_tests = yes; then \
-    red='[0;31m'; \
-    grn='[0;32m'; \
-    lgn='[1;32m'; \
-    blu='[1;34m'; \
-    mgn='[0;35m'; \
-    brg='[1m'; \
-    std='[m'; \
-  fi; \
-}
-am__recheck_rx = ^[ 	]*:recheck:[ 	]*
-am__global_test_result_rx = ^[ 	]*:global-test-result:[ 	]*
-am__copy_in_global_log_rx = ^[ 	]*:copy-in-global-log:[ 	]*
-# A command that, given a newline-separated list of test names on the
-# standard input, print the name of the tests that are to be re-run
-# upon "make recheck".
-am__list_recheck_tests = $(AWK) '{ \
-  recheck = 1; \
-  while ((rc = (getline line < ($$0 ".trs"))) != 0) \
-    { \
-      if (rc < 0) \
-        { \
-          if ((getline line2 < ($$0 ".log")) < 0) \
-	    recheck = 0; \
-          break; \
-        } \
-      else if (line ~ /$(am__recheck_rx)[nN][Oo]/) \
-        { \
-          recheck = 0; \
-          break; \
-        } \
-      else if (line ~ /$(am__recheck_rx)[yY][eE][sS]/) \
-        { \
-          break; \
-        } \
-    }; \
-  if (recheck) \
-    print $$0; \
-  close ($$0 ".trs"); \
-  close ($$0 ".log"); \
-}'
-# A command that, given a newline-separated list of test names on the
-# standard input, create the global log from their .trs and .log files.
-am__create_global_log = $(AWK) ' \
-function fatal(msg) \
-{ \
-  print "fatal: making $@: " msg | "cat >&2"; \
-  exit 1; \
-} \
-function rst_section(header) \
-{ \
-  print header; \
-  len = length(header); \
-  for (i = 1; i <= len; i = i + 1) \
-    printf "="; \
-  printf "\n\n"; \
-} \
-{ \
-  copy_in_global_log = 1; \
-  global_test_result = "RUN"; \
-  while ((rc = (getline line < ($$0 ".trs"))) != 0) \
-    { \
-      if (rc < 0) \
-         fatal("failed to read from " $$0 ".trs"); \
-      if (line ~ /$(am__global_test_result_rx)/) \
-        { \
-          sub("$(am__global_test_result_rx)", "", line); \
-          sub("[ 	]*$$", "", line); \
-          global_test_result = line; \
-        } \
-      else if (line ~ /$(am__copy_in_global_log_rx)[nN][oO]/) \
-        copy_in_global_log = 0; \
-    }; \
-  if (copy_in_global_log) \
-    { \
-      rst_section(global_test_result ": " $$0); \
-      while ((rc = (getline line < ($$0 ".log"))) != 0) \
-      { \
-        if (rc < 0) \
-          fatal("failed to read from " $$0 ".log"); \
-        print line; \
-      }; \
-      printf "\n"; \
-    }; \
-  close ($$0 ".trs"); \
-  close ($$0 ".log"); \
-}'
-# Restructured Text title.
-am__rst_title = { sed 's/.*/   &   /;h;s/./=/g;p;x;s/ *$$//;p;g' && echo; }
-# Solaris 10 'make', and several other traditional 'make' implementations,
-# pass "-e" to $(SHELL), and POSIX 2008 even requires this.  Work around it
-# by disabling -e (using the XSI extension "set +e") if it's set.
-am__sh_e_setup = case $$- in *e*) set +e;; esac
-# Default flags passed to test drivers.
-am__common_driver_flags = \
-  --color-tests "$$am__color_tests" \
-  --enable-hard-errors "$$am__enable_hard_errors" \
-  --expect-failure "$$am__expect_failure"
-# To be inserted before the command running the test.  Creates the
-# directory for the log if needed.  Stores in $dir the directory
-# containing $f, in $tst the test, in $log the log.  Executes the
-# developer- defined test setup AM_TESTS_ENVIRONMENT (if any), and
-# passes TESTS_ENVIRONMENT.  Set up options for the wrapper that
-# will run the test scripts (or their associated LOG_COMPILER, if
-# thy have one).
-am__check_pre = \
-$(am__sh_e_setup);					\
-$(am__vpath_adj_setup) $(am__vpath_adj)			\
-$(am__tty_colors);					\
-srcdir=$(srcdir); export srcdir;			\
-case "$@" in						\
-  */*) am__odir=`echo "./$@" | sed 's|/[^/]*$$||'`;;	\
-    *) am__odir=.;; 					\
-esac;							\
-test "x$$am__odir" = x"." || test -d "$$am__odir" 	\
-  || $(MKDIR_P) "$$am__odir" || exit $$?;		\
-if test -f "./$$f"; then dir=./;			\
-elif test -f "$$f"; then dir=;				\
-else dir="$(srcdir)/"; fi;				\
-tst=$$dir$$f; log='$@'; 				\
-if test -n '$(DISABLE_HARD_ERRORS)'; then		\
-  am__enable_hard_errors=no; 				\
-else							\
-  am__enable_hard_errors=yes; 				\
-fi; 							\
-case " $(XFAIL_TESTS) " in				\
-  *[\ \	]$$f[\ \	]* | *[\ \	]$$dir$$f[\ \	]*) \
-    am__expect_failure=yes;;				\
-  *)							\
-    am__expect_failure=no;;				\
-esac; 							\
-$(AM_TESTS_ENVIRONMENT) $(TESTS_ENVIRONMENT)
-# A shell command to get the names of the tests scripts with any registered
-# extension removed (i.e., equivalently, the names of the test logs, with
-# the '.log' extension removed).  The result is saved in the shell variable
-# '$bases'.  This honors runtime overriding of TESTS and TEST_LOGS.  Sadly,
-# we cannot use something simpler, involving e.g., "$(TEST_LOGS:.log=)",
-# since that might cause problem with VPATH rewrites for suffix-less tests.
-# See also 'test-harness-vpath-rewrite.sh' and 'test-trs-basic.sh'.
-am__set_TESTS_bases = \
-  bases='$(TEST_LOGS)'; \
-  bases=`for i in $$bases; do echo $$i; done | sed 's/\.log$$//'`; \
-  bases=`echo $$bases`
-RECHECK_LOGS = $(TEST_LOGS)
-TEST_SUITE_LOG = test-suite.log
-TEST_EXTENSIONS = @EXEEXT@ .test
-LOG_DRIVER = $(SHELL) $(top_srcdir)/test-driver
-LOG_COMPILE = $(LOG_COMPILER) $(AM_LOG_FLAGS) $(LOG_FLAGS)
-am__set_b = \
-  case '$@' in \
-    */*) \
-      case '$*' in \
-        */*) b='$*';; \
-          *) b=`echo '$@' | sed 's/\.log$$//'`; \
-       esac;; \
-    *) \
-      b='$*';; \
-  esac
-am__test_logs1 = $(TESTS:=.log)
-am__test_logs2 = $(am__test_logs1:@EXEEXT@.log=.log)
-TEST_LOGS = $(am__test_logs2:.test.log=.log)
-TEST_LOG_DRIVER = $(SHELL) $(top_srcdir)/test-driver
-TEST_LOG_COMPILE = $(TEST_LOG_COMPILER) $(AM_TEST_LOG_FLAGS) \
-	$(TEST_LOG_FLAGS)
+AM_RECURSIVE_TARGETS = cscope
 am__DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/config.h.in \
-	$(srcdir)/evconfig-private.h.in $(srcdir)/include/include.am \
-	$(srcdir)/libevent.pc.in $(srcdir)/libevent_core.pc.in \
-	$(srcdir)/libevent_extra.pc.in \
+	$(srcdir)/evconfig-private.h.in $(srcdir)/libevent.pc.in \
+	$(srcdir)/libevent_core.pc.in $(srcdir)/libevent_extra.pc.in \
 	$(srcdir)/libevent_openssl.pc.in \
-	$(srcdir)/libevent_pthreads.pc.in $(srcdir)/sample/include.am \
-	$(srcdir)/test/include.am ChangeLog compile config.guess \
-	config.sub depcomp epoll_sub.c install-sh ltmain.sh missing \
-	test-driver
+	$(srcdir)/libevent_pthreads.pc.in ChangeLog compile \
+	config.guess config.sub depcomp epoll_sub.c install-sh \
+	ltmain.sh missing
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 distdir = $(PACKAGE)-$(VERSION)
 top_distdir = $(distdir)
@@ -856,7 +443,7 @@ PATH_SEPARATOR = @PATH_SEPARATOR@
 PKG_CONFIG = @PKG_CONFIG@
 PTHREAD_CC = @PTHREAD_CC@
 PTHREAD_CFLAGS = @PTHREAD_CFLAGS@
-PTHREAD_LIBS = @PTHREAD_LIBS@ $(am__append_13)
+PTHREAD_LIBS = @PTHREAD_LIBS@
 RANLIB = @RANLIB@
 SED = @SED@
 SET_MAKE = @SET_MAKE@
@@ -1041,23 +628,29 @@ CMAKE_FILES = \
 	evconfig-private.h.cmake \
 	CMakeLists.txt
 
-EXTRA_DIST = ChangeLog-1.4 ChangeLog-2.0 Doxyfile LICENSE \
-	Makefile.nmake test/Makefile.nmake autogen.sh event_rpcgen.py \
-	libevent.pc.in make-event-config.sed whatsnew-2.0.txt \
-	whatsnew-2.1.txt README.md $(CMAKE_FILES) \
-	$(PLATFORM_DEPENDENT_SRC) test/check-dumpevents.py \
-	test/regress.gen.c test/regress.gen.h test/regress.rpc \
-	test/rpcgen_wrapper.sh test/print-winsock-errors.c \
-	test/test.sh
+EXTRA_DIST = \
+	ChangeLog-1.4 \
+	ChangeLog-2.0 \
+	Doxyfile \
+	LICENSE \
+	Makefile.nmake test/Makefile.nmake \
+	autogen.sh \
+	event_rpcgen.py \
+	libevent.pc.in \
+	make-event-config.sed \
+	whatsnew-2.0.txt \
+	whatsnew-2.1.txt \
+	README.md \
+	$(CMAKE_FILES) \
+	$(PLATFORM_DEPENDENT_SRC)
+
 LIBEVENT_LIBS_LA = libevent.la libevent_core.la libevent_extra.la \
 	$(am__append_1) $(am__append_3)
 @INSTALL_LIBEVENT_TRUE@lib_LTLIBRARIES = $(LIBEVENT_LIBS_LA)
 @INSTALL_LIBEVENT_TRUE@pkgconfig_DATA = $(LIBEVENT_PKGCONFIG)
 @INSTALL_LIBEVENT_FALSE@noinst_LTLIBRARIES = $(LIBEVENT_LIBS_LA)
 EXTRA_SOURCE = 
-noinst_HEADERS = $(am__append_6) $(am__append_8) test/regress.h \
-	test/regress_thread.h test/tinytest.h test/tinytest_local.h \
-	test/tinytest_macros.h WIN32-Code/nmake/evconfig-private.h \
+noinst_HEADERS = WIN32-Code/nmake/evconfig-private.h \
 	WIN32-Code/nmake/event2/event-config.h WIN32-Code/getopt.h \
 	WIN32-Code/getopt.c WIN32-Code/getopt_long.c WIN32-Code/tree.h \
 	bufferevent-internal.h changelist-internal.h \
@@ -1068,144 +661,23 @@ noinst_HEADERS = $(am__append_6) $(am__append_8) test/regress.h \
 	kqueue-internal.h log-internal.h minheap-internal.h \
 	mm-internal.h ratelim-internal.h ratelim-internal.h \
 	strlcpy-internal.h time-internal.h util-internal.h \
-	openssl-compat.h $(am__append_27)
-CLEANFILES = test/rpcgen-attempted
-DISTCLEANFILES = test/regress.gen.c test/regress.gen.h *~ libevent.pc \
-	libevent_core.pc libevent_extra.pc \
+	openssl-compat.h $(am__append_14)
+CLEANFILES = 
+DISTCLEANFILES = *~ libevent.pc libevent_core.pc libevent_extra.pc \
 	./include/event2/event-config.h
-BUILT_SOURCES = $(am__append_12) include/event2/event-config.h
-include_event2dir = $(includedir)/event2
-EVENT2_EXPORT = include/event2/buffer.h include/event2/buffer_compat.h \
-	include/event2/bufferevent.h \
-	include/event2/bufferevent_compat.h \
-	include/event2/bufferevent_struct.h include/event2/dns.h \
-	include/event2/dns_compat.h include/event2/dns_struct.h \
-	include/event2/event.h include/event2/event_compat.h \
-	include/event2/event_struct.h include/event2/http.h \
-	include/event2/http_compat.h include/event2/http_struct.h \
-	include/event2/keyvalq_struct.h include/event2/listener.h \
-	include/event2/rpc.h include/event2/rpc_compat.h \
-	include/event2/rpc_struct.h include/event2/tag.h \
-	include/event2/tag_compat.h include/event2/thread.h \
-	include/event2/util.h include/event2/visibility.h \
-	$(am__append_5)
-@INSTALL_LIBEVENT_TRUE@include_event2_HEADERS = $(EVENT2_EXPORT)
-@INSTALL_LIBEVENT_TRUE@nodist_include_event2_HEADERS = include/event2/event-config.h
-@INSTALL_LIBEVENT_FALSE@nodist_noinst_HEADERS = include/event2/event-config.h
-SAMPLES = sample/dns-example sample/event-read-fifo sample/hello-world \
-	sample/http-server sample/http-connect sample/signal-test \
-	sample/time-test $(am__append_7)
-@OPENSSL_TRUE@sample_le_proxy_SOURCES = sample/le-proxy.c
-@OPENSSL_TRUE@sample_le_proxy_LDADD = libevent.la libevent_openssl.la $(OPENSSL_LIBS) $(OPENSSL_LIBADD)
-@OPENSSL_TRUE@sample_le_proxy_CPPFLAGS = $(AM_CPPFLAGS) $(OPENSSL_INCS)
-@OPENSSL_TRUE@sample_https_client_SOURCES = \
-@OPENSSL_TRUE@	sample/https-client.c \
-@OPENSSL_TRUE@	sample/hostcheck.c \
-@OPENSSL_TRUE@	sample/openssl_hostname_validation.c
-
-@OPENSSL_TRUE@sample_https_client_LDADD = libevent.la libevent_openssl.la $(OPENSSL_LIBS) $(OPENSSL_LIBADD)
-@OPENSSL_TRUE@sample_https_client_CPPFLAGS = $(AM_CPPFLAGS) $(OPENSSL_INCS)
-sample_event_read_fifo_SOURCES = sample/event-read-fifo.c
-sample_event_read_fifo_LDADD = $(LIBEVENT_GC_SECTIONS) libevent.la
-sample_time_test_SOURCES = sample/time-test.c
-sample_time_test_LDADD = $(LIBEVENT_GC_SECTIONS) libevent.la
-sample_signal_test_SOURCES = sample/signal-test.c
-sample_signal_test_LDADD = $(LIBEVENT_GC_SECTIONS) libevent.la
-sample_dns_example_SOURCES = sample/dns-example.c
-sample_dns_example_LDADD = $(LIBEVENT_GC_SECTIONS) libevent.la
-sample_hello_world_SOURCES = sample/hello-world.c
-sample_hello_world_LDADD = $(LIBEVENT_GC_SECTIONS) libevent.la
-sample_http_server_SOURCES = sample/http-server.c
-sample_http_server_LDADD = $(LIBEVENT_GC_SECTIONS) libevent.la
-sample_http_connect_SOURCES = sample/http-connect.c
-sample_http_connect_LDADD = $(LIBEVENT_GC_SECTIONS) libevent.la
-regress_CPPFLAGS = -DTINYTEST_LOCAL
-TESTPROGRAMS = \
-	test/bench					\
-	test/bench_cascade				\
-	test/bench_http				\
-	test/bench_httpclient			\
-	test/test-changelist				\
-	test/test-dumpevents				\
-	test/test-eof				\
-	test/test-closed				\
-	test/test-fdleak				\
-	test/test-init				\
-	test/test-ratelim				\
-	test/test-time				\
-	test/test-weof \
-	test/regress
-
-TESTS = \
-	test_runner_epoll \
-	test_runner_select \
-	test_runner_kqueue \
-	test_runner_evport \
-	test_runner_devpoll \
-	test_runner_poll \
-	test_runner_win32 \
-	test_runner_timerfd \
-	test_runner_changelist \
-	test_runner_timerfd_changelist
-
-LOG_COMPILER = true
-TESTS_COMPILER = true
-test_test_init_SOURCES = test/test-init.c
-test_test_init_LDADD = libevent_core.la
-test_test_dumpevents_SOURCES = test/test-dumpevents.c
-test_test_dumpevents_LDADD = libevent_core.la
-test_test_eof_SOURCES = test/test-eof.c
-test_test_eof_LDADD = libevent_core.la
-test_test_closed_SOURCES = test/test-closed.c
-test_test_closed_LDADD = libevent_core.la
-test_test_changelist_SOURCES = test/test-changelist.c
-test_test_changelist_LDADD = libevent_core.la
-test_test_weof_SOURCES = test/test-weof.c
-test_test_weof_LDADD = libevent_core.la
-test_test_time_SOURCES = test/test-time.c
-test_test_time_LDADD = libevent_core.la
-test_test_ratelim_SOURCES = test/test-ratelim.c
-test_test_ratelim_LDADD = libevent_core.la -lm
-test_test_fdleak_SOURCES = test/test-fdleak.c
-test_test_fdleak_LDADD = libevent_core.la
-test_regress_SOURCES = test/regress.c test/regress.gen.c \
-	test/regress.gen.h test/regress_buffer.c \
-	test/regress_bufferevent.c test/regress_dns.c \
-	test/regress_et.c test/regress_finalize.c test/regress_http.c \
-	test/regress_listener.c test/regress_main.c \
-	test/regress_minheap.c test/regress_rpc.c \
-	test/regress_testutils.c test/regress_testutils.h \
-	test/regress_util.c test/tinytest.c $(regress_thread_SOURCES) \
-	$(regress_zlib_SOURCES) $(am__append_14) $(am__append_15)
-@BUILD_WIN32_TRUE@@THREADS_TRUE@regress_thread_SOURCES = test/regress_thread.c
-@PTHREADS_TRUE@regress_thread_SOURCES = test/regress_thread.c
-@ZLIB_REGRESS_TRUE@regress_zlib_SOURCES = test/regress_zlib.c
-test_regress_LDADD = $(LIBEVENT_GC_SECTIONS) libevent_core.la \
-	libevent_extra.la $(PTHREAD_LIBS) $(ZLIB_LIBS) \
-	$(am__append_17)
-test_regress_CPPFLAGS = $(AM_CPPFLAGS) $(PTHREAD_CFLAGS) \
-	$(ZLIB_CFLAGS) -Itest $(am__append_16)
-test_regress_LDFLAGS = $(PTHREAD_CFLAGS)
-test_bench_SOURCES = test/bench.c
-test_bench_LDADD = $(LIBEVENT_GC_SECTIONS) libevent.la
-test_bench_cascade_SOURCES = test/bench_cascade.c
-test_bench_cascade_LDADD = $(LIBEVENT_GC_SECTIONS) libevent.la
-test_bench_http_SOURCES = test/bench_http.c
-test_bench_http_LDADD = $(LIBEVENT_GC_SECTIONS) libevent.la
-test_bench_httpclient_SOURCES = test/bench_httpclient.c
-test_bench_httpclient_LDADD = $(LIBEVENT_GC_SECTIONS) libevent_core.la
+BUILT_SOURCES = include/event2/event-config.h
 @BUILD_WIN32_FALSE@SYS_LIBS = 
 @BUILD_WIN32_TRUE@SYS_LIBS = -lws2_32 -lshell32 -ladvapi32
-@BUILD_WIN32_FALSE@SYS_SRC = $(am__append_19) $(am__append_20) \
-@BUILD_WIN32_FALSE@	$(am__append_21) $(am__append_22) \
-@BUILD_WIN32_FALSE@	$(am__append_23) $(am__append_24) \
-@BUILD_WIN32_FALSE@	$(am__append_25) $(am__append_26)
+@BUILD_WIN32_FALSE@SYS_SRC = $(am__append_6) $(am__append_7) \
+@BUILD_WIN32_FALSE@	$(am__append_8) $(am__append_9) \
+@BUILD_WIN32_FALSE@	$(am__append_10) $(am__append_11) \
+@BUILD_WIN32_FALSE@	$(am__append_12) $(am__append_13)
 @BUILD_WIN32_TRUE@SYS_SRC = win32select.c buffer_iocp.c event_iocp.c \
-@BUILD_WIN32_TRUE@	bufferevent_async.c $(am__append_18) \
-@BUILD_WIN32_TRUE@	$(am__append_19) $(am__append_20) \
-@BUILD_WIN32_TRUE@	$(am__append_21) $(am__append_22) \
-@BUILD_WIN32_TRUE@	$(am__append_23) $(am__append_24) \
-@BUILD_WIN32_TRUE@	$(am__append_25) $(am__append_26)
+@BUILD_WIN32_TRUE@	bufferevent_async.c $(am__append_5) \
+@BUILD_WIN32_TRUE@	$(am__append_6) $(am__append_7) \
+@BUILD_WIN32_TRUE@	$(am__append_8) $(am__append_9) \
+@BUILD_WIN32_TRUE@	$(am__append_10) $(am__append_11) \
+@BUILD_WIN32_TRUE@	$(am__append_12) $(am__append_13)
 @BUILD_WIN32_FALSE@SYS_INCLUDES = 
 @BUILD_WIN32_TRUE@SYS_INCLUDES = -IWIN32-Code -IWIN32-Code/nmake
 CORE_SRC = \
@@ -1267,10 +739,10 @@ all: $(BUILT_SOURCES) config.h evconfig-private.h
 	$(MAKE) $(AM_MAKEFLAGS) all-am
 
 .SUFFIXES:
-.SUFFIXES: .c .lo .log .o .obj .test .test$(EXEEXT) .trs
+.SUFFIXES: .c .lo .o .obj
 am--refresh: Makefile
 	@:
-$(srcdir)/Makefile.in:  $(srcdir)/Makefile.am $(srcdir)/include/include.am $(srcdir)/sample/include.am $(srcdir)/test/include.am $(am__configure_deps)
+$(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
 	    *$$dep*) \
@@ -1292,7 +764,6 @@ Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	    echo ' cd $(top_builddir) && $(SHELL) ./config.status $@ $(am__depfiles_maybe)'; \
 	    cd $(top_builddir) && $(SHELL) ./config.status $@ $(am__depfiles_maybe);; \
 	esac;
-$(srcdir)/include/include.am $(srcdir)/sample/include.am $(srcdir)/test/include.am $(am__empty):
 
 $(top_builddir)/config.status: $(top_srcdir)/configure $(CONFIG_STATUS_DEPENDENCIES)
 	$(SHELL) ./config.status --recheck
@@ -1405,196 +876,6 @@ clean-noinstPROGRAMS:
 	list=`for p in $$list; do echo "$$p"; done | sed 's/$(EXEEXT)$$//'`; \
 	echo " rm -f" $$list; \
 	rm -f $$list
-sample/$(am__dirstamp):
-	@$(MKDIR_P) sample
-	@: > sample/$(am__dirstamp)
-sample/$(DEPDIR)/$(am__dirstamp):
-	@$(MKDIR_P) sample/$(DEPDIR)
-	@: > sample/$(DEPDIR)/$(am__dirstamp)
-sample/dns-example.$(OBJEXT): sample/$(am__dirstamp) \
-	sample/$(DEPDIR)/$(am__dirstamp)
-
-sample/dns-example$(EXEEXT): $(sample_dns_example_OBJECTS) $(sample_dns_example_DEPENDENCIES) $(EXTRA_sample_dns_example_DEPENDENCIES) sample/$(am__dirstamp)
-	@rm -f sample/dns-example$(EXEEXT)
-	$(AM_V_CCLD)$(LINK) $(sample_dns_example_OBJECTS) $(sample_dns_example_LDADD) $(LIBS)
-sample/event-read-fifo.$(OBJEXT): sample/$(am__dirstamp) \
-	sample/$(DEPDIR)/$(am__dirstamp)
-
-sample/event-read-fifo$(EXEEXT): $(sample_event_read_fifo_OBJECTS) $(sample_event_read_fifo_DEPENDENCIES) $(EXTRA_sample_event_read_fifo_DEPENDENCIES) sample/$(am__dirstamp)
-	@rm -f sample/event-read-fifo$(EXEEXT)
-	$(AM_V_CCLD)$(LINK) $(sample_event_read_fifo_OBJECTS) $(sample_event_read_fifo_LDADD) $(LIBS)
-sample/hello-world.$(OBJEXT): sample/$(am__dirstamp) \
-	sample/$(DEPDIR)/$(am__dirstamp)
-
-sample/hello-world$(EXEEXT): $(sample_hello_world_OBJECTS) $(sample_hello_world_DEPENDENCIES) $(EXTRA_sample_hello_world_DEPENDENCIES) sample/$(am__dirstamp)
-	@rm -f sample/hello-world$(EXEEXT)
-	$(AM_V_CCLD)$(LINK) $(sample_hello_world_OBJECTS) $(sample_hello_world_LDADD) $(LIBS)
-sample/http-connect.$(OBJEXT): sample/$(am__dirstamp) \
-	sample/$(DEPDIR)/$(am__dirstamp)
-
-sample/http-connect$(EXEEXT): $(sample_http_connect_OBJECTS) $(sample_http_connect_DEPENDENCIES) $(EXTRA_sample_http_connect_DEPENDENCIES) sample/$(am__dirstamp)
-	@rm -f sample/http-connect$(EXEEXT)
-	$(AM_V_CCLD)$(LINK) $(sample_http_connect_OBJECTS) $(sample_http_connect_LDADD) $(LIBS)
-sample/http-server.$(OBJEXT): sample/$(am__dirstamp) \
-	sample/$(DEPDIR)/$(am__dirstamp)
-
-sample/http-server$(EXEEXT): $(sample_http_server_OBJECTS) $(sample_http_server_DEPENDENCIES) $(EXTRA_sample_http_server_DEPENDENCIES) sample/$(am__dirstamp)
-	@rm -f sample/http-server$(EXEEXT)
-	$(AM_V_CCLD)$(LINK) $(sample_http_server_OBJECTS) $(sample_http_server_LDADD) $(LIBS)
-sample/sample_https_client-https-client.$(OBJEXT):  \
-	sample/$(am__dirstamp) sample/$(DEPDIR)/$(am__dirstamp)
-sample/sample_https_client-hostcheck.$(OBJEXT):  \
-	sample/$(am__dirstamp) sample/$(DEPDIR)/$(am__dirstamp)
-sample/sample_https_client-openssl_hostname_validation.$(OBJEXT):  \
-	sample/$(am__dirstamp) sample/$(DEPDIR)/$(am__dirstamp)
-
-sample/https-client$(EXEEXT): $(sample_https_client_OBJECTS) $(sample_https_client_DEPENDENCIES) $(EXTRA_sample_https_client_DEPENDENCIES) sample/$(am__dirstamp)
-	@rm -f sample/https-client$(EXEEXT)
-	$(AM_V_CCLD)$(LINK) $(sample_https_client_OBJECTS) $(sample_https_client_LDADD) $(LIBS)
-sample/sample_le_proxy-le-proxy.$(OBJEXT): sample/$(am__dirstamp) \
-	sample/$(DEPDIR)/$(am__dirstamp)
-
-sample/le-proxy$(EXEEXT): $(sample_le_proxy_OBJECTS) $(sample_le_proxy_DEPENDENCIES) $(EXTRA_sample_le_proxy_DEPENDENCIES) sample/$(am__dirstamp)
-	@rm -f sample/le-proxy$(EXEEXT)
-	$(AM_V_CCLD)$(LINK) $(sample_le_proxy_OBJECTS) $(sample_le_proxy_LDADD) $(LIBS)
-sample/signal-test.$(OBJEXT): sample/$(am__dirstamp) \
-	sample/$(DEPDIR)/$(am__dirstamp)
-
-sample/signal-test$(EXEEXT): $(sample_signal_test_OBJECTS) $(sample_signal_test_DEPENDENCIES) $(EXTRA_sample_signal_test_DEPENDENCIES) sample/$(am__dirstamp)
-	@rm -f sample/signal-test$(EXEEXT)
-	$(AM_V_CCLD)$(LINK) $(sample_signal_test_OBJECTS) $(sample_signal_test_LDADD) $(LIBS)
-sample/time-test.$(OBJEXT): sample/$(am__dirstamp) \
-	sample/$(DEPDIR)/$(am__dirstamp)
-
-sample/time-test$(EXEEXT): $(sample_time_test_OBJECTS) $(sample_time_test_DEPENDENCIES) $(EXTRA_sample_time_test_DEPENDENCIES) sample/$(am__dirstamp)
-	@rm -f sample/time-test$(EXEEXT)
-	$(AM_V_CCLD)$(LINK) $(sample_time_test_OBJECTS) $(sample_time_test_LDADD) $(LIBS)
-test/$(am__dirstamp):
-	@$(MKDIR_P) test
-	@: > test/$(am__dirstamp)
-test/$(DEPDIR)/$(am__dirstamp):
-	@$(MKDIR_P) test/$(DEPDIR)
-	@: > test/$(DEPDIR)/$(am__dirstamp)
-test/bench.$(OBJEXT): test/$(am__dirstamp) \
-	test/$(DEPDIR)/$(am__dirstamp)
-
-test/bench$(EXEEXT): $(test_bench_OBJECTS) $(test_bench_DEPENDENCIES) $(EXTRA_test_bench_DEPENDENCIES) test/$(am__dirstamp)
-	@rm -f test/bench$(EXEEXT)
-	$(AM_V_CCLD)$(LINK) $(test_bench_OBJECTS) $(test_bench_LDADD) $(LIBS)
-test/bench_cascade.$(OBJEXT): test/$(am__dirstamp) \
-	test/$(DEPDIR)/$(am__dirstamp)
-
-test/bench_cascade$(EXEEXT): $(test_bench_cascade_OBJECTS) $(test_bench_cascade_DEPENDENCIES) $(EXTRA_test_bench_cascade_DEPENDENCIES) test/$(am__dirstamp)
-	@rm -f test/bench_cascade$(EXEEXT)
-	$(AM_V_CCLD)$(LINK) $(test_bench_cascade_OBJECTS) $(test_bench_cascade_LDADD) $(LIBS)
-test/bench_http.$(OBJEXT): test/$(am__dirstamp) \
-	test/$(DEPDIR)/$(am__dirstamp)
-
-test/bench_http$(EXEEXT): $(test_bench_http_OBJECTS) $(test_bench_http_DEPENDENCIES) $(EXTRA_test_bench_http_DEPENDENCIES) test/$(am__dirstamp)
-	@rm -f test/bench_http$(EXEEXT)
-	$(AM_V_CCLD)$(LINK) $(test_bench_http_OBJECTS) $(test_bench_http_LDADD) $(LIBS)
-test/bench_httpclient.$(OBJEXT): test/$(am__dirstamp) \
-	test/$(DEPDIR)/$(am__dirstamp)
-
-test/bench_httpclient$(EXEEXT): $(test_bench_httpclient_OBJECTS) $(test_bench_httpclient_DEPENDENCIES) $(EXTRA_test_bench_httpclient_DEPENDENCIES) test/$(am__dirstamp)
-	@rm -f test/bench_httpclient$(EXEEXT)
-	$(AM_V_CCLD)$(LINK) $(test_bench_httpclient_OBJECTS) $(test_bench_httpclient_LDADD) $(LIBS)
-test/test_regress-regress.$(OBJEXT): test/$(am__dirstamp) \
-	test/$(DEPDIR)/$(am__dirstamp)
-test/test_regress-regress.gen.$(OBJEXT): test/$(am__dirstamp) \
-	test/$(DEPDIR)/$(am__dirstamp)
-test/test_regress-regress_buffer.$(OBJEXT): test/$(am__dirstamp) \
-	test/$(DEPDIR)/$(am__dirstamp)
-test/test_regress-regress_bufferevent.$(OBJEXT): test/$(am__dirstamp) \
-	test/$(DEPDIR)/$(am__dirstamp)
-test/test_regress-regress_dns.$(OBJEXT): test/$(am__dirstamp) \
-	test/$(DEPDIR)/$(am__dirstamp)
-test/test_regress-regress_et.$(OBJEXT): test/$(am__dirstamp) \
-	test/$(DEPDIR)/$(am__dirstamp)
-test/test_regress-regress_finalize.$(OBJEXT): test/$(am__dirstamp) \
-	test/$(DEPDIR)/$(am__dirstamp)
-test/test_regress-regress_http.$(OBJEXT): test/$(am__dirstamp) \
-	test/$(DEPDIR)/$(am__dirstamp)
-test/test_regress-regress_listener.$(OBJEXT): test/$(am__dirstamp) \
-	test/$(DEPDIR)/$(am__dirstamp)
-test/test_regress-regress_main.$(OBJEXT): test/$(am__dirstamp) \
-	test/$(DEPDIR)/$(am__dirstamp)
-test/test_regress-regress_minheap.$(OBJEXT): test/$(am__dirstamp) \
-	test/$(DEPDIR)/$(am__dirstamp)
-test/test_regress-regress_rpc.$(OBJEXT): test/$(am__dirstamp) \
-	test/$(DEPDIR)/$(am__dirstamp)
-test/test_regress-regress_testutils.$(OBJEXT): test/$(am__dirstamp) \
-	test/$(DEPDIR)/$(am__dirstamp)
-test/test_regress-regress_util.$(OBJEXT): test/$(am__dirstamp) \
-	test/$(DEPDIR)/$(am__dirstamp)
-test/test_regress-tinytest.$(OBJEXT): test/$(am__dirstamp) \
-	test/$(DEPDIR)/$(am__dirstamp)
-test/test_regress-regress_thread.$(OBJEXT): test/$(am__dirstamp) \
-	test/$(DEPDIR)/$(am__dirstamp)
-test/test_regress-regress_zlib.$(OBJEXT): test/$(am__dirstamp) \
-	test/$(DEPDIR)/$(am__dirstamp)
-test/test_regress-regress_iocp.$(OBJEXT): test/$(am__dirstamp) \
-	test/$(DEPDIR)/$(am__dirstamp)
-test/test_regress-regress_ssl.$(OBJEXT): test/$(am__dirstamp) \
-	test/$(DEPDIR)/$(am__dirstamp)
-
-test/regress$(EXEEXT): $(test_regress_OBJECTS) $(test_regress_DEPENDENCIES) $(EXTRA_test_regress_DEPENDENCIES) test/$(am__dirstamp)
-	@rm -f test/regress$(EXEEXT)
-	$(AM_V_CCLD)$(test_regress_LINK) $(test_regress_OBJECTS) $(test_regress_LDADD) $(LIBS)
-test/test-changelist.$(OBJEXT): test/$(am__dirstamp) \
-	test/$(DEPDIR)/$(am__dirstamp)
-
-test/test-changelist$(EXEEXT): $(test_test_changelist_OBJECTS) $(test_test_changelist_DEPENDENCIES) $(EXTRA_test_test_changelist_DEPENDENCIES) test/$(am__dirstamp)
-	@rm -f test/test-changelist$(EXEEXT)
-	$(AM_V_CCLD)$(LINK) $(test_test_changelist_OBJECTS) $(test_test_changelist_LDADD) $(LIBS)
-test/test-closed.$(OBJEXT): test/$(am__dirstamp) \
-	test/$(DEPDIR)/$(am__dirstamp)
-
-test/test-closed$(EXEEXT): $(test_test_closed_OBJECTS) $(test_test_closed_DEPENDENCIES) $(EXTRA_test_test_closed_DEPENDENCIES) test/$(am__dirstamp)
-	@rm -f test/test-closed$(EXEEXT)
-	$(AM_V_CCLD)$(LINK) $(test_test_closed_OBJECTS) $(test_test_closed_LDADD) $(LIBS)
-test/test-dumpevents.$(OBJEXT): test/$(am__dirstamp) \
-	test/$(DEPDIR)/$(am__dirstamp)
-
-test/test-dumpevents$(EXEEXT): $(test_test_dumpevents_OBJECTS) $(test_test_dumpevents_DEPENDENCIES) $(EXTRA_test_test_dumpevents_DEPENDENCIES) test/$(am__dirstamp)
-	@rm -f test/test-dumpevents$(EXEEXT)
-	$(AM_V_CCLD)$(LINK) $(test_test_dumpevents_OBJECTS) $(test_test_dumpevents_LDADD) $(LIBS)
-test/test-eof.$(OBJEXT): test/$(am__dirstamp) \
-	test/$(DEPDIR)/$(am__dirstamp)
-
-test/test-eof$(EXEEXT): $(test_test_eof_OBJECTS) $(test_test_eof_DEPENDENCIES) $(EXTRA_test_test_eof_DEPENDENCIES) test/$(am__dirstamp)
-	@rm -f test/test-eof$(EXEEXT)
-	$(AM_V_CCLD)$(LINK) $(test_test_eof_OBJECTS) $(test_test_eof_LDADD) $(LIBS)
-test/test-fdleak.$(OBJEXT): test/$(am__dirstamp) \
-	test/$(DEPDIR)/$(am__dirstamp)
-
-test/test-fdleak$(EXEEXT): $(test_test_fdleak_OBJECTS) $(test_test_fdleak_DEPENDENCIES) $(EXTRA_test_test_fdleak_DEPENDENCIES) test/$(am__dirstamp)
-	@rm -f test/test-fdleak$(EXEEXT)
-	$(AM_V_CCLD)$(LINK) $(test_test_fdleak_OBJECTS) $(test_test_fdleak_LDADD) $(LIBS)
-test/test-init.$(OBJEXT): test/$(am__dirstamp) \
-	test/$(DEPDIR)/$(am__dirstamp)
-
-test/test-init$(EXEEXT): $(test_test_init_OBJECTS) $(test_test_init_DEPENDENCIES) $(EXTRA_test_test_init_DEPENDENCIES) test/$(am__dirstamp)
-	@rm -f test/test-init$(EXEEXT)
-	$(AM_V_CCLD)$(LINK) $(test_test_init_OBJECTS) $(test_test_init_LDADD) $(LIBS)
-test/test-ratelim.$(OBJEXT): test/$(am__dirstamp) \
-	test/$(DEPDIR)/$(am__dirstamp)
-
-test/test-ratelim$(EXEEXT): $(test_test_ratelim_OBJECTS) $(test_test_ratelim_DEPENDENCIES) $(EXTRA_test_test_ratelim_DEPENDENCIES) test/$(am__dirstamp)
-	@rm -f test/test-ratelim$(EXEEXT)
-	$(AM_V_CCLD)$(LINK) $(test_test_ratelim_OBJECTS) $(test_test_ratelim_LDADD) $(LIBS)
-test/test-time.$(OBJEXT): test/$(am__dirstamp) \
-	test/$(DEPDIR)/$(am__dirstamp)
-
-test/test-time$(EXEEXT): $(test_test_time_OBJECTS) $(test_test_time_DEPENDENCIES) $(EXTRA_test_test_time_DEPENDENCIES) test/$(am__dirstamp)
-	@rm -f test/test-time$(EXEEXT)
-	$(AM_V_CCLD)$(LINK) $(test_test_time_OBJECTS) $(test_test_time_LDADD) $(LIBS)
-test/test-weof.$(OBJEXT): test/$(am__dirstamp) \
-	test/$(DEPDIR)/$(am__dirstamp)
-
-test/test-weof$(EXEEXT): $(test_test_weof_OBJECTS) $(test_test_weof_DEPENDENCIES) $(EXTRA_test_test_weof_DEPENDENCIES) test/$(am__dirstamp)
-	@rm -f test/test-weof$(EXEEXT)
-	$(AM_V_CCLD)$(LINK) $(test_test_weof_OBJECTS) $(test_test_weof_LDADD) $(LIBS)
 install-dist_binSCRIPTS: $(dist_bin_SCRIPTS)
 	@$(NORMAL_INSTALL)
 	@list='$(dist_bin_SCRIPTS)'; test -n "$(bindir)" || list=; \
@@ -1633,8 +914,6 @@ uninstall-dist_binSCRIPTS:
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
-	-rm -f sample/*.$(OBJEXT)
-	-rm -f test/*.$(OBJEXT)
 
 distclean-compile:
 	-rm -f *.tab.c
@@ -1673,49 +952,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/signal.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/strlcpy.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/win32select.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@sample/$(DEPDIR)/dns-example.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@sample/$(DEPDIR)/event-read-fifo.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@sample/$(DEPDIR)/hello-world.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@sample/$(DEPDIR)/http-connect.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@sample/$(DEPDIR)/http-server.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@sample/$(DEPDIR)/sample_https_client-hostcheck.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@sample/$(DEPDIR)/sample_https_client-https-client.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@sample/$(DEPDIR)/sample_https_client-openssl_hostname_validation.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@sample/$(DEPDIR)/sample_le_proxy-le-proxy.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@sample/$(DEPDIR)/signal-test.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@sample/$(DEPDIR)/time-test.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/bench.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/bench_cascade.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/bench_http.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/bench_httpclient.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/test-changelist.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/test-closed.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/test-dumpevents.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/test-eof.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/test-fdleak.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/test-init.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/test-ratelim.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/test-time.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/test-weof.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/test_regress-regress.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/test_regress-regress.gen.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/test_regress-regress_buffer.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/test_regress-regress_bufferevent.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/test_regress-regress_dns.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/test_regress-regress_et.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/test_regress-regress_finalize.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/test_regress-regress_http.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/test_regress-regress_iocp.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/test_regress-regress_listener.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/test_regress-regress_main.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/test_regress-regress_minheap.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/test_regress-regress_rpc.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/test_regress-regress_ssl.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/test_regress-regress_testutils.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/test_regress-regress_thread.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/test_regress-regress_util.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/test_regress-regress_zlib.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/test_regress-tinytest.Po@am__quote@
 
 .c.o:
 @am__fastdepCC_TRUE@	$(AM_V_CC)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.o$$||'`;\
@@ -1748,335 +984,11 @@ libevent_openssl_la-bufferevent_openssl.lo: bufferevent_openssl.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libevent_openssl_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libevent_openssl_la-bufferevent_openssl.lo `test -f 'bufferevent_openssl.c' || echo '$(srcdir)/'`bufferevent_openssl.c
 
-sample/sample_https_client-https-client.o: sample/https-client.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(sample_https_client_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT sample/sample_https_client-https-client.o -MD -MP -MF sample/$(DEPDIR)/sample_https_client-https-client.Tpo -c -o sample/sample_https_client-https-client.o `test -f 'sample/https-client.c' || echo '$(srcdir)/'`sample/https-client.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) sample/$(DEPDIR)/sample_https_client-https-client.Tpo sample/$(DEPDIR)/sample_https_client-https-client.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='sample/https-client.c' object='sample/sample_https_client-https-client.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(sample_https_client_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o sample/sample_https_client-https-client.o `test -f 'sample/https-client.c' || echo '$(srcdir)/'`sample/https-client.c
-
-sample/sample_https_client-https-client.obj: sample/https-client.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(sample_https_client_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT sample/sample_https_client-https-client.obj -MD -MP -MF sample/$(DEPDIR)/sample_https_client-https-client.Tpo -c -o sample/sample_https_client-https-client.obj `if test -f 'sample/https-client.c'; then $(CYGPATH_W) 'sample/https-client.c'; else $(CYGPATH_W) '$(srcdir)/sample/https-client.c'; fi`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) sample/$(DEPDIR)/sample_https_client-https-client.Tpo sample/$(DEPDIR)/sample_https_client-https-client.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='sample/https-client.c' object='sample/sample_https_client-https-client.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(sample_https_client_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o sample/sample_https_client-https-client.obj `if test -f 'sample/https-client.c'; then $(CYGPATH_W) 'sample/https-client.c'; else $(CYGPATH_W) '$(srcdir)/sample/https-client.c'; fi`
-
-sample/sample_https_client-hostcheck.o: sample/hostcheck.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(sample_https_client_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT sample/sample_https_client-hostcheck.o -MD -MP -MF sample/$(DEPDIR)/sample_https_client-hostcheck.Tpo -c -o sample/sample_https_client-hostcheck.o `test -f 'sample/hostcheck.c' || echo '$(srcdir)/'`sample/hostcheck.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) sample/$(DEPDIR)/sample_https_client-hostcheck.Tpo sample/$(DEPDIR)/sample_https_client-hostcheck.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='sample/hostcheck.c' object='sample/sample_https_client-hostcheck.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(sample_https_client_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o sample/sample_https_client-hostcheck.o `test -f 'sample/hostcheck.c' || echo '$(srcdir)/'`sample/hostcheck.c
-
-sample/sample_https_client-hostcheck.obj: sample/hostcheck.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(sample_https_client_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT sample/sample_https_client-hostcheck.obj -MD -MP -MF sample/$(DEPDIR)/sample_https_client-hostcheck.Tpo -c -o sample/sample_https_client-hostcheck.obj `if test -f 'sample/hostcheck.c'; then $(CYGPATH_W) 'sample/hostcheck.c'; else $(CYGPATH_W) '$(srcdir)/sample/hostcheck.c'; fi`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) sample/$(DEPDIR)/sample_https_client-hostcheck.Tpo sample/$(DEPDIR)/sample_https_client-hostcheck.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='sample/hostcheck.c' object='sample/sample_https_client-hostcheck.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(sample_https_client_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o sample/sample_https_client-hostcheck.obj `if test -f 'sample/hostcheck.c'; then $(CYGPATH_W) 'sample/hostcheck.c'; else $(CYGPATH_W) '$(srcdir)/sample/hostcheck.c'; fi`
-
-sample/sample_https_client-openssl_hostname_validation.o: sample/openssl_hostname_validation.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(sample_https_client_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT sample/sample_https_client-openssl_hostname_validation.o -MD -MP -MF sample/$(DEPDIR)/sample_https_client-openssl_hostname_validation.Tpo -c -o sample/sample_https_client-openssl_hostname_validation.o `test -f 'sample/openssl_hostname_validation.c' || echo '$(srcdir)/'`sample/openssl_hostname_validation.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) sample/$(DEPDIR)/sample_https_client-openssl_hostname_validation.Tpo sample/$(DEPDIR)/sample_https_client-openssl_hostname_validation.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='sample/openssl_hostname_validation.c' object='sample/sample_https_client-openssl_hostname_validation.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(sample_https_client_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o sample/sample_https_client-openssl_hostname_validation.o `test -f 'sample/openssl_hostname_validation.c' || echo '$(srcdir)/'`sample/openssl_hostname_validation.c
-
-sample/sample_https_client-openssl_hostname_validation.obj: sample/openssl_hostname_validation.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(sample_https_client_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT sample/sample_https_client-openssl_hostname_validation.obj -MD -MP -MF sample/$(DEPDIR)/sample_https_client-openssl_hostname_validation.Tpo -c -o sample/sample_https_client-openssl_hostname_validation.obj `if test -f 'sample/openssl_hostname_validation.c'; then $(CYGPATH_W) 'sample/openssl_hostname_validation.c'; else $(CYGPATH_W) '$(srcdir)/sample/openssl_hostname_validation.c'; fi`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) sample/$(DEPDIR)/sample_https_client-openssl_hostname_validation.Tpo sample/$(DEPDIR)/sample_https_client-openssl_hostname_validation.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='sample/openssl_hostname_validation.c' object='sample/sample_https_client-openssl_hostname_validation.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(sample_https_client_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o sample/sample_https_client-openssl_hostname_validation.obj `if test -f 'sample/openssl_hostname_validation.c'; then $(CYGPATH_W) 'sample/openssl_hostname_validation.c'; else $(CYGPATH_W) '$(srcdir)/sample/openssl_hostname_validation.c'; fi`
-
-sample/sample_le_proxy-le-proxy.o: sample/le-proxy.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(sample_le_proxy_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT sample/sample_le_proxy-le-proxy.o -MD -MP -MF sample/$(DEPDIR)/sample_le_proxy-le-proxy.Tpo -c -o sample/sample_le_proxy-le-proxy.o `test -f 'sample/le-proxy.c' || echo '$(srcdir)/'`sample/le-proxy.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) sample/$(DEPDIR)/sample_le_proxy-le-proxy.Tpo sample/$(DEPDIR)/sample_le_proxy-le-proxy.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='sample/le-proxy.c' object='sample/sample_le_proxy-le-proxy.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(sample_le_proxy_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o sample/sample_le_proxy-le-proxy.o `test -f 'sample/le-proxy.c' || echo '$(srcdir)/'`sample/le-proxy.c
-
-sample/sample_le_proxy-le-proxy.obj: sample/le-proxy.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(sample_le_proxy_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT sample/sample_le_proxy-le-proxy.obj -MD -MP -MF sample/$(DEPDIR)/sample_le_proxy-le-proxy.Tpo -c -o sample/sample_le_proxy-le-proxy.obj `if test -f 'sample/le-proxy.c'; then $(CYGPATH_W) 'sample/le-proxy.c'; else $(CYGPATH_W) '$(srcdir)/sample/le-proxy.c'; fi`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) sample/$(DEPDIR)/sample_le_proxy-le-proxy.Tpo sample/$(DEPDIR)/sample_le_proxy-le-proxy.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='sample/le-proxy.c' object='sample/sample_le_proxy-le-proxy.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(sample_le_proxy_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o sample/sample_le_proxy-le-proxy.obj `if test -f 'sample/le-proxy.c'; then $(CYGPATH_W) 'sample/le-proxy.c'; else $(CYGPATH_W) '$(srcdir)/sample/le-proxy.c'; fi`
-
-test/test_regress-regress.o: test/regress.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT test/test_regress-regress.o -MD -MP -MF test/$(DEPDIR)/test_regress-regress.Tpo -c -o test/test_regress-regress.o `test -f 'test/regress.c' || echo '$(srcdir)/'`test/regress.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_regress-regress.Tpo test/$(DEPDIR)/test_regress-regress.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='test/regress.c' object='test/test_regress-regress.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o test/test_regress-regress.o `test -f 'test/regress.c' || echo '$(srcdir)/'`test/regress.c
-
-test/test_regress-regress.obj: test/regress.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT test/test_regress-regress.obj -MD -MP -MF test/$(DEPDIR)/test_regress-regress.Tpo -c -o test/test_regress-regress.obj `if test -f 'test/regress.c'; then $(CYGPATH_W) 'test/regress.c'; else $(CYGPATH_W) '$(srcdir)/test/regress.c'; fi`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_regress-regress.Tpo test/$(DEPDIR)/test_regress-regress.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='test/regress.c' object='test/test_regress-regress.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o test/test_regress-regress.obj `if test -f 'test/regress.c'; then $(CYGPATH_W) 'test/regress.c'; else $(CYGPATH_W) '$(srcdir)/test/regress.c'; fi`
-
-test/test_regress-regress.gen.o: test/regress.gen.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT test/test_regress-regress.gen.o -MD -MP -MF test/$(DEPDIR)/test_regress-regress.gen.Tpo -c -o test/test_regress-regress.gen.o `test -f 'test/regress.gen.c' || echo '$(srcdir)/'`test/regress.gen.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_regress-regress.gen.Tpo test/$(DEPDIR)/test_regress-regress.gen.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='test/regress.gen.c' object='test/test_regress-regress.gen.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o test/test_regress-regress.gen.o `test -f 'test/regress.gen.c' || echo '$(srcdir)/'`test/regress.gen.c
-
-test/test_regress-regress.gen.obj: test/regress.gen.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT test/test_regress-regress.gen.obj -MD -MP -MF test/$(DEPDIR)/test_regress-regress.gen.Tpo -c -o test/test_regress-regress.gen.obj `if test -f 'test/regress.gen.c'; then $(CYGPATH_W) 'test/regress.gen.c'; else $(CYGPATH_W) '$(srcdir)/test/regress.gen.c'; fi`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_regress-regress.gen.Tpo test/$(DEPDIR)/test_regress-regress.gen.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='test/regress.gen.c' object='test/test_regress-regress.gen.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o test/test_regress-regress.gen.obj `if test -f 'test/regress.gen.c'; then $(CYGPATH_W) 'test/regress.gen.c'; else $(CYGPATH_W) '$(srcdir)/test/regress.gen.c'; fi`
-
-test/test_regress-regress_buffer.o: test/regress_buffer.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT test/test_regress-regress_buffer.o -MD -MP -MF test/$(DEPDIR)/test_regress-regress_buffer.Tpo -c -o test/test_regress-regress_buffer.o `test -f 'test/regress_buffer.c' || echo '$(srcdir)/'`test/regress_buffer.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_regress-regress_buffer.Tpo test/$(DEPDIR)/test_regress-regress_buffer.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='test/regress_buffer.c' object='test/test_regress-regress_buffer.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o test/test_regress-regress_buffer.o `test -f 'test/regress_buffer.c' || echo '$(srcdir)/'`test/regress_buffer.c
-
-test/test_regress-regress_buffer.obj: test/regress_buffer.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT test/test_regress-regress_buffer.obj -MD -MP -MF test/$(DEPDIR)/test_regress-regress_buffer.Tpo -c -o test/test_regress-regress_buffer.obj `if test -f 'test/regress_buffer.c'; then $(CYGPATH_W) 'test/regress_buffer.c'; else $(CYGPATH_W) '$(srcdir)/test/regress_buffer.c'; fi`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_regress-regress_buffer.Tpo test/$(DEPDIR)/test_regress-regress_buffer.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='test/regress_buffer.c' object='test/test_regress-regress_buffer.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o test/test_regress-regress_buffer.obj `if test -f 'test/regress_buffer.c'; then $(CYGPATH_W) 'test/regress_buffer.c'; else $(CYGPATH_W) '$(srcdir)/test/regress_buffer.c'; fi`
-
-test/test_regress-regress_bufferevent.o: test/regress_bufferevent.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT test/test_regress-regress_bufferevent.o -MD -MP -MF test/$(DEPDIR)/test_regress-regress_bufferevent.Tpo -c -o test/test_regress-regress_bufferevent.o `test -f 'test/regress_bufferevent.c' || echo '$(srcdir)/'`test/regress_bufferevent.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_regress-regress_bufferevent.Tpo test/$(DEPDIR)/test_regress-regress_bufferevent.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='test/regress_bufferevent.c' object='test/test_regress-regress_bufferevent.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o test/test_regress-regress_bufferevent.o `test -f 'test/regress_bufferevent.c' || echo '$(srcdir)/'`test/regress_bufferevent.c
-
-test/test_regress-regress_bufferevent.obj: test/regress_bufferevent.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT test/test_regress-regress_bufferevent.obj -MD -MP -MF test/$(DEPDIR)/test_regress-regress_bufferevent.Tpo -c -o test/test_regress-regress_bufferevent.obj `if test -f 'test/regress_bufferevent.c'; then $(CYGPATH_W) 'test/regress_bufferevent.c'; else $(CYGPATH_W) '$(srcdir)/test/regress_bufferevent.c'; fi`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_regress-regress_bufferevent.Tpo test/$(DEPDIR)/test_regress-regress_bufferevent.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='test/regress_bufferevent.c' object='test/test_regress-regress_bufferevent.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o test/test_regress-regress_bufferevent.obj `if test -f 'test/regress_bufferevent.c'; then $(CYGPATH_W) 'test/regress_bufferevent.c'; else $(CYGPATH_W) '$(srcdir)/test/regress_bufferevent.c'; fi`
-
-test/test_regress-regress_dns.o: test/regress_dns.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT test/test_regress-regress_dns.o -MD -MP -MF test/$(DEPDIR)/test_regress-regress_dns.Tpo -c -o test/test_regress-regress_dns.o `test -f 'test/regress_dns.c' || echo '$(srcdir)/'`test/regress_dns.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_regress-regress_dns.Tpo test/$(DEPDIR)/test_regress-regress_dns.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='test/regress_dns.c' object='test/test_regress-regress_dns.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o test/test_regress-regress_dns.o `test -f 'test/regress_dns.c' || echo '$(srcdir)/'`test/regress_dns.c
-
-test/test_regress-regress_dns.obj: test/regress_dns.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT test/test_regress-regress_dns.obj -MD -MP -MF test/$(DEPDIR)/test_regress-regress_dns.Tpo -c -o test/test_regress-regress_dns.obj `if test -f 'test/regress_dns.c'; then $(CYGPATH_W) 'test/regress_dns.c'; else $(CYGPATH_W) '$(srcdir)/test/regress_dns.c'; fi`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_regress-regress_dns.Tpo test/$(DEPDIR)/test_regress-regress_dns.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='test/regress_dns.c' object='test/test_regress-regress_dns.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o test/test_regress-regress_dns.obj `if test -f 'test/regress_dns.c'; then $(CYGPATH_W) 'test/regress_dns.c'; else $(CYGPATH_W) '$(srcdir)/test/regress_dns.c'; fi`
-
-test/test_regress-regress_et.o: test/regress_et.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT test/test_regress-regress_et.o -MD -MP -MF test/$(DEPDIR)/test_regress-regress_et.Tpo -c -o test/test_regress-regress_et.o `test -f 'test/regress_et.c' || echo '$(srcdir)/'`test/regress_et.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_regress-regress_et.Tpo test/$(DEPDIR)/test_regress-regress_et.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='test/regress_et.c' object='test/test_regress-regress_et.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o test/test_regress-regress_et.o `test -f 'test/regress_et.c' || echo '$(srcdir)/'`test/regress_et.c
-
-test/test_regress-regress_et.obj: test/regress_et.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT test/test_regress-regress_et.obj -MD -MP -MF test/$(DEPDIR)/test_regress-regress_et.Tpo -c -o test/test_regress-regress_et.obj `if test -f 'test/regress_et.c'; then $(CYGPATH_W) 'test/regress_et.c'; else $(CYGPATH_W) '$(srcdir)/test/regress_et.c'; fi`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_regress-regress_et.Tpo test/$(DEPDIR)/test_regress-regress_et.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='test/regress_et.c' object='test/test_regress-regress_et.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o test/test_regress-regress_et.obj `if test -f 'test/regress_et.c'; then $(CYGPATH_W) 'test/regress_et.c'; else $(CYGPATH_W) '$(srcdir)/test/regress_et.c'; fi`
-
-test/test_regress-regress_finalize.o: test/regress_finalize.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT test/test_regress-regress_finalize.o -MD -MP -MF test/$(DEPDIR)/test_regress-regress_finalize.Tpo -c -o test/test_regress-regress_finalize.o `test -f 'test/regress_finalize.c' || echo '$(srcdir)/'`test/regress_finalize.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_regress-regress_finalize.Tpo test/$(DEPDIR)/test_regress-regress_finalize.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='test/regress_finalize.c' object='test/test_regress-regress_finalize.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o test/test_regress-regress_finalize.o `test -f 'test/regress_finalize.c' || echo '$(srcdir)/'`test/regress_finalize.c
-
-test/test_regress-regress_finalize.obj: test/regress_finalize.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT test/test_regress-regress_finalize.obj -MD -MP -MF test/$(DEPDIR)/test_regress-regress_finalize.Tpo -c -o test/test_regress-regress_finalize.obj `if test -f 'test/regress_finalize.c'; then $(CYGPATH_W) 'test/regress_finalize.c'; else $(CYGPATH_W) '$(srcdir)/test/regress_finalize.c'; fi`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_regress-regress_finalize.Tpo test/$(DEPDIR)/test_regress-regress_finalize.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='test/regress_finalize.c' object='test/test_regress-regress_finalize.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o test/test_regress-regress_finalize.obj `if test -f 'test/regress_finalize.c'; then $(CYGPATH_W) 'test/regress_finalize.c'; else $(CYGPATH_W) '$(srcdir)/test/regress_finalize.c'; fi`
-
-test/test_regress-regress_http.o: test/regress_http.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT test/test_regress-regress_http.o -MD -MP -MF test/$(DEPDIR)/test_regress-regress_http.Tpo -c -o test/test_regress-regress_http.o `test -f 'test/regress_http.c' || echo '$(srcdir)/'`test/regress_http.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_regress-regress_http.Tpo test/$(DEPDIR)/test_regress-regress_http.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='test/regress_http.c' object='test/test_regress-regress_http.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o test/test_regress-regress_http.o `test -f 'test/regress_http.c' || echo '$(srcdir)/'`test/regress_http.c
-
-test/test_regress-regress_http.obj: test/regress_http.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT test/test_regress-regress_http.obj -MD -MP -MF test/$(DEPDIR)/test_regress-regress_http.Tpo -c -o test/test_regress-regress_http.obj `if test -f 'test/regress_http.c'; then $(CYGPATH_W) 'test/regress_http.c'; else $(CYGPATH_W) '$(srcdir)/test/regress_http.c'; fi`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_regress-regress_http.Tpo test/$(DEPDIR)/test_regress-regress_http.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='test/regress_http.c' object='test/test_regress-regress_http.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o test/test_regress-regress_http.obj `if test -f 'test/regress_http.c'; then $(CYGPATH_W) 'test/regress_http.c'; else $(CYGPATH_W) '$(srcdir)/test/regress_http.c'; fi`
-
-test/test_regress-regress_listener.o: test/regress_listener.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT test/test_regress-regress_listener.o -MD -MP -MF test/$(DEPDIR)/test_regress-regress_listener.Tpo -c -o test/test_regress-regress_listener.o `test -f 'test/regress_listener.c' || echo '$(srcdir)/'`test/regress_listener.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_regress-regress_listener.Tpo test/$(DEPDIR)/test_regress-regress_listener.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='test/regress_listener.c' object='test/test_regress-regress_listener.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o test/test_regress-regress_listener.o `test -f 'test/regress_listener.c' || echo '$(srcdir)/'`test/regress_listener.c
-
-test/test_regress-regress_listener.obj: test/regress_listener.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT test/test_regress-regress_listener.obj -MD -MP -MF test/$(DEPDIR)/test_regress-regress_listener.Tpo -c -o test/test_regress-regress_listener.obj `if test -f 'test/regress_listener.c'; then $(CYGPATH_W) 'test/regress_listener.c'; else $(CYGPATH_W) '$(srcdir)/test/regress_listener.c'; fi`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_regress-regress_listener.Tpo test/$(DEPDIR)/test_regress-regress_listener.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='test/regress_listener.c' object='test/test_regress-regress_listener.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o test/test_regress-regress_listener.obj `if test -f 'test/regress_listener.c'; then $(CYGPATH_W) 'test/regress_listener.c'; else $(CYGPATH_W) '$(srcdir)/test/regress_listener.c'; fi`
-
-test/test_regress-regress_main.o: test/regress_main.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT test/test_regress-regress_main.o -MD -MP -MF test/$(DEPDIR)/test_regress-regress_main.Tpo -c -o test/test_regress-regress_main.o `test -f 'test/regress_main.c' || echo '$(srcdir)/'`test/regress_main.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_regress-regress_main.Tpo test/$(DEPDIR)/test_regress-regress_main.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='test/regress_main.c' object='test/test_regress-regress_main.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o test/test_regress-regress_main.o `test -f 'test/regress_main.c' || echo '$(srcdir)/'`test/regress_main.c
-
-test/test_regress-regress_main.obj: test/regress_main.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT test/test_regress-regress_main.obj -MD -MP -MF test/$(DEPDIR)/test_regress-regress_main.Tpo -c -o test/test_regress-regress_main.obj `if test -f 'test/regress_main.c'; then $(CYGPATH_W) 'test/regress_main.c'; else $(CYGPATH_W) '$(srcdir)/test/regress_main.c'; fi`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_regress-regress_main.Tpo test/$(DEPDIR)/test_regress-regress_main.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='test/regress_main.c' object='test/test_regress-regress_main.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o test/test_regress-regress_main.obj `if test -f 'test/regress_main.c'; then $(CYGPATH_W) 'test/regress_main.c'; else $(CYGPATH_W) '$(srcdir)/test/regress_main.c'; fi`
-
-test/test_regress-regress_minheap.o: test/regress_minheap.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT test/test_regress-regress_minheap.o -MD -MP -MF test/$(DEPDIR)/test_regress-regress_minheap.Tpo -c -o test/test_regress-regress_minheap.o `test -f 'test/regress_minheap.c' || echo '$(srcdir)/'`test/regress_minheap.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_regress-regress_minheap.Tpo test/$(DEPDIR)/test_regress-regress_minheap.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='test/regress_minheap.c' object='test/test_regress-regress_minheap.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o test/test_regress-regress_minheap.o `test -f 'test/regress_minheap.c' || echo '$(srcdir)/'`test/regress_minheap.c
-
-test/test_regress-regress_minheap.obj: test/regress_minheap.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT test/test_regress-regress_minheap.obj -MD -MP -MF test/$(DEPDIR)/test_regress-regress_minheap.Tpo -c -o test/test_regress-regress_minheap.obj `if test -f 'test/regress_minheap.c'; then $(CYGPATH_W) 'test/regress_minheap.c'; else $(CYGPATH_W) '$(srcdir)/test/regress_minheap.c'; fi`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_regress-regress_minheap.Tpo test/$(DEPDIR)/test_regress-regress_minheap.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='test/regress_minheap.c' object='test/test_regress-regress_minheap.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o test/test_regress-regress_minheap.obj `if test -f 'test/regress_minheap.c'; then $(CYGPATH_W) 'test/regress_minheap.c'; else $(CYGPATH_W) '$(srcdir)/test/regress_minheap.c'; fi`
-
-test/test_regress-regress_rpc.o: test/regress_rpc.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT test/test_regress-regress_rpc.o -MD -MP -MF test/$(DEPDIR)/test_regress-regress_rpc.Tpo -c -o test/test_regress-regress_rpc.o `test -f 'test/regress_rpc.c' || echo '$(srcdir)/'`test/regress_rpc.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_regress-regress_rpc.Tpo test/$(DEPDIR)/test_regress-regress_rpc.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='test/regress_rpc.c' object='test/test_regress-regress_rpc.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o test/test_regress-regress_rpc.o `test -f 'test/regress_rpc.c' || echo '$(srcdir)/'`test/regress_rpc.c
-
-test/test_regress-regress_rpc.obj: test/regress_rpc.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT test/test_regress-regress_rpc.obj -MD -MP -MF test/$(DEPDIR)/test_regress-regress_rpc.Tpo -c -o test/test_regress-regress_rpc.obj `if test -f 'test/regress_rpc.c'; then $(CYGPATH_W) 'test/regress_rpc.c'; else $(CYGPATH_W) '$(srcdir)/test/regress_rpc.c'; fi`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_regress-regress_rpc.Tpo test/$(DEPDIR)/test_regress-regress_rpc.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='test/regress_rpc.c' object='test/test_regress-regress_rpc.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o test/test_regress-regress_rpc.obj `if test -f 'test/regress_rpc.c'; then $(CYGPATH_W) 'test/regress_rpc.c'; else $(CYGPATH_W) '$(srcdir)/test/regress_rpc.c'; fi`
-
-test/test_regress-regress_testutils.o: test/regress_testutils.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT test/test_regress-regress_testutils.o -MD -MP -MF test/$(DEPDIR)/test_regress-regress_testutils.Tpo -c -o test/test_regress-regress_testutils.o `test -f 'test/regress_testutils.c' || echo '$(srcdir)/'`test/regress_testutils.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_regress-regress_testutils.Tpo test/$(DEPDIR)/test_regress-regress_testutils.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='test/regress_testutils.c' object='test/test_regress-regress_testutils.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o test/test_regress-regress_testutils.o `test -f 'test/regress_testutils.c' || echo '$(srcdir)/'`test/regress_testutils.c
-
-test/test_regress-regress_testutils.obj: test/regress_testutils.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT test/test_regress-regress_testutils.obj -MD -MP -MF test/$(DEPDIR)/test_regress-regress_testutils.Tpo -c -o test/test_regress-regress_testutils.obj `if test -f 'test/regress_testutils.c'; then $(CYGPATH_W) 'test/regress_testutils.c'; else $(CYGPATH_W) '$(srcdir)/test/regress_testutils.c'; fi`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_regress-regress_testutils.Tpo test/$(DEPDIR)/test_regress-regress_testutils.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='test/regress_testutils.c' object='test/test_regress-regress_testutils.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o test/test_regress-regress_testutils.obj `if test -f 'test/regress_testutils.c'; then $(CYGPATH_W) 'test/regress_testutils.c'; else $(CYGPATH_W) '$(srcdir)/test/regress_testutils.c'; fi`
-
-test/test_regress-regress_util.o: test/regress_util.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT test/test_regress-regress_util.o -MD -MP -MF test/$(DEPDIR)/test_regress-regress_util.Tpo -c -o test/test_regress-regress_util.o `test -f 'test/regress_util.c' || echo '$(srcdir)/'`test/regress_util.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_regress-regress_util.Tpo test/$(DEPDIR)/test_regress-regress_util.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='test/regress_util.c' object='test/test_regress-regress_util.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o test/test_regress-regress_util.o `test -f 'test/regress_util.c' || echo '$(srcdir)/'`test/regress_util.c
-
-test/test_regress-regress_util.obj: test/regress_util.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT test/test_regress-regress_util.obj -MD -MP -MF test/$(DEPDIR)/test_regress-regress_util.Tpo -c -o test/test_regress-regress_util.obj `if test -f 'test/regress_util.c'; then $(CYGPATH_W) 'test/regress_util.c'; else $(CYGPATH_W) '$(srcdir)/test/regress_util.c'; fi`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_regress-regress_util.Tpo test/$(DEPDIR)/test_regress-regress_util.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='test/regress_util.c' object='test/test_regress-regress_util.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o test/test_regress-regress_util.obj `if test -f 'test/regress_util.c'; then $(CYGPATH_W) 'test/regress_util.c'; else $(CYGPATH_W) '$(srcdir)/test/regress_util.c'; fi`
-
-test/test_regress-tinytest.o: test/tinytest.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT test/test_regress-tinytest.o -MD -MP -MF test/$(DEPDIR)/test_regress-tinytest.Tpo -c -o test/test_regress-tinytest.o `test -f 'test/tinytest.c' || echo '$(srcdir)/'`test/tinytest.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_regress-tinytest.Tpo test/$(DEPDIR)/test_regress-tinytest.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='test/tinytest.c' object='test/test_regress-tinytest.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o test/test_regress-tinytest.o `test -f 'test/tinytest.c' || echo '$(srcdir)/'`test/tinytest.c
-
-test/test_regress-tinytest.obj: test/tinytest.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT test/test_regress-tinytest.obj -MD -MP -MF test/$(DEPDIR)/test_regress-tinytest.Tpo -c -o test/test_regress-tinytest.obj `if test -f 'test/tinytest.c'; then $(CYGPATH_W) 'test/tinytest.c'; else $(CYGPATH_W) '$(srcdir)/test/tinytest.c'; fi`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_regress-tinytest.Tpo test/$(DEPDIR)/test_regress-tinytest.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='test/tinytest.c' object='test/test_regress-tinytest.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o test/test_regress-tinytest.obj `if test -f 'test/tinytest.c'; then $(CYGPATH_W) 'test/tinytest.c'; else $(CYGPATH_W) '$(srcdir)/test/tinytest.c'; fi`
-
-test/test_regress-regress_thread.o: test/regress_thread.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT test/test_regress-regress_thread.o -MD -MP -MF test/$(DEPDIR)/test_regress-regress_thread.Tpo -c -o test/test_regress-regress_thread.o `test -f 'test/regress_thread.c' || echo '$(srcdir)/'`test/regress_thread.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_regress-regress_thread.Tpo test/$(DEPDIR)/test_regress-regress_thread.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='test/regress_thread.c' object='test/test_regress-regress_thread.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o test/test_regress-regress_thread.o `test -f 'test/regress_thread.c' || echo '$(srcdir)/'`test/regress_thread.c
-
-test/test_regress-regress_thread.obj: test/regress_thread.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT test/test_regress-regress_thread.obj -MD -MP -MF test/$(DEPDIR)/test_regress-regress_thread.Tpo -c -o test/test_regress-regress_thread.obj `if test -f 'test/regress_thread.c'; then $(CYGPATH_W) 'test/regress_thread.c'; else $(CYGPATH_W) '$(srcdir)/test/regress_thread.c'; fi`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_regress-regress_thread.Tpo test/$(DEPDIR)/test_regress-regress_thread.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='test/regress_thread.c' object='test/test_regress-regress_thread.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o test/test_regress-regress_thread.obj `if test -f 'test/regress_thread.c'; then $(CYGPATH_W) 'test/regress_thread.c'; else $(CYGPATH_W) '$(srcdir)/test/regress_thread.c'; fi`
-
-test/test_regress-regress_zlib.o: test/regress_zlib.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT test/test_regress-regress_zlib.o -MD -MP -MF test/$(DEPDIR)/test_regress-regress_zlib.Tpo -c -o test/test_regress-regress_zlib.o `test -f 'test/regress_zlib.c' || echo '$(srcdir)/'`test/regress_zlib.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_regress-regress_zlib.Tpo test/$(DEPDIR)/test_regress-regress_zlib.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='test/regress_zlib.c' object='test/test_regress-regress_zlib.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o test/test_regress-regress_zlib.o `test -f 'test/regress_zlib.c' || echo '$(srcdir)/'`test/regress_zlib.c
-
-test/test_regress-regress_zlib.obj: test/regress_zlib.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT test/test_regress-regress_zlib.obj -MD -MP -MF test/$(DEPDIR)/test_regress-regress_zlib.Tpo -c -o test/test_regress-regress_zlib.obj `if test -f 'test/regress_zlib.c'; then $(CYGPATH_W) 'test/regress_zlib.c'; else $(CYGPATH_W) '$(srcdir)/test/regress_zlib.c'; fi`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_regress-regress_zlib.Tpo test/$(DEPDIR)/test_regress-regress_zlib.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='test/regress_zlib.c' object='test/test_regress-regress_zlib.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o test/test_regress-regress_zlib.obj `if test -f 'test/regress_zlib.c'; then $(CYGPATH_W) 'test/regress_zlib.c'; else $(CYGPATH_W) '$(srcdir)/test/regress_zlib.c'; fi`
-
-test/test_regress-regress_iocp.o: test/regress_iocp.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT test/test_regress-regress_iocp.o -MD -MP -MF test/$(DEPDIR)/test_regress-regress_iocp.Tpo -c -o test/test_regress-regress_iocp.o `test -f 'test/regress_iocp.c' || echo '$(srcdir)/'`test/regress_iocp.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_regress-regress_iocp.Tpo test/$(DEPDIR)/test_regress-regress_iocp.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='test/regress_iocp.c' object='test/test_regress-regress_iocp.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o test/test_regress-regress_iocp.o `test -f 'test/regress_iocp.c' || echo '$(srcdir)/'`test/regress_iocp.c
-
-test/test_regress-regress_iocp.obj: test/regress_iocp.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT test/test_regress-regress_iocp.obj -MD -MP -MF test/$(DEPDIR)/test_regress-regress_iocp.Tpo -c -o test/test_regress-regress_iocp.obj `if test -f 'test/regress_iocp.c'; then $(CYGPATH_W) 'test/regress_iocp.c'; else $(CYGPATH_W) '$(srcdir)/test/regress_iocp.c'; fi`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_regress-regress_iocp.Tpo test/$(DEPDIR)/test_regress-regress_iocp.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='test/regress_iocp.c' object='test/test_regress-regress_iocp.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o test/test_regress-regress_iocp.obj `if test -f 'test/regress_iocp.c'; then $(CYGPATH_W) 'test/regress_iocp.c'; else $(CYGPATH_W) '$(srcdir)/test/regress_iocp.c'; fi`
-
-test/test_regress-regress_ssl.o: test/regress_ssl.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT test/test_regress-regress_ssl.o -MD -MP -MF test/$(DEPDIR)/test_regress-regress_ssl.Tpo -c -o test/test_regress-regress_ssl.o `test -f 'test/regress_ssl.c' || echo '$(srcdir)/'`test/regress_ssl.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_regress-regress_ssl.Tpo test/$(DEPDIR)/test_regress-regress_ssl.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='test/regress_ssl.c' object='test/test_regress-regress_ssl.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o test/test_regress-regress_ssl.o `test -f 'test/regress_ssl.c' || echo '$(srcdir)/'`test/regress_ssl.c
-
-test/test_regress-regress_ssl.obj: test/regress_ssl.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT test/test_regress-regress_ssl.obj -MD -MP -MF test/$(DEPDIR)/test_regress-regress_ssl.Tpo -c -o test/test_regress-regress_ssl.obj `if test -f 'test/regress_ssl.c'; then $(CYGPATH_W) 'test/regress_ssl.c'; else $(CYGPATH_W) '$(srcdir)/test/regress_ssl.c'; fi`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_regress-regress_ssl.Tpo test/$(DEPDIR)/test_regress-regress_ssl.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='test/regress_ssl.c' object='test/test_regress-regress_ssl.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_regress_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o test/test_regress-regress_ssl.obj `if test -f 'test/regress_ssl.c'; then $(CYGPATH_W) 'test/regress_ssl.c'; else $(CYGPATH_W) '$(srcdir)/test/regress_ssl.c'; fi`
-
 mostlyclean-libtool:
 	-rm -f *.lo
 
 clean-libtool:
 	-rm -rf .libs _libs
-	-rm -rf sample/.libs sample/_libs
-	-rm -rf test/.libs test/_libs
 
 distclean-libtool:
 	-rm -f libtool config.lt
@@ -2122,48 +1034,6 @@ uninstall-includeHEADERS:
 	@list='$(include_HEADERS)'; test -n "$(includedir)" || list=; \
 	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
 	dir='$(DESTDIR)$(includedir)'; $(am__uninstall_files_from_dir)
-install-include_event2HEADERS: $(include_event2_HEADERS)
-	@$(NORMAL_INSTALL)
-	@list='$(include_event2_HEADERS)'; test -n "$(include_event2dir)" || list=; \
-	if test -n "$$list"; then \
-	  echo " $(MKDIR_P) '$(DESTDIR)$(include_event2dir)'"; \
-	  $(MKDIR_P) "$(DESTDIR)$(include_event2dir)" || exit 1; \
-	fi; \
-	for p in $$list; do \
-	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
-	  echo "$$d$$p"; \
-	done | $(am__base_list) | \
-	while read files; do \
-	  echo " $(INSTALL_HEADER) $$files '$(DESTDIR)$(include_event2dir)'"; \
-	  $(INSTALL_HEADER) $$files "$(DESTDIR)$(include_event2dir)" || exit $$?; \
-	done
-
-uninstall-include_event2HEADERS:
-	@$(NORMAL_UNINSTALL)
-	@list='$(include_event2_HEADERS)'; test -n "$(include_event2dir)" || list=; \
-	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
-	dir='$(DESTDIR)$(include_event2dir)'; $(am__uninstall_files_from_dir)
-install-nodist_include_event2HEADERS: $(nodist_include_event2_HEADERS)
-	@$(NORMAL_INSTALL)
-	@list='$(nodist_include_event2_HEADERS)'; test -n "$(include_event2dir)" || list=; \
-	if test -n "$$list"; then \
-	  echo " $(MKDIR_P) '$(DESTDIR)$(include_event2dir)'"; \
-	  $(MKDIR_P) "$(DESTDIR)$(include_event2dir)" || exit 1; \
-	fi; \
-	for p in $$list; do \
-	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
-	  echo "$$d$$p"; \
-	done | $(am__base_list) | \
-	while read files; do \
-	  echo " $(INSTALL_HEADER) $$files '$(DESTDIR)$(include_event2dir)'"; \
-	  $(INSTALL_HEADER) $$files "$(DESTDIR)$(include_event2dir)" || exit $$?; \
-	done
-
-uninstall-nodist_include_event2HEADERS:
-	@$(NORMAL_UNINSTALL)
-	@list='$(nodist_include_event2_HEADERS)'; test -n "$(include_event2dir)" || list=; \
-	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
-	dir='$(DESTDIR)$(include_event2dir)'; $(am__uninstall_files_from_dir)
 
 ID: $(am__tagged_files)
 	$(am__define_uniq_tagged_files); mkid -fID $$unique
@@ -2223,232 +1093,6 @@ cscopelist-am: $(am__tagged_files)
 distclean-tags:
 	-rm -f TAGS ID GTAGS GRTAGS GSYMS GPATH tags
 	-rm -f cscope.out cscope.in.out cscope.po.out cscope.files
-
-# Recover from deleted '.trs' file; this should ensure that
-# "rm -f foo.log; make foo.trs" re-run 'foo.test', and re-create
-# both 'foo.log' and 'foo.trs'.  Break the recipe in two subshells
-# to avoid problems with "make -n".
-.log.trs:
-	rm -f $< $@
-	$(MAKE) $(AM_MAKEFLAGS) $<
-
-# Leading 'am--fnord' is there to ensure the list of targets does not
-# expand to empty, as could happen e.g. with make check TESTS=''.
-am--fnord $(TEST_LOGS) $(TEST_LOGS:.log=.trs): $(am__force_recheck)
-am--force-recheck:
-	@:
-
-$(TEST_SUITE_LOG): $(TEST_LOGS)
-	@$(am__set_TESTS_bases); \
-	am__f_ok () { test -f "$$1" && test -r "$$1"; }; \
-	redo_bases=`for i in $$bases; do \
-	              am__f_ok $$i.trs && am__f_ok $$i.log || echo $$i; \
-	            done`; \
-	if test -n "$$redo_bases"; then \
-	  redo_logs=`for i in $$redo_bases; do echo $$i.log; done`; \
-	  redo_results=`for i in $$redo_bases; do echo $$i.trs; done`; \
-	  if $(am__make_dryrun); then :; else \
-	    rm -f $$redo_logs && rm -f $$redo_results || exit 1; \
-	  fi; \
-	fi; \
-	if test -n "$$am__remaking_logs"; then \
-	  echo "fatal: making $(TEST_SUITE_LOG): possible infinite" \
-	       "recursion detected" >&2; \
-	elif test -n "$$redo_logs"; then \
-	  am__remaking_logs=yes $(MAKE) $(AM_MAKEFLAGS) $$redo_logs; \
-	fi; \
-	if $(am__make_dryrun); then :; else \
-	  st=0;  \
-	  errmsg="fatal: making $(TEST_SUITE_LOG): failed to create"; \
-	  for i in $$redo_bases; do \
-	    test -f $$i.trs && test -r $$i.trs \
-	      || { echo "$$errmsg $$i.trs" >&2; st=1; }; \
-	    test -f $$i.log && test -r $$i.log \
-	      || { echo "$$errmsg $$i.log" >&2; st=1; }; \
-	  done; \
-	  test $$st -eq 0 || exit 1; \
-	fi
-	@$(am__sh_e_setup); $(am__tty_colors); $(am__set_TESTS_bases); \
-	ws='[ 	]'; \
-	results=`for b in $$bases; do echo $$b.trs; done`; \
-	test -n "$$results" || results=/dev/null; \
-	all=`  grep "^$$ws*:test-result:"           $$results | wc -l`; \
-	pass=` grep "^$$ws*:test-result:$$ws*PASS"  $$results | wc -l`; \
-	fail=` grep "^$$ws*:test-result:$$ws*FAIL"  $$results | wc -l`; \
-	skip=` grep "^$$ws*:test-result:$$ws*SKIP"  $$results | wc -l`; \
-	xfail=`grep "^$$ws*:test-result:$$ws*XFAIL" $$results | wc -l`; \
-	xpass=`grep "^$$ws*:test-result:$$ws*XPASS" $$results | wc -l`; \
-	error=`grep "^$$ws*:test-result:$$ws*ERROR" $$results | wc -l`; \
-	if test `expr $$fail + $$xpass + $$error` -eq 0; then \
-	  success=true; \
-	else \
-	  success=false; \
-	fi; \
-	br='==================='; br=$$br$$br$$br$$br; \
-	result_count () \
-	{ \
-	    if test x"$$1" = x"--maybe-color"; then \
-	      maybe_colorize=yes; \
-	    elif test x"$$1" = x"--no-color"; then \
-	      maybe_colorize=no; \
-	    else \
-	      echo "$@: invalid 'result_count' usage" >&2; exit 4; \
-	    fi; \
-	    shift; \
-	    desc=$$1 count=$$2; \
-	    if test $$maybe_colorize = yes && test $$count -gt 0; then \
-	      color_start=$$3 color_end=$$std; \
-	    else \
-	      color_start= color_end=; \
-	    fi; \
-	    echo "$${color_start}# $$desc $$count$${color_end}"; \
-	}; \
-	create_testsuite_report () \
-	{ \
-	  result_count $$1 "TOTAL:" $$all   "$$brg"; \
-	  result_count $$1 "PASS: " $$pass  "$$grn"; \
-	  result_count $$1 "SKIP: " $$skip  "$$blu"; \
-	  result_count $$1 "XFAIL:" $$xfail "$$lgn"; \
-	  result_count $$1 "FAIL: " $$fail  "$$red"; \
-	  result_count $$1 "XPASS:" $$xpass "$$red"; \
-	  result_count $$1 "ERROR:" $$error "$$mgn"; \
-	}; \
-	{								\
-	  echo "$(PACKAGE_STRING): $(subdir)/$(TEST_SUITE_LOG)" |	\
-	    $(am__rst_title);						\
-	  create_testsuite_report --no-color;				\
-	  echo;								\
-	  echo ".. contents:: :depth: 2";				\
-	  echo;								\
-	  for b in $$bases; do echo $$b; done				\
-	    | $(am__create_global_log);					\
-	} >$(TEST_SUITE_LOG).tmp || exit 1;				\
-	mv $(TEST_SUITE_LOG).tmp $(TEST_SUITE_LOG);			\
-	if $$success; then						\
-	  col="$$grn";							\
-	 else								\
-	  col="$$red";							\
-	  test x"$$VERBOSE" = x || cat $(TEST_SUITE_LOG);		\
-	fi;								\
-	echo "$${col}$$br$${std}"; 					\
-	echo "$${col}Testsuite summary for $(PACKAGE_STRING)$${std}";	\
-	echo "$${col}$$br$${std}"; 					\
-	create_testsuite_report --maybe-color;				\
-	echo "$$col$$br$$std";						\
-	if $$success; then :; else					\
-	  echo "$${col}See $(subdir)/$(TEST_SUITE_LOG)$${std}";		\
-	  if test -n "$(PACKAGE_BUGREPORT)"; then			\
-	    echo "$${col}Please report to $(PACKAGE_BUGREPORT)$${std}";	\
-	  fi;								\
-	  echo "$$col$$br$$std";					\
-	fi;								\
-	$$success || exit 1
-
-check-TESTS:
-	@list='$(RECHECK_LOGS)';           test -z "$$list" || rm -f $$list
-	@list='$(RECHECK_LOGS:.log=.trs)'; test -z "$$list" || rm -f $$list
-	@test -z "$(TEST_SUITE_LOG)" || rm -f $(TEST_SUITE_LOG)
-	@set +e; $(am__set_TESTS_bases); \
-	log_list=`for i in $$bases; do echo $$i.log; done`; \
-	trs_list=`for i in $$bases; do echo $$i.trs; done`; \
-	log_list=`echo $$log_list`; trs_list=`echo $$trs_list`; \
-	$(MAKE) $(AM_MAKEFLAGS) $(TEST_SUITE_LOG) TEST_LOGS="$$log_list"; \
-	exit $$?;
-recheck: all 
-	@test -z "$(TEST_SUITE_LOG)" || rm -f $(TEST_SUITE_LOG)
-	@set +e; $(am__set_TESTS_bases); \
-	bases=`for i in $$bases; do echo $$i; done \
-	         | $(am__list_recheck_tests)` || exit 1; \
-	log_list=`for i in $$bases; do echo $$i.log; done`; \
-	log_list=`echo $$log_list`; \
-	$(MAKE) $(AM_MAKEFLAGS) $(TEST_SUITE_LOG) \
-	        am__force_recheck=am--force-recheck \
-	        TEST_LOGS="$$log_list"; \
-	exit $$?
-test_runner_epoll.log: test_runner_epoll
-	@p='test_runner_epoll'; \
-	b='test_runner_epoll'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-test_runner_select.log: test_runner_select
-	@p='test_runner_select'; \
-	b='test_runner_select'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-test_runner_kqueue.log: test_runner_kqueue
-	@p='test_runner_kqueue'; \
-	b='test_runner_kqueue'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-test_runner_evport.log: test_runner_evport
-	@p='test_runner_evport'; \
-	b='test_runner_evport'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-test_runner_devpoll.log: test_runner_devpoll
-	@p='test_runner_devpoll'; \
-	b='test_runner_devpoll'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-test_runner_poll.log: test_runner_poll
-	@p='test_runner_poll'; \
-	b='test_runner_poll'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-test_runner_win32.log: test_runner_win32
-	@p='test_runner_win32'; \
-	b='test_runner_win32'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-test_runner_timerfd.log: test_runner_timerfd
-	@p='test_runner_timerfd'; \
-	b='test_runner_timerfd'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-test_runner_changelist.log: test_runner_changelist
-	@p='test_runner_changelist'; \
-	b='test_runner_changelist'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-test_runner_timerfd_changelist.log: test_runner_timerfd_changelist
-	@p='test_runner_timerfd_changelist'; \
-	b='test_runner_timerfd_changelist'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-.test.log:
-	@p='$<'; \
-	$(am__set_b); \
-	$(am__check_pre) $(TEST_LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_TEST_LOG_DRIVER_FLAGS) $(TEST_LOG_DRIVER_FLAGS) -- $(TEST_LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-@am__EXEEXT_TRUE@.test$(EXEEXT).log:
-@am__EXEEXT_TRUE@	@p='$<'; \
-@am__EXEEXT_TRUE@	$(am__set_b); \
-@am__EXEEXT_TRUE@	$(am__check_pre) $(TEST_LOG_DRIVER) --test-name "$$f" \
-@am__EXEEXT_TRUE@	--log-file $$b.log --trs-file $$b.trs \
-@am__EXEEXT_TRUE@	$(am__common_driver_flags) $(AM_TEST_LOG_DRIVER_FLAGS) $(TEST_LOG_DRIVER_FLAGS) -- $(TEST_LOG_COMPILE) \
-@am__EXEEXT_TRUE@	"$$tst" $(AM_TESTS_FD_REDIRECT)
 
 distdir: $(DISTFILES)
 	$(am__remove_distdir)
@@ -2614,13 +1258,12 @@ distcleancheck: distclean
 	       $(distcleancheck_listfiles) ; \
 	       exit 1; } >&2
 check-am: all-am
-	$(MAKE) $(AM_MAKEFLAGS) check-TESTS
 check: $(BUILT_SOURCES)
 	$(MAKE) $(AM_MAKEFLAGS) check-am
 all-am: Makefile $(LTLIBRARIES) $(PROGRAMS) $(SCRIPTS) $(DATA) \
 		$(HEADERS) config.h evconfig-private.h
 installdirs:
-	for dir in "$(DESTDIR)$(libdir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(pkgconfigdir)" "$(DESTDIR)$(includedir)" "$(DESTDIR)$(include_event2dir)" "$(DESTDIR)$(include_event2dir)"; do \
+	for dir in "$(DESTDIR)$(libdir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(pkgconfigdir)" "$(DESTDIR)$(includedir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
 install: $(BUILT_SOURCES)
@@ -2644,9 +1287,6 @@ install-strip:
 	    "INSTALL_PROGRAM_ENV=STRIPPROG='$(STRIP)'" install; \
 	fi
 mostlyclean-generic:
-	-test -z "$(TEST_LOGS)" || rm -f $(TEST_LOGS)
-	-test -z "$(TEST_LOGS:.log=.trs)" || rm -f $(TEST_LOGS:.log=.trs)
-	-test -z "$(TEST_SUITE_LOG)" || rm -f $(TEST_SUITE_LOG)
 
 clean-generic:
 	-test -z "$(CLEANFILES)" || rm -f $(CLEANFILES)
@@ -2654,10 +1294,6 @@ clean-generic:
 distclean-generic:
 	-test -z "$(CONFIG_CLEAN_FILES)" || rm -f $(CONFIG_CLEAN_FILES)
 	-test . = "$(srcdir)" || test -z "$(CONFIG_CLEAN_VPATH_FILES)" || rm -f $(CONFIG_CLEAN_VPATH_FILES)
-	-rm -f sample/$(DEPDIR)/$(am__dirstamp)
-	-rm -f sample/$(am__dirstamp)
-	-rm -f test/$(DEPDIR)/$(am__dirstamp)
-	-rm -f test/$(am__dirstamp)
 	-test -z "$(DISTCLEANFILES)" || rm -f $(DISTCLEANFILES)
 
 maintainer-clean-generic:
@@ -2671,7 +1307,7 @@ clean-am: clean-generic clean-libLTLIBRARIES clean-libtool \
 
 distclean: distclean-am
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
-	-rm -rf $(DEPDIR) ./$(DEPDIR) sample/$(DEPDIR) test/$(DEPDIR)
+	-rm -rf $(DEPDIR) ./$(DEPDIR)
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
 	distclean-hdr distclean-libtool distclean-tags
@@ -2688,8 +1324,7 @@ info: info-am
 
 info-am:
 
-install-data-am: install-includeHEADERS install-include_event2HEADERS \
-	install-nodist_include_event2HEADERS install-pkgconfigDATA
+install-data-am: install-includeHEADERS install-pkgconfigDATA
 
 install-dvi: install-dvi-am
 
@@ -2720,7 +1355,7 @@ installcheck-am:
 maintainer-clean: maintainer-clean-am
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
 	-rm -rf $(top_srcdir)/autom4te.cache
-	-rm -rf $(DEPDIR) ./$(DEPDIR) sample/$(DEPDIR) test/$(DEPDIR)
+	-rm -rf $(DEPDIR) ./$(DEPDIR)
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 
@@ -2738,15 +1373,14 @@ ps: ps-am
 ps-am:
 
 uninstall-am: uninstall-dist_binSCRIPTS uninstall-includeHEADERS \
-	uninstall-include_event2HEADERS uninstall-libLTLIBRARIES \
-	uninstall-nodist_include_event2HEADERS uninstall-pkgconfigDATA
+	uninstall-libLTLIBRARIES uninstall-pkgconfigDATA
 
-.MAKE: all check check-am install install-am install-strip
+.MAKE: all check install install-am install-strip
 
-.PHONY: CTAGS GTAGS TAGS all all-am am--refresh check check-TESTS \
-	check-am clean clean-cscope clean-generic clean-libLTLIBRARIES \
-	clean-libtool clean-noinstLTLIBRARIES clean-noinstPROGRAMS \
-	cscope cscopelist-am ctags ctags-am dist dist-all dist-bzip2 \
+.PHONY: CTAGS GTAGS TAGS all all-am am--refresh check check-am clean \
+	clean-cscope clean-generic clean-libLTLIBRARIES clean-libtool \
+	clean-noinstLTLIBRARIES clean-noinstPROGRAMS cscope \
+	cscopelist-am ctags ctags-am dist dist-all dist-bzip2 \
 	dist-gzip dist-lzip dist-shar dist-tarZ dist-xz dist-zip \
 	distcheck distclean distclean-compile distclean-generic \
 	distclean-hdr distclean-libtool distclean-tags distcleancheck \
@@ -2754,58 +1388,18 @@ uninstall-am: uninstall-dist_binSCRIPTS uninstall-includeHEADERS \
 	info-am install install-am install-data install-data-am \
 	install-dist_binSCRIPTS install-dvi install-dvi-am \
 	install-exec install-exec-am install-html install-html-am \
-	install-includeHEADERS install-include_event2HEADERS \
-	install-info install-info-am install-libLTLIBRARIES \
-	install-man install-nodist_include_event2HEADERS install-pdf \
-	install-pdf-am install-pkgconfigDATA install-ps install-ps-am \
-	install-strip installcheck installcheck-am installdirs \
-	maintainer-clean maintainer-clean-generic mostlyclean \
-	mostlyclean-compile mostlyclean-generic mostlyclean-libtool \
-	pdf pdf-am ps ps-am recheck tags tags-am uninstall \
-	uninstall-am uninstall-dist_binSCRIPTS \
-	uninstall-includeHEADERS uninstall-include_event2HEADERS \
-	uninstall-libLTLIBRARIES \
-	uninstall-nodist_include_event2HEADERS uninstall-pkgconfigDATA
+	install-includeHEADERS install-info install-info-am \
+	install-libLTLIBRARIES install-man install-pdf install-pdf-am \
+	install-pkgconfigDATA install-ps install-ps-am install-strip \
+	installcheck installcheck-am installdirs maintainer-clean \
+	maintainer-clean-generic mostlyclean mostlyclean-compile \
+	mostlyclean-generic mostlyclean-libtool pdf pdf-am ps ps-am \
+	tags tags-am uninstall uninstall-am uninstall-dist_binSCRIPTS \
+	uninstall-includeHEADERS uninstall-libLTLIBRARIES \
+	uninstall-pkgconfigDATA
 
 .PRECIOUS: Makefile
 
-
-$(SAMPLES) : libevent.la
-
-test_runner_epoll: $(top_srcdir)/test/test.sh
-	$(top_srcdir)/test/test.sh -b EPOLL
-test_runner_select: $(top_srcdir)/test/test.sh
-	$(top_srcdir)/test/test.sh -b SELECT
-test_runner_kqueue: $(top_srcdir)/test/test.sh
-	$(top_srcdir)/test/test.sh -b KQUEUE
-test_runner_evport: $(top_srcdir)/test/test.sh
-	$(top_srcdir)/test/test.sh -b EVPORT
-test_runner_devpoll: $(top_srcdir)/test/test.sh
-	$(top_srcdir)/test/test.sh -b DEVPOLL
-test_runner_poll: $(top_srcdir)/test/test.sh
-	$(top_srcdir)/test/test.sh -b POLL
-test_runner_win32: $(top_srcdir)/test/test.sh
-	$(top_srcdir)/test/test.sh -b WIN32
-test_runner_timerfd: $(top_srcdir)/test/test.sh
-	$(top_srcdir)/test/test.sh -b "" -t
-test_runner_changelist: $(top_srcdir)/test/test.sh
-	$(top_srcdir)/test/test.sh -b "" -c
-test_runner_timerfd_changelist: $(top_srcdir)/test/test.sh
-	$(top_srcdir)/test/test.sh -b "" -T
-
-test/regress.gen.c test/regress.gen.h: test/rpcgen-attempted
-
-test/rpcgen-attempted: test/regress.rpc event_rpcgen.py test/rpcgen_wrapper.sh
-	$(AM_V_GEN)date -u > $@
-	$(AM_V_at)if $(srcdir)/test/rpcgen_wrapper.sh $(srcdir)/test; then \
-	   true; \
-	else \
-	   echo "No Python installed; stubbing out RPC test." >&2; \
-	   echo " "> test/regress.gen.c; \
-	   echo "#define NO_PYTHON_EXISTS" > test/regress.gen.h; \
-	fi
-
-$(TESTPROGRAMS) : libevent.la
 
 include/event2/event-config.h: config.h make-event-config.sed
 	$(AM_V_GEN)test -d include/event2 || $(MKDIR_P) include/event2
