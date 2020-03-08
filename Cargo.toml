@@ -1,6 +1,6 @@
 [package]
 name = "libtor-sys"
-version = "426.0.0+0.4.2.6"
+version = "426.0.1+0.4.2.6"
 authors = ["Alekos Filini <alekos.filini@gmail.com>"]
 edition = "2018"
 build = "build.rs"
