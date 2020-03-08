@@ -1,7 +1,15 @@
 [package]
 name = "libtor-sys"
-version = "426.0.1+0.4.2.6"
+version = "426.0.2+0.4.2.6"
 authors = ["Alekos Filini <alekos.filini@gmail.com>"]
+license = "MIT"
+homepage = "https://github.com/MagicalBitcoin/libtor-sys"
+repository = "https://github.com/MagicalBitcoin/libtor-sys"
+documentation = "https://docs.rs/libtor-sys/"
+description = "Rust crate that internally compiles Tor and its dependencies"
+keywords = ["tor", "daemon"]
+readme = "README.md"
+
 build = "build.rs"
 links = "tor"
 
