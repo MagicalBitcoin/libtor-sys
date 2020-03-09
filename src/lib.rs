@@ -20,6 +20,8 @@
 //!     tor_main_configuration_set_command_line(config, argv.len() as i32, argv.as_ptr());
 //!
 //!     assert_eq!(tor_run_main(config), 0);
+//!
+//!     tor_main_configuration_free(config);
 //! }
 //! ```
 
@@ -34,5 +36,6 @@ extern "C" {
         argc: c_int,
         argv: *const *const c_char,
     ) -> c_int;
+    pub fn tor_main_configuration_free(config: *mut tor_main_configuration_t);
     pub fn tor_run_main(configuration: *const tor_main_configuration_t) -> c_int;
 }
