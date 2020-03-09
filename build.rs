@@ -1,13 +1,13 @@
 extern crate autotools;
-extern crate fs_extra;
 extern crate cc;
+extern crate fs_extra;
 
 use std::env;
 use std::fs;
 use std::path::{Path, PathBuf};
 use std::process::Command;
 
-use fs_extra::dir::{CopyOptions, copy};
+use fs_extra::dir::{copy, CopyOptions};
 
 pub fn source_dir(var: &str, package: &str, version: &str) -> PathBuf {
     Path::new(var).join(format!("{}-{}", package, version))
@@ -69,7 +69,8 @@ fn build_libevent() -> Artifacts {
     let original_src = source_dir(env!("CARGO_MANIFEST_DIR"), "libevent", LIBEVENT_VERSION);
     let path = source_dir(root.to_str().unwrap(), "libevent", LIBEVENT_VERSION);
     if !path.exists() {
-        copy(original_src, &root, &CopyOptions::new()).expect("Unable to copy libevent's src folder");
+        copy(original_src, &root, &CopyOptions::new())
+            .expect("Unable to copy libevent's src folder");
     }
 
     if let Err(e) = autoreconf(&path) {
@@ -129,7 +130,11 @@ fn build_tor(libevent: Artifacts) {
         &get_version(full_version),
     );
     let root = PathBuf::from(env::var("OUT_DIR").expect("OUT_DIR expected"));
-    let path = source_dir(root.to_str().unwrap(), "tor-tor", &get_version(full_version));
+    let path = source_dir(
+        root.to_str().unwrap(),
+        "tor-tor",
+        &get_version(full_version),
+    );
     if !path.exists() {
         copy(original_src, &root, &CopyOptions::new()).expect("Unable to copy Tor's src folder");
     }
