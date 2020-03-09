@@ -1,19 +1,13 @@
-//! # Build script
-
-// Coding conventions
-/*#![deny(non_upper_case_globals)]
-#![deny(non_camel_case_types)]
-#![deny(non_snake_case)]
-#![deny(unused_mut)]
-#![warn(missing_docs)]*/
-
 extern crate autotools;
+extern crate fs_extra;
 extern crate cc;
 
 use std::env;
 use std::fs;
 use std::path::{Path, PathBuf};
 use std::process::Command;
+
+use fs_extra::dir::{CopyOptions, copy};
 
 pub fn source_dir(var: &str, package: &str, version: &str) -> PathBuf {
     Path::new(var).join(format!("{}-{}", package, version))
@@ -61,6 +55,7 @@ pub fn autoreconf(path: &PathBuf) -> Result<(), Vec<u8>> {
 
 fn build_libevent() -> Artifacts {
     // TODO: cmake on windows
+    const LIBEVENT_VERSION: &'static str = "2.1.11-stable";
 
     let target = env::var("TARGET").unwrap();
     let host = env::var("HOST").unwrap();
@@ -69,9 +64,14 @@ fn build_libevent() -> Artifacts {
     cc.target(&target).host(&host);
     let compiler = cc.get_compiler();
     let root = PathBuf::from(env::var("OUT_DIR").expect("OUT_DIR expected")).join("libevent");
-    fs::create_dir_all(&root).unwrap();
+    fs::create_dir_all(&root).expect("Cannot create `libevent` in `OUT_DIR`");
 
-    let path = source_dir(env!("CARGO_MANIFEST_DIR"), "libevent", "2.1.11-stable");
+    let original_src = source_dir(env!("CARGO_MANIFEST_DIR"), "libevent", LIBEVENT_VERSION);
+    let path = source_dir(root.to_str().unwrap(), "libevent", LIBEVENT_VERSION);
+    if !path.exists() {
+        copy(original_src, &root, &CopyOptions::new()).expect("Unable to copy libevent's src folder");
+    }
+
     if let Err(e) = autoreconf(&path) {
         println!(
             "cargo:warning=Failed to run `autoreconf`: {:?}",
@@ -94,10 +94,6 @@ fn build_libevent() -> Artifacts {
         .disable("dependency-tracking", None);
 
     let libevent = config.build();
-    if let Err(e) = std::fs::remove_dir_all(path.join("autom4te.cache")) {
-        println!("cargo:warning=Cannot remove `autom4te.cache: {:?}`", e);
-    }
-
     let artifacts = Artifacts {
         lib_dir: libevent.join("lib"),
         include_dir: root.join("include"),
@@ -127,11 +123,17 @@ fn build_tor(libevent: Artifacts) {
         PathBuf::from(env::var("DEP_OPENSSL_ROOT").expect("DEP_OPENSSL_ROOT expected"));
 
     let full_version = env!("CARGO_PKG_VERSION");
-    let path = source_dir(
+    let original_src = source_dir(
         env!("CARGO_MANIFEST_DIR"),
         "tor-tor",
         &get_version(full_version),
     );
+    let root = PathBuf::from(env::var("OUT_DIR").expect("OUT_DIR expected"));
+    let path = source_dir(root.to_str().unwrap(), "tor-tor", &get_version(full_version));
+    if !path.exists() {
+        copy(original_src, &root, &CopyOptions::new()).expect("Unable to copy Tor's src folder");
+    }
+
     if let Err(e) = autoreconf(&path) {
         println!(
             "cargo:warning=Failed to run `autoreconf`: {:?}",
@@ -197,9 +199,6 @@ fn build_tor(libevent: Artifacts) {
     }
 
     let tor = config.build();
-    if let Err(e) = std::fs::remove_dir_all(path.join("autom4te.cache")) {
-        println!("cargo:warning=Cannot remove `autom4te.cache: {:?}`", e);
-    }
 
     println!(
         "cargo:rustc-link-search=native={}",
