@@ -13,6 +13,7 @@ extern crate cc;
 use std::env;
 use std::fs;
 use std::path::{Path, PathBuf};
+use std::process::Command;
 
 pub fn source_dir(var: &str, package: &str, version: &str) -> PathBuf {
     Path::new(var).join(format!("{}-{}", package, version))
@@ -41,6 +42,23 @@ impl Artifacts {
     }
 }
 
+pub fn autoreconf(path: &PathBuf) -> Result<(), Vec<u8>> {
+    match Command::new("autoreconf")
+        .current_dir(path)
+        .args(&["--force", "--install"])
+        .output()
+    {
+        Ok(output) => {
+            if !output.status.success() {
+                Err(output.stderr)
+            } else {
+                Ok(())
+            }
+        }
+        Err(e) => Err(format!("{:?}", e).as_bytes().to_vec()),
+    }
+}
+
 fn build_libevent() -> Artifacts {
     // TODO: cmake on windows
 
@@ -54,6 +72,13 @@ fn build_libevent() -> Artifacts {
     fs::create_dir_all(&root).unwrap();
 
     let path = source_dir(env!("CARGO_MANIFEST_DIR"), "libevent", "2.1.11-stable");
+    if let Err(e) = autoreconf(&path) {
+        println!(
+            "cargo:warning=Failed to run `autoreconf`: {:?}",
+            String::from_utf8(e)
+        );
+    }
+
     let mut config = autotools::Config::new(path.clone());
     config
         .out_dir(&root)
@@ -107,6 +132,13 @@ fn build_tor(libevent: Artifacts) {
         "tor-tor",
         &get_version(full_version),
     );
+    if let Err(e) = autoreconf(&path) {
+        println!(
+            "cargo:warning=Failed to run `autoreconf`: {:?}",
+            String::from_utf8(e)
+        );
+    }
+
     let mut config = autotools::Config::new(path.clone());
     config
         .env("CC", compiler.path())
