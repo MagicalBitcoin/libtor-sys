@@ -1,13 +1,10 @@
 extern crate autotools;
 extern crate cc;
-extern crate fs_extra;
 
 use std::env;
 use std::fs;
 use std::path::{Path, PathBuf};
 use std::process::Command;
-
-use fs_extra::dir::{copy, CopyOptions};
 
 pub fn source_dir(var: &str, package: &str, version: &str) -> PathBuf {
     Path::new(var).join(format!("{}-{}", package, version))
@@ -54,51 +51,32 @@ pub fn autoreconf(path: &PathBuf) -> Result<(), Vec<u8>> {
 }
 
 fn build_libevent() -> Artifacts {
-    // TODO: cmake on windows
     const LIBEVENT_VERSION: &'static str = "2.1.11-stable";
 
     let target = env::var("TARGET").unwrap();
-    let host = env::var("HOST").unwrap();
 
-    let mut cc = cc::Build::new();
-    cc.target(&target).host(&host);
-    let compiler = cc.get_compiler();
     let root = PathBuf::from(env::var("OUT_DIR").expect("OUT_DIR expected")).join("libevent");
-    fs::create_dir_all(&root).expect("Cannot create `libevent` in `OUT_DIR`");
-
     let original_src = source_dir(env!("CARGO_MANIFEST_DIR"), "libevent", LIBEVENT_VERSION);
-    let path = source_dir(root.to_str().unwrap(), "libevent", LIBEVENT_VERSION);
-    if !path.exists() {
-        copy(original_src, &root, &CopyOptions::new())
-            .expect("Unable to copy libevent's src folder");
+
+    let mut build = cc::Build::new();
+    build.define("HAVE_CONFIG_H", None);
+
+    build.include(PathBuf::from("configs").join(&target));
+
+    build.include(&original_src);
+    build.include(original_src.join("include"));
+
+    for file in EV_FILE_LIST.iter() {
+        let full_path = original_src.join(file);
+        build.file(full_path);
     }
 
-    if let Err(e) = autoreconf(&path) {
-        println!(
-            "cargo:warning=Failed to run `autoreconf`: {:?}",
-            String::from_utf8(e)
-        );
-    }
+    build.compile("libevent.a");
 
-    let mut config = autotools::Config::new(path.clone());
-    config
-        .out_dir(&root)
-        .env("CC", compiler.path())
-        .host(&target)
-        .enable_static()
-        .disable_shared()
-        .with("pic", None)
-        .disable("samples", None)
-        .disable("openssl", None)
-        .disable("libevent-regress", None)
-        .disable("debug-mode", None)
-        .disable("dependency-tracking", None);
-
-    let libevent = config.build();
     let artifacts = Artifacts {
-        lib_dir: libevent.join("lib"),
-        include_dir: root.join("include"),
-        libs: vec!["event".to_string(), "event_pthreads".to_string()], // TODO: on windows re-add the `lib` prefix
+        lib_dir: root.clone(),
+        include_dir: original_src.join("include"),
+        libs: vec!["event".to_string()],
         root,
     };
     artifacts.print_cargo_metadata();
@@ -138,7 +116,7 @@ fn build_tor(libevent: Artifacts) {
     build.include(openssl_dir.join("include/"));
     build.include(libevent.include_dir);
 
-    for file in FILE_LIST.iter() {
+    for file in TOR_FILE_LIST.iter() {
         let full_path = original_src.join(file);
         build.file(full_path);
     }
@@ -161,7 +139,6 @@ fn build_tor(libevent: Artifacts) {
     build.compile("libtor.a");
 
     println!("cargo:rustc-link-lib=static={}", "event");
-    println!("cargo:rustc-link-lib=static={}", "event_pthreads");
 
     println!("cargo:rustc-link-lib=static={}", "crypto");
     println!("cargo:rustc-link-lib=static={}", "ssl");
@@ -184,11 +161,36 @@ fn main() {
     build_tor(libevent);
 }
 
-const FILE_LIST: [&str; 348] = [
+const EV_FILE_LIST: [&str; 24] = [
+    "bufferevent.c",
+    "buffer.c",
+    "bufferevent_filter.c",
+    "bufferevent_pair.c",
+    "bufferevent_ratelim.c",
+    "bufferevent_sock.c",
+    "event.c",
+    "evmap.c",
+    "evthread.c",
+    "evutil.c",
+    "evutil_rand.c",
+    "evutil_time.c",
+    "listener.c",
+    "log.c",
+    "strlcpy.c",
+    "select.c",
+    "poll.c",
+    "epoll.c",
+    "signal.c",
+    "evdns.c",
+    "event_tagging.c",
+    "evrpc.c",
+    "http.c",
+    "evthread_pthread.c",
+];
+
+const TOR_FILE_LIST: [&str; 348] = [
     "src/ext/csiphash.c",
-    //"src/tools/tor_runner.c",
     "src/app/config/config.c",
-    //"src/app/main/tor_main.c",
     "src/app/config/statefile.c",
     "src/app/main/main.c",
     "src/app/main/shutdown.c",
