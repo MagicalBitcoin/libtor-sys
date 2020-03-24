@@ -166,6 +166,7 @@ fn build_tor(libevent: Artifacts) {
         .disable("unittests", None)
         .disable("tool-name-check", None)
         .disable("module-dirauth", None)
+        .disable("seccomp", None)
         .disable("rust", None);
 
     if target.contains("android") {
