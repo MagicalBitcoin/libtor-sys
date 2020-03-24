@@ -1143,19 +1143,6 @@ fi
 AC_SUBST(TOR_ZSTD_CFLAGS)
 AC_SUBST(TOR_ZSTD_LIBS)
 
-dnl ----------------------------------------------------------------------
-dnl Check if libcap is available for capabilities.
-
-tor_cap_pkg_debian="libcap2"
-tor_cap_pkg_redhat="libcap"
-tor_cap_devpkg_debian="libcap-dev"
-tor_cap_devpkg_redhat="libcap-devel"
-
-AC_CHECK_LIB([cap], [cap_init], [],
-  AC_MSG_NOTICE([Libcap was not found. Capabilities will not be usable.])
-)
-AC_CHECK_FUNCS(cap_set_proc)
-
 dnl ---------------------------------------------------------------------
 dnl Now that we know about our major libraries, we can check for compiler
 dnl and linker hardening options.  We need to do this with the libraries known,
