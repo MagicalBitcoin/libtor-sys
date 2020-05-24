@@ -9,15 +9,6 @@ use std::process::Command;
 
 use fs_extra::dir::{copy, remove, CopyOptions};
 
-pub fn source_dir(var: &str, package: &str, version: &str) -> PathBuf {
-    Path::new(var).join(format!("{}-{}", package, version))
-}
-
-pub fn get_version(full_version: &str) -> String {
-    let parts: Vec<_> = full_version.split('+').collect();
-    parts[1].into()
-}
-
 pub struct Artifacts {
     pub root: PathBuf,
     pub include_dir: PathBuf,
@@ -55,8 +46,6 @@ pub fn autoreconf(path: &PathBuf) -> Result<(), Vec<u8>> {
 
 fn build_libevent() -> Artifacts {
     // TODO: cmake on windows
-    const LIBEVENT_VERSION: &'static str = "2.1.11-stable";
-
     let target = env::var("TARGET").unwrap();
     let host = env::var("HOST").unwrap();
 
@@ -66,8 +55,8 @@ fn build_libevent() -> Artifacts {
     let root = PathBuf::from(env::var("OUT_DIR").expect("OUT_DIR expected")).join("libevent");
     fs::create_dir_all(&root).expect("Cannot create `libevent` in `OUT_DIR`");
 
-    let original_src = source_dir(env!("CARGO_MANIFEST_DIR"), "libevent", LIBEVENT_VERSION);
-    let path = source_dir(root.to_str().unwrap(), "libevent", LIBEVENT_VERSION);
+    let original_src = Path::new(env!("CARGO_MANIFEST_DIR")).join("libevent-src");
+    let path = Path::new(root.to_str().unwrap()).join("libevent-src");
     if path.exists() {
         remove(&path).expect("Unable to remove libevent's src folder");
     }
@@ -123,18 +112,9 @@ fn build_tor(libevent: Artifacts) {
     let openssl_dir =
         PathBuf::from(env::var("DEP_OPENSSL_ROOT").expect("DEP_OPENSSL_ROOT expected"));
 
-    let full_version = env!("CARGO_PKG_VERSION");
-    let original_src = source_dir(
-        env!("CARGO_MANIFEST_DIR"),
-        "tor-tor",
-        &get_version(full_version),
-    );
+    let original_src = Path::new(env!("CARGO_MANIFEST_DIR")).join("tor-src");
     let root = PathBuf::from(env::var("OUT_DIR").expect("OUT_DIR expected"));
-    let path = source_dir(
-        root.to_str().unwrap(),
-        "tor-tor",
-        &get_version(full_version),
-    );
+    let path = PathBuf::from(root.to_str().unwrap()).join("tor-src");
     if path.exists() {
         remove(&path).expect("Unable to remove Tor's src folder");
     }
