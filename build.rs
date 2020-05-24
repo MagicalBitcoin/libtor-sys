@@ -273,8 +273,9 @@ fn build_tor(libevent: Artifacts) {
     .unwrap();
     println!("cargo:include={}/include", tor.to_str().unwrap());
 
-    // TODO: remove
     println!("cargo:rerun-if-changed=build.rs");
+    println!("cargo:rerun-if-changed=tor-src");
+    println!("cargo:rerun-if-changed=libevent-src");
 }
 
 fn main() {

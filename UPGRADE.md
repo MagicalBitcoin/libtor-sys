@@ -1,21 +1,21 @@
 ```
 # tar xf tor-0.4.blah blah
 
-patch -d tor-tor-* -p0 < patches/tor-*
+patch -d tor-src -p0 < patches/tor-*
 
 # remove those, otherwise cargo skips those folders while packing the crate
-rm tor-tor-*/src/rust/Cargo.toml
-rm tor-tor-*/src/rust/tor_rust/Cargo.toml
+rm tor-src/src/rust/Cargo.toml
+rm tor-src/src/rust/tor_rust/Cargo.toml
 
-cd tor-tor-*
+cd tor-src
 sh autogen.sh
 cd ../
 ```
 
 ```
-patch -d libevent-* -p0 < patches/libevent-*
+patch -d libevent-src -p0 < patches/libevent-*
 
-cd libevent-*
+cd libevent-src
 sh autogen.sh
 cd ../
 ```

@@ -3,7 +3,7 @@
 /* Define if building universal (internal helper macro) */
 #undef AC_APPLE_UNIVERSAL_BUILD
 
-/* # for 0.4.2.7 Approximate date when this software was released. (Updated
+/* # for 0.4.3.5 Approximate date when this software was released. (Updated
    when the version changes.) */
 #undef APPROX_RELEASE_DATE
 
@@ -61,14 +61,14 @@
 /* Define to 1 if you have the <arpa/inet.h> header file. */
 #undef HAVE_ARPA_INET_H
 
+/* defined if we have the fallthrough attribute. */
+#undef HAVE_ATTR_FALLTHROUGH
+
 /* Define to 1 if you have the `backtrace' function. */
 #undef HAVE_BACKTRACE
 
 /* Define to 1 if you have the `backtrace_symbols_fd' function. */
 #undef HAVE_BACKTRACE_SYMBOLS_FD
-
-/* Define to 1 if you have the `cap_set_proc' function. */
-#undef HAVE_CAP_SET_PROC
 
 /* True if we have -Wnull-dereference */
 #undef HAVE_CFLAG_WNULL_DEREFERENCE
@@ -153,6 +153,9 @@
 /* Define to 1 if you have the `flock' function. */
 #undef HAVE_FLOCK
 
+/* Define to 1 if you have the `fsync' function. */
+#undef HAVE_FSYNC
+
 /* Define to 1 if you have the `ftime' function. */
 #undef HAVE_FTIME
 
@@ -233,9 +236,6 @@
 
 /* Defined if KIST scheduler is supported on this system */
 #undef HAVE_KIST_SUPPORT
-
-/* Define to 1 if you have the `cap' library (-lcap). */
-#undef HAVE_LIBCAP
 
 /* Define to 1 if you have the <libscrypt.h> header file. */
 #undef HAVE_LIBSCRYPT_H
@@ -324,6 +324,12 @@
 
 /* Compile with Directory Authority feature support */
 #undef HAVE_MODULE_DIRAUTH
+
+/* Compile with directory cache support */
+#undef HAVE_MODULE_DIRCACHE
+
+/* Compile with Relay feature support */
+#undef HAVE_MODULE_RELAY
 
 /* Define to 1 if you have the <nacl/crypto_scalarmult_curve25519.h> header
    file. */

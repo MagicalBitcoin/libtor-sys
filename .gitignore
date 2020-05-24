@@ -1,10 +1,7 @@
 /target
 Cargo.lock
 
-libevent-sys/target
-libevent-sys/Cargo.lock
-
-buildutils/target
-buildutils/Cargo.lock
+/tor-src/autom4te.cache/
+/tor-src/configure.ac.orig
 
 *.swp
