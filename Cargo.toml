@@ -1,6 +1,6 @@
 [package]
 name = "libtor-sys"
-version = "42.7.0+0.4.2.7"
+version = "42.7.1+0.4.2.7"
 authors = ["Alekos Filini <alekos.filini@gmail.com>"]
 license = "MIT"
 homepage = "https://github.com/MagicalBitcoin/libtor-sys"
