@@ -3,5 +3,7 @@ Cargo.lock
 
 /tor-src/autom4te.cache/
 /tor-src/configure.ac.orig
+/tor-src/src/rust/Cargo.toml
+/tor-src/src/rust/tor_rust/Cargo.toml
 
 *.swp

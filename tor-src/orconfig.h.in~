@@ -70,9 +70,6 @@
 /* Define to 1 if you have the `backtrace_symbols_fd' function. */
 #undef HAVE_BACKTRACE_SYMBOLS_FD
 
-/* Define to 1 if you have the `cap_set_proc' function. */
-#undef HAVE_CAP_SET_PROC
-
 /* True if we have -Wnull-dereference */
 #undef HAVE_CFLAG_WNULL_DEREFERENCE
 
@@ -239,9 +236,6 @@
 
 /* Defined if KIST scheduler is supported on this system */
 #undef HAVE_KIST_SUPPORT
-
-/* Define to 1 if you have the `cap' library (-lcap). */
-#undef HAVE_LIBCAP
 
 /* Define to 1 if you have the <libscrypt.h> header file. */
 #undef HAVE_LIBSCRYPT_H

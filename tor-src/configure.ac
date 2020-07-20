@@ -4,7 +4,7 @@ dnl Copyright (c) 2007-2019, The Tor Project, Inc.
 dnl See LICENSE for licensing information
 
 AC_PREREQ([2.63])
-AC_INIT([tor],[0.4.3.5])
+AC_INIT([tor],[0.4.3.6])
 AC_CONFIG_SRCDIR([src/app/main/tor_main.c])
 AC_CONFIG_MACRO_DIR([m4])
 
@@ -16,7 +16,7 @@ configure_flags="$*"
 # version number changes.  Tor uses it to make sure that it
 # only shuts down for missing "required protocols" when those protocols
 # are listed as required by a consensus after this date.
-AC_DEFINE(APPROX_RELEASE_DATE, ["2020-05-14"], # for 0.4.3.5
+AC_DEFINE(APPROX_RELEASE_DATE, ["2020-07-09"], # for 0.4.3.6
           [Approximate date when this software was released. (Updated when the version changes.)])
 
 # "foreign" means we don't follow GNU package layout standards
@@ -440,7 +440,7 @@ AC_CACHE_CHECK([for __attribute__((fallthrough))],
 	 [tor_cv_c_attr_fallthrough=no] )])
 CFLAGS="$saved_CFLAGS"
 
-if test "$tor_cv_c_attr_fallthrough" == "yes"; then
+if test "$tor_cv_c_attr_fallthrough" = "yes"; then
   AC_DEFINE(HAVE_ATTR_FALLTHROUGH, [1], [defined if we have the fallthrough attribute.])
 fi
 
