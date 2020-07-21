@@ -84,10 +84,17 @@ fn build_libevent() -> Artifacts {
         .disable("dependency-tracking", None);
 
     let libevent = config.build();
+
+    let mut libs = vec!["event".to_string()];
+    if !target.contains("windows") {
+        // Windows targets don't build event_pthreads
+        libs.push("event_pthreads".to_string());
+    }
+
     let artifacts = Artifacts {
         lib_dir: libevent.join("lib"),
         include_dir: root.join("include"),
-        libs: vec!["event".to_string(), "event_pthreads".to_string()], // TODO: on windows re-add the `lib` prefix
+        libs: libs, // TODO: on windows re-add the `lib` prefix
         root,
     };
     artifacts.print_cargo_metadata();
@@ -149,6 +156,11 @@ fn build_tor(libevent: Artifacts) {
         .disable("module-dirauth", None)
         .disable("seccomp", None)
         .disable("rust", None);
+
+    if target.contains("windows") {
+        // On Windows targets the configure script needs some extra libs so it properly detects OpenSSL
+        config.env("LIBS", "-lcrypt32 -liphlpapi -lws2_32 -lgdi32");
+    }
 
     if target.contains("android") {
         // Apparently zlib is already there on Android https://github.com/rust-lang/libz-sys/blob/master/build.rs#L42
@@ -217,7 +229,10 @@ fn build_tor(libevent: Artifacts) {
     );
 
     println!("cargo:rustc-link-lib=static={}", "event");
-    println!("cargo:rustc-link-lib=static={}", "event_pthreads");
+    if !target.contains("windows") {
+        // Windows targets don't build event_pthreads
+        println!("cargo:rustc-link-lib=static={}", "event_pthreads");
+    }
 
     println!("cargo:rustc-link-lib=static={}", "crypto");
     println!("cargo:rustc-link-lib=static={}", "ssl");
@@ -264,6 +279,36 @@ fn build_tor(libevent: Artifacts) {
     println!("cargo:rustc-link-lib=static={}", "tor-pubsub");
     println!("cargo:rustc-link-lib=static={}", "tor-dispatch");
     println!("cargo:rustc-link-lib=static={}", "tor-trace");
+
+    if target.contains("windows") {
+        // println!("cargo:rustc-link-search=native=/usr/i686-w64-mingw32/lib");
+
+        // Add the CC's library paths
+        let output = Command::new(format!("{}", compiler.path().display()))
+            .arg("-print-search-dirs")
+            .output()
+            .expect("CC doesn't accept -print-search-dirs");
+
+        let output = std::str::from_utf8(&output.stdout).expect("Invalid output");
+        let lines: Vec<&str> = output
+            .lines()
+            .filter(|line| line.starts_with("libraries: ="))
+            .collect();
+        for line in lines {
+            let equals = line.find("=").unwrap();
+            for path in (&line[(equals + 1)..]).split(':') {
+                println!("cargo:rustc-link-search=native={}", path);
+            }
+        }
+
+        println!("cargo:rustc-link-lib=static={}", "crypt32");
+        println!("cargo:rustc-link-lib=static={}", "iphlpapi");
+        println!("cargo:rustc-link-lib=static={}", "ws2_32");
+        println!("cargo:rustc-link-lib=static={}", "gdi32");
+
+        println!("cargo:rustc-link-lib=static={}", "shell32");
+        println!("cargo:rustc-link-lib=static={}", "ssp");
+    }
 
     fs::create_dir_all(tor.join("include")).unwrap();
     fs::copy(
