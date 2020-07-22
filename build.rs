@@ -94,7 +94,7 @@ fn build_libevent() -> Artifacts {
     let artifacts = Artifacts {
         lib_dir: libevent.join("lib"),
         include_dir: root.join("include"),
-        libs: libs, // TODO: on windows re-add the `lib` prefix
+        libs, // TODO: on windows re-add the `lib` prefix
         root,
     };
     artifacts.print_cargo_metadata();
@@ -290,13 +290,15 @@ fn build_tor(libevent: Artifacts) {
             .expect("CC doesn't accept -print-search-dirs");
 
         let output = std::str::from_utf8(&output.stdout).expect("Invalid output");
-        let lines: Vec<&str> = output
-            .lines()
-            .filter(|line| line.starts_with("libraries: ="))
-            .collect();
+        let lines = output.lines().filter_map(|line| {
+            if line.starts_with("libraries: =") {
+                Some(line.replacen("libraries: =", "", 1))
+            } else {
+                None
+            }
+        });
         for line in lines {
-            let equals = line.find("=").unwrap();
-            for path in (&line[(equals + 1)..]).split(':') {
+            for path in line.split(':') {
                 println!("cargo:rustc-link-search=native={}", path);
             }
         }
