@@ -289,6 +289,7 @@ fn build_tor(libevent: Artifacts) {
     println!("cargo:rustc-link-lib=static={}", "tor-pubsub");
     println!("cargo:rustc-link-lib=static={}", "tor-dispatch");
     println!("cargo:rustc-link-lib=static={}", "tor-trace");
+    println!("cargo:rustc-link-lib=static={}", "tor-llharden");
 
     if target.contains("windows") {
         // println!("cargo:rustc-link-search=native=/usr/i686-w64-mingw32/lib");
