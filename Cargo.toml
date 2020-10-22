@@ -9,6 +9,11 @@ documentation = "https://docs.rs/libtor-sys/"
 description = "Rust crate that internally compiles Tor and its dependencies"
 keywords = ["tor", "daemon"]
 readme = "README.md"
+exclude = [
+    "patches",
+    "tor-src/ChangeLog",
+    "tor-src/ReleaseNotes",
+]
 
 build = "build.rs"
 links = "tor"
