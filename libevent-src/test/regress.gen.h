@@ -1,9 +1,11 @@
+
 /*
  * Automatically generated from ../test/regress.rpc
  */
 
 #ifndef EVENT_RPCOUT____TEST_REGRESS_RPC_
 #define EVENT_RPCOUT____TEST_REGRESS_RPC_
+
 
 #include <event2/util.h> /* for ev_uint*_t */
 #include <event2/rpc.h>

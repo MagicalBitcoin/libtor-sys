@@ -12,6 +12,9 @@
 /* Define to 1 if you have the `accept4' function. */
 #undef HAVE_ACCEPT4
 
+/* Define to 1 if you have the <afunix.h> header file. */
+#undef HAVE_AFUNIX_H
+
 /* Define to 1 if you have the `arc4random' function. */
 #undef HAVE_ARC4RANDOM
 
@@ -34,14 +37,6 @@
 /* Define to 1 if you have the declaration of `KERN_ARND', and to 0 if you
    don't. */
 #undef HAVE_DECL_KERN_ARND
-
-/* Define to 1 if you have the declaration of `KERN_RANDOM', and to 0 if you
-   don't. */
-#undef HAVE_DECL_KERN_RANDOM
-
-/* Define to 1 if you have the declaration of `RANDOM_UUID', and to 0 if you
-   don't. */
-#undef HAVE_DECL_RANDOM_UUID
 
 /* Define if /dev/poll is available */
 #undef HAVE_DEVPOLL
@@ -106,6 +101,9 @@
 /* Define to 1 if you have the `getprotobynumber' function. */
 #undef HAVE_GETPROTOBYNUMBER
 
+/* Define to 1 if you have the `getrandom' function. */
+#undef HAVE_GETRANDOM
+
 /* Define to 1 if you have the `getservbyname' function. */
 #undef HAVE_GETSERVBYNAME
 
@@ -130,11 +128,17 @@
 /* Define to 1 if you have the `kqueue' function. */
 #undef HAVE_KQUEUE
 
+/* Define to 1 if you have the `ws2_32' library (-lws2_32). */
+#undef HAVE_LIBWS2_32
+
 /* Define if the system has zlib */
 #undef HAVE_LIBZ
 
 /* Define to 1 if you have the `mach_absolute_time' function. */
 #undef HAVE_MACH_ABSOLUTE_TIME
+
+/* Define to 1 if you have the <mach/mach.h> header file. */
+#undef HAVE_MACH_MACH_H
 
 /* Define to 1 if you have the <mach/mach_time.h> header file. */
 #undef HAVE_MACH_MACH_TIME_H
@@ -313,6 +317,9 @@
 /* Define to 1 if you have the <sys/queue.h> header file. */
 #undef HAVE_SYS_QUEUE_H
 
+/* Define to 1 if you have the <sys/random.h> header file. */
+#undef HAVE_SYS_RANDOM_H
+
 /* Define to 1 if you have the <sys/resource.h> header file. */
 #undef HAVE_SYS_RESOURCE_H
 
@@ -402,6 +409,12 @@
 
 /* Define to 1 if you have the <zlib.h> header file. */
 #undef HAVE_ZLIB_H
+
+/* Define to 1 if you have the `_gmtime64' function. */
+#undef HAVE__GMTIME64
+
+/* Define to 1 if you have the `_gmtime64_s' function. */
+#undef HAVE__GMTIME64_S
 
 /* Define to 1 if compiler have __FUNCTION__ */
 #undef HAVE___FUNCTION__
