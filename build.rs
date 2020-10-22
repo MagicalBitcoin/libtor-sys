@@ -150,7 +150,11 @@ fn build_tor(libevent: Artifacts) {
         .disable("largefile", None)
         .disable("unittests", None)
         .disable("tool-name-check", None)
+        .disable("manpage", None)
+        .disable("html-manual", None)
         .disable("module-dirauth", None)
+        .disable("module-relay", None)
+        .disable("module-dircache", None)
         .disable("seccomp", None)
         .disable("rust", None);
 
