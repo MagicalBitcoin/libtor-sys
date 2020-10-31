@@ -843,7 +843,7 @@ if test "$enable_static_libevent" = "yes"; then
     fi
 fi
 
-TOR_SEARCH_LIBRARY(libevent, $trylibeventdir, [-levent $STATIC_LIBEVENT_FLAGS $TOR_LIB_WS32], [
+TOR_SEARCH_LIBRARY(libevent, $trylibeventdir, [-levent $STATIC_LIBEVENT_FLAGS $TOR_LIB_WS32 $LIBS], [
 #ifdef _WIN32
 #include <winsock2.h>
 #endif

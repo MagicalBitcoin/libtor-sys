@@ -74,7 +74,6 @@ fn build_libevent() -> Artifacts {
         .out_dir(&root)
         .env("CC", compiler.path())
         .env("CFLAGS", compiler.cflags_env())
-        .host(&target)
         .enable_static()
         .disable_shared()
         .with("pic", None)
@@ -95,7 +94,7 @@ fn build_libevent() -> Artifacts {
     let artifacts = Artifacts {
         lib_dir: libevent.join("lib"),
         include_dir: root.join("include"),
-        libs, // TODO: on windows re-add the `lib` prefix
+        libs,
         root,
     };
     artifacts.print_cargo_metadata();
@@ -137,9 +136,7 @@ fn build_tor(libevent: Artifacts) {
     let mut config = autotools::Config::new(path.clone());
     config
         .env("CC", compiler.path())
-        .env("CFLAGS", compiler.cflags_env())
         .with("libevent-dir", libevent.root.to_str())
-        .cflag(format!("-I{}", libevent.include_dir.display()))
         .enable("pic", None)
         //.enable("static-tor", None)
         .enable("static-libevent", None)
@@ -159,6 +156,8 @@ fn build_tor(libevent: Artifacts) {
         .disable("module-dircache", None)
         .disable("seccomp", None)
         .disable("rust", None);
+    let mut cflags = String::new();
+    cflags += &format!(" {}", compiler.cflags_env().into_string().unwrap());
 
     if target.contains("windows") {
         // On Windows targets the configure script needs some extra libs so it properly detects OpenSSL
@@ -203,17 +202,19 @@ fn build_tor(libevent: Artifacts) {
         println!("cargo:rustc-link-search=native={}", sysroot_lib);
     } else {
         let mut zlib_dir = PathBuf::from(env::var("DEP_Z_ROOT").expect("DEP_Z_ROOT expected"));
+
         let zlib_include_dir = zlib_dir.join("include");
+        cflags += &format!(" -I{}", zlib_include_dir.display());
+
         zlib_dir.push("build");
 
-        config
-            .with("zlib-dir", zlib_dir.to_str())
-            .cflag(format!("-I{}", zlib_include_dir.display()));
+        config.with("zlib-dir", zlib_dir.to_str());
+        // .env("CFLAGS", format!("-I{}", zlib_include_dir.display()));
 
         println!("cargo:rustc-link-search=native={}", zlib_dir.display());
     }
 
-    let tor = config.build();
+    let tor = config.env("CFLAGS", cflags).build();
 
     if let Some(dir) = &openssl_dir {
         println!(

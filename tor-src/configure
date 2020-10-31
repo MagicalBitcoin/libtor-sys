@@ -9194,7 +9194,7 @@ else
 
   for tor_trydir in "$trylibeventdir" "(system)" "$prefix" /usr/local /usr/pkg /opt/libevent; do
     LDFLAGS="$tor_saved_LDFLAGS"
-    LIBS="$tor_saved_LIBS -levent $STATIC_LIBEVENT_FLAGS $TOR_LIB_WS32"
+    LIBS="$tor_saved_LIBS -levent $STATIC_LIBEVENT_FLAGS $TOR_LIB_WS32 $LIBS"
     CPPFLAGS="$tor_saved_CPPFLAGS"
 
     if test -z "$tor_trydir" ; then
@@ -9375,7 +9375,7 @@ fi
 fi
 { $as_echo "$as_me:${as_lineno-$LINENO}: result: $tor_cv_library_libevent_dir" >&5
 $as_echo "$tor_cv_library_libevent_dir" >&6; }
-LIBS="$LIBS -levent $STATIC_LIBEVENT_FLAGS $TOR_LIB_WS32"
+LIBS="$LIBS -levent $STATIC_LIBEVENT_FLAGS $TOR_LIB_WS32 $LIBS"
 if test "$tor_cv_library_libevent_dir" != "(system)"; then
 
   if test -d "$tor_cv_library_libevent_dir/lib"; then
