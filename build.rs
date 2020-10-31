@@ -46,8 +46,8 @@ pub fn autoreconf(path: &PathBuf) -> Result<(), Vec<u8>> {
 
 fn build_libevent() -> Artifacts {
     // TODO: cmake on windows
-    let target = env::var("TARGET").unwrap();
-    let host = env::var("HOST").unwrap();
+    let target = env::var("TARGET").expect("TARGET expected");
+    let host = env::var("HOST").expect("HOST expected");
 
     let mut cc = cc::Build::new();
     cc.target(&target).host(&host);
@@ -73,6 +73,7 @@ fn build_libevent() -> Artifacts {
     config
         .out_dir(&root)
         .env("CC", compiler.path())
+        .env("CFLAGS", compiler.cflags_env())
         .host(&target)
         .enable_static()
         .disable_shared()
@@ -136,6 +137,7 @@ fn build_tor(libevent: Artifacts) {
     let mut config = autotools::Config::new(path.clone());
     config
         .env("CC", compiler.path())
+        .env("CFLAGS", compiler.cflags_env())
         .with("libevent-dir", libevent.root.to_str())
         .cflag(format!("-I{}", libevent.include_dir.display()))
         .enable("pic", None)
@@ -170,9 +172,24 @@ fn build_tor(libevent: Artifacts) {
     }
 
     if target.contains("android") {
-        // Apparently zlib is already there on Android https://github.com/rust-lang/libz-sys/blob/master/build.rs#L42
-
-        let sysroot_lib = format!("{}/usr/lib", env::var("SYSROOT").expect("SYSROOT expected"));
+        // zlib is part of the `sysroot` on android. Use `clang` to get the full path so that we
+        // can link with it.
+        let output = compiler
+            .to_command()
+            .args(&["--print-file-name", "libz.a"])
+            .output()
+            .expect("Failed to run `clang`");
+        if !output.status.success() {
+            panic!("`clang` did not complete successfully");
+        }
+        let libz_path =
+            std::str::from_utf8(&output.stdout).expect("Invalid path for `libz.a` returned");
+        let libz_path = PathBuf::from(libz_path);
+        let sysroot_lib = libz_path
+            .parent()
+            .expect("Invalid path for `libz.a` returned")
+            .to_str()
+            .unwrap();
 
         // provides stdin and stderr
         cc::Build::new()
@@ -181,14 +198,6 @@ fn build_tor(libevent: Artifacts) {
 
         config
             .enable("android", None)
-            .env(
-                "LDFLAGS",
-                format!(
-                    "-L{} -L{}",
-                    sysroot_lib,
-                    env::var("OUT_DIR").expect("OUT_DIR expected")
-                ),
-            )
             .with("zlib-dir", Some(&sysroot_lib));
 
         println!("cargo:rustc-link-search=native={}", sysroot_lib);

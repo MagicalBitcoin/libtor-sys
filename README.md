@@ -13,12 +13,13 @@ The currently supported platforms are:
 
 * Linux (tested on Fedora 30 and Ubuntu Xenial)
 * Android through the NDK
+* MacOS
+* iOS
+* Windows cross-compiled from Linux with `mingw`
 
 Coming Soon :tm::
 
-* MacOS (it *might* even work now, but I don't have a Mac to test it)
-* iOS
-* Windows
+* Windows (natively built)
 
 ## Build gotchas
 
