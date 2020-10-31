@@ -1,0 +1,142 @@
+name: Continuous integration
+on: [push, pull_request]
+
+# The NDK is preinstalled on Linux and macOS, nice!
+
+jobs:
+  linux-native:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.toml','**/Cargo.lock') }}
+      - uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          override: true
+          toolchain: ${{ matrix.channel }}
+      - uses: actions-rs/cargo@v1
+        with:
+          command: build
+          args: -vv
+    strategy:
+      matrix:
+        channel: [stable, beta]
+
+  macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.toml','**/Cargo.lock') }}
+      - uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          override: true
+          toolchain: ${{ matrix.channel }}
+          target: ${{ matrix.target }}
+      - run: brew install automake
+      - uses: actions-rs/cargo@v1
+        with:
+          command: build
+          # always build with `vendored-openssl` for macOS/iOS
+          args: --features=vendored-openssl --target ${{ matrix.target }} -vv
+    strategy:
+      matrix:
+        channel: [stable, beta]
+        target:
+          - x86_64-apple-darwin
+          - aarch64-apple-ios
+          - x86_64-apple-ios
+
+  linux-cross-ndk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.toml','**/Cargo.lock') }}
+      - uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          override: true
+          toolchain: ${{ matrix.channel }}
+          target: ${{ matrix.target }}
+      # Add NDK toolchain to `PATH`
+      - run: echo "$ANDROID_SDK_ROOT/ndk-bundle/toolchains/llvm/prebuilt/linux-x86_64/bin" >> $GITHUB_PATH
+      - uses: actions-rs/cargo@v1
+        with:
+          command: build
+          # always build with `vendored-openssl` for NDK
+          args: --features=vendored-openssl --target ${{ matrix.target }} -vv
+    strategy:
+      matrix:
+        channel: [stable, beta]
+        target:
+          - aarch64-linux-android
+          - armv7-linux-androideabi
+          - i686-linux-android
+          - x86_64-linux-android
+
+  linux-cross-windows:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.toml','**/Cargo.lock') }}
+      - uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          override: true
+          toolchain: ${{ matrix.channel }}
+          target: ${{ matrix.target }}
+      - run: sudo apt-get install -y gcc-mingw-w64-x86-64 gcc-mingw-w64-i686
+      - uses: actions-rs/cargo@v1
+        with:
+          command: build
+          # always build with `vendored-openssl` for Mingw
+          args: --features=vendored-openssl --target ${{ matrix.target }} -vv
+    strategy:
+      matrix:
+        channel: [stable, beta]
+        target:
+          - i686-pc-windows-gnu
+          - x86_64-pc-windows-gnu
+
+  fmt:
+    name: Rust fmt
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          override: true
+          components: rustfmt
+      - name: fmt check
+        uses: actions-rs/cargo@v1
+        with:
+          command: fmt
+          args: --all -- --check
