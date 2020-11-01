@@ -23,24 +23,26 @@ Coming Soon :tm::
 
 ## Build gotchas
 
-### Linux
+Command examples to cross-compile for multiple platforms are available in [`CROSS_COMPILING.md`](CROSS_COMPILING.md).
 
-Building on a Linux pc shouldn't be too hard, a `cargo build` should normally work. Keep in mind that you will need all the "usual" build tools, like a compiler, automake, autoconf, make, in your PATH.
+### Linux/macOS
 
-If you get an `aclocal-1.15 not found` or something similar, try to cd into `libevent-<version>` and run `autoreconf --force --install`. Repeat in `tor-tor-<version>` if you get the
+Building on a UNIX-like os shouldn't be too hard, a `cargo build` should normally work. Keep in mind that you will need all the "usual" build tools, like a compiler, automake, autoconf, make, in your PATH. On macOS
+you can install those tools using `brew`.
+
+If you get an `aclocal-1.15 not found` or something similar, try to cd into `libevent-src` and run `autoreconf --force --install`. Repeat in `tor-src` if you get the
 same issue there, and then re-`cargo build`.
 
 ### Android
 
-Cross-compiling for Android is a bit more complicated, there are a few things to adjust:
-1. Some libraries (zlib) are provided by the OS, but we need to link against them. So an extra environment variable `SYSROOT` that points to the sysroot shipped with NDK is required to let Rust
-know where to look for those libraries.
-2. Rust by default will look for a compiler named `<arch>-linux-android-clang`, but that's not how they are called in the NDK. So a `CC` env variable should be provided, pointing to the right compiler
-for the specific architecture.
-3. Rust will also look for other compiling tools, like `ar`. Usually the best thing is to have the NDK's bin folder in your PATH so that it can find everything it needs.
+Cross-compiling for Android is fairly straightforward, just make sure that you have the NDK toolchain in your `PATH`. If you do so, `cargo build` will use the right compiler targeting the minimum supported
+sdk version of the NDK you are using (generally 16 for `armv7` and 21 for everything else).
 
-At the end, your command line will look something like this, assuming you are building for `aarch64` on a `linux-x86_64` pc, targeting `android21`:
+### iOS
 
-```
-PATH="$PATH:$NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/bin" SYSROOT=$NDK_HOME/platforms/android-21/arch-arm64 CC="aarch64-linux-android21-clang" cargo build --target=aarch64-linux-android
-```
+Cross-compiling for iOS on a Mac that has the `Xcode Command Line Tools` installed should work out of the box.
+
+### Windows (MingW)
+
+Cross-compiling for Windows using MingW should also work out of the box, as long as you have the right compiler and the required libraries installed. To link the library into binaries it's generally required to also
+install the static version of `libwinpthreads`.
