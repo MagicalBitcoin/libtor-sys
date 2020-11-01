@@ -1,4 +1,4 @@
-# libtor-sys [![Build Status](https://travis-ci.org/MagicalBitcoin/libtor-sys.svg?branch=master)](https://travis-ci.org/MagicalBitcoin/libtor-sys)
+# libtor-sys ![Continuous integration](https://github.com/MagicalBitcoin/libtor-sys/workflows/Continuous%20integration/badge.svg?branch=master)
 
 This library compiles Tor and a few dependencies (zlib, libevent and openssl) into a single Rust library that can be imported like any other Rust crate into existing projects.
 This provides a way to use Tor without having to ship/download extra binaries - on platforms that allows running them - while for some other platforms like
