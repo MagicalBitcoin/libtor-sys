@@ -3,6 +3,11 @@
 //! This library builds Tor and a minimal set of its dependencies into a single library that can be
 //! loaded like any other Rust crate dependency.
 //!
+//! By default it only uses the minimal set of dependencies required by Tor, namely OpenSSL,
+//! Libevent and Zlib. The `with-lzma` and `with-zstd` features can be used to enable the
+//! respective dependencies, and the `vendored-lzma` and `vendored-zstd` features can be used
+//! to compile and like those libraries statically.
+//!
 //! The interface simply re-exports Tor's functions defined in its tor_api.h header.
 //!
 //! # Example

@@ -110,13 +110,14 @@ fn build_tor(libevent: Artifacts) {
     cc.target(&target).host(&host);
     let compiler = cc.get_compiler();
 
-    /* for (key, value) in std::env::vars() {
-        println!("{}: {}", key, value);
-    }
-    return; */
+    // for (key, value) in std::env::vars() {
+    //     println!("{}: {}", key, value);
+    // }
+    // return;
 
-    // TODO https://github.com/arlolra/tor/blob/master/INSTALL#L32
     let openssl_dir = env::var("DEP_OPENSSL_ROOT").ok().map(PathBuf::from);
+    let lzma_dir = env::var("DEP_LZMA_ROOT").ok().map(PathBuf::from);
+    let zstd_dir = env::var("DEP_ZSTD_ROOT").ok().map(PathBuf::from);
 
     let original_src = Path::new(env!("CARGO_MANIFEST_DIR")).join("tor-src");
     let root = PathBuf::from(env::var("OUT_DIR").expect("OUT_DIR expected"));
@@ -133,6 +134,7 @@ fn build_tor(libevent: Artifacts) {
         );
     }
 
+    // lzma and zstd are enabled by default, but it doesn't fail if it can't find it
     let mut config = autotools::Config::new(path.clone());
     config
         .env("CC", compiler.path())
@@ -144,8 +146,6 @@ fn build_tor(libevent: Artifacts) {
         .disable("system-torrc", None)
         .disable("asciidoc", None)
         .disable("systemd", None)
-        .disable("zstd", None)
-        .disable("lzma", None)
         .disable("largefile", None)
         .disable("unittests", None)
         .disable("tool-name-check", None)
@@ -159,6 +159,13 @@ fn build_tor(libevent: Artifacts) {
     let mut cflags = String::new();
     cflags += &format!(" {}", compiler.cflags_env().into_string().unwrap());
 
+    if !cfg!(feature = "with-lzma") {
+        config.disable("lzma", None);
+    }
+    if !cfg!(feature = "with-zstd") {
+        config.disable("zstd", None);
+    }
+
     if target.contains("windows") {
         // On Windows targets the configure script needs some extra libs so it properly detects OpenSSL
         config.env("LIBS", "-lcrypt32 -liphlpapi -lws2_32 -lgdi32");
@@ -168,6 +175,22 @@ fn build_tor(libevent: Artifacts) {
         config
             .with("openssl-dir", dir.to_str())
             .enable("static-openssl", None);
+    }
+    if let Some(dir) = &lzma_dir {
+        let lzma_include = env::var("DEP_LZMA_INCLUDE").expect("Missing `DEP_LZMA_INCLUDE`");
+
+        config.env("LZMA_CFLAGS", format!("-I{}", lzma_include));
+        config.env("LZMA_LIBS", dir.join("liblzma.a").to_str().unwrap());
+
+        println!("cargo:rustc-link-lib=static={}", "lzma");
+    }
+    if let Some(dir) = &zstd_dir {
+        let lzma_include = env::var("DEP_ZSTD_INCLUDE").expect("Missing `DEP_ZSTD_INCLUDE`");
+
+        config.env("ZSTD_CFLAGS", format!("-I{}", lzma_include));
+        config.env("ZSTD_LIBS", dir.join("libzstd.a").to_str().unwrap());
+
+        println!("cargo:rustc-link-lib=static={}", "zstd");
     }
 
     if target.contains("android") {

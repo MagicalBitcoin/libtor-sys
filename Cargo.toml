@@ -21,6 +21,8 @@ links = "tor"
 [dependencies]
 openssl-sys = "0.9"
 libz-sys = { version = "1.0", features = ["static"] }
+lzma-sys = { version = "0.1", optional = true }
+zstd-sys = { version = "1.4", optional = true }
 
 [build-dependencies]
 cc = "1.0"
@@ -33,3 +35,7 @@ path = "src/lib.rs"
 
 [features]
 vendored-openssl = ["openssl-sys/vendored"]
+vendored-lzma = ["lzma-sys", "with-lzma"]
+vendored-zstd = ["zstd-sys", "with-zstd"]
+with-lzma = []
+with-zstd = []

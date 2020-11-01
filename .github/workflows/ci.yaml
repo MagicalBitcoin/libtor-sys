@@ -23,10 +23,11 @@ jobs:
       - uses: actions-rs/cargo@v1
         with:
           command: build
-          args: -vv
+          args: -vv --features=${{ matrix.features }}
     strategy:
       matrix:
         channel: [stable, beta]
+        features: ["", "vendored-lzma,vendored-zstd"]
 
   macos:
     runs-on: macos-latest
@@ -49,11 +50,12 @@ jobs:
       - uses: actions-rs/cargo@v1
         with:
           command: build
-          # always build with `vendored-openssl` for macOS/iOS
-          args: --features=vendored-openssl --target ${{ matrix.target }} -vv
+          args: --features=${{ matrix.features }} --target ${{ matrix.target }} -vv
     strategy:
       matrix:
         channel: [stable, beta]
+        # always build at least with `vendored-openssl` for macOS/iOS
+        features: ["vendored-openssl", "vendored-openssl,vendored-lzma,vendored-zstd"]
         target:
           - x86_64-apple-darwin
           - aarch64-apple-ios
@@ -81,11 +83,12 @@ jobs:
       - uses: actions-rs/cargo@v1
         with:
           command: build
-          # always build with `vendored-openssl` for NDK
-          args: --features=vendored-openssl --target ${{ matrix.target }} -vv
+          args: --features=${{ matrix.features }} --target ${{ matrix.target }} -vv
     strategy:
       matrix:
         channel: [stable, beta]
+        # always build at least with `vendored-openssl` for NDK
+        features: ["vendored-openssl", "vendored-openssl,vendored-lzma,vendored-zstd"]
         target:
           - aarch64-linux-android
           - armv7-linux-androideabi
@@ -113,11 +116,12 @@ jobs:
       - uses: actions-rs/cargo@v1
         with:
           command: build
-          # always build with `vendored-openssl` for Mingw
-          args: --features=vendored-openssl --target ${{ matrix.target }} -vv
+          args: --features=${{ matrix.features }} --target ${{ matrix.target }} -vv
     strategy:
       matrix:
         channel: [stable, beta]
+        # always build at least with `vendored-openssl` for MingW
+        features: ["vendored-openssl", "vendored-openssl,vendored-lzma,vendored-zstd"]
         target:
           - i686-pc-windows-gnu
           - x86_64-pc-windows-gnu
