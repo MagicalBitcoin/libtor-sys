@@ -16,6 +16,7 @@
 #include "orconfig.h"
 
 #ifdef ENABLE_OPENSSL
+#include <openssl/engine.h>
 #include <openssl/opensslv.h>
 /*
   Macro to create an arbitrary OpenSSL version number as used by
