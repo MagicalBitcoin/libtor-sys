@@ -72,6 +72,7 @@ fn build_libevent() -> Artifacts {
     let mut config = autotools::Config::new(path.clone());
     config
         .out_dir(&root)
+        .config_option("host", Some(&host))
         .env("CC", compiler.path())
         .env("CFLAGS", compiler.cflags_env())
         .enable_static()
@@ -137,6 +138,7 @@ fn build_tor(libevent: Artifacts) {
     // lzma and zstd are enabled by default, but it doesn't fail if it can't find it
     let mut config = autotools::Config::new(path.clone());
     config
+        .config_option("host", Some(&host))
         .env("CC", compiler.path())
         .with("libevent-dir", libevent.root.to_str())
         .enable("pic", None)
