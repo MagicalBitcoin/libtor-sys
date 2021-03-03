@@ -41,6 +41,7 @@
 #include "feature/rend/rendcache.h"
 #include "core/or/circuitlist.h"
 #include "core/or/circuitbuild.h"
+#include "core/or/extendinfo.h"
 #include "core/mainloop/connection.h"
 #include "core/or/connection_edge.h"
 #include "feature/nodelist/networkstatus.h"
@@ -531,7 +532,7 @@ test_client_pick_intro(void *arg)
         get_options_mutable()->ClientUseIPv6 = 1;
         intro_ei = hs_get_extend_info_from_lspecs(ip->link_specifiers,
                                                   &ip->onion_key, 1);
-        tt_assert(tor_addr_family(&intro_ei->addr) == AF_INET6);
+        tt_assert(tor_addr_family(&intro_ei->orports[0].addr) == AF_INET6);
       }
       tt_assert(intro_ei);
       if (intro_ei) {
@@ -539,7 +540,8 @@ test_client_pick_intro(void *arg)
         char ip_addr[TOR_ADDR_BUF_LEN];
         /* We need to decorate in case it is an IPv6 else routerset_parse()
          * doesn't like it. */
-        ptr = tor_addr_to_str(ip_addr, &intro_ei->addr, sizeof(ip_addr), 1);
+        ptr = tor_addr_to_str(ip_addr, &intro_ei->orports[0].addr,
+                              sizeof(ip_addr), 1);
         tt_assert(ptr == ip_addr);
         ret = routerset_parse(get_options_mutable()->ExcludeNodes,
                               ip_addr, "");
@@ -1486,7 +1488,7 @@ test_purge_ephemeral_client_auth(void *arg)
   MOCK(get_options, mock_get_options);
   MOCK(write_str_to_file, mock_write_str_to_file);
 
-  /* Boggus directory so when we try to write the permanent client
+  /* Bogus directory so when we try to write the permanent client
    * authorization data to disk, we don't fail. See
    * store_permanent_client_auth_credentials() for more details. */
   mocked_options.ClientOnionAuthDir = tor_strdup("auth_dir");

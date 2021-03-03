@@ -16,6 +16,7 @@
 #include "app/config/config.h"
 #include "core/or/circuitbuild.h"
 #include "core/or/policies.h"
+#include "core/or/extendinfo.h"
 #include "feature/dirauth/shared_random_state.h"
 #include "feature/hs/hs_cache.h"
 #include "feature/hs/hs_circuitmap.h"
@@ -889,12 +890,14 @@ hs_set_conn_addr_port(const smartlist_t *ports, edge_connection_t *conn)
   chosen_port = smartlist_choose(matching_ports);
   smartlist_free(matching_ports);
   if (chosen_port) {
-    if (!(chosen_port->is_unix_addr)) {
-      /* save the original destination before we overwrite it */
-      if (conn->hs_ident) {
-        conn->hs_ident->orig_virtual_port = TO_CONN(conn)->port;
-      }
+    /* Remember, v2 doesn't use an hs_ident. */
+    if (conn->hs_ident) {
+      /* There is always a connection identifier at this point. Regardless of a
+       * Unix or TCP port, note the virtual port. */
+      conn->hs_ident->orig_virtual_port = chosen_port->virtual_port;
+    }
 
+    if (!(chosen_port->is_unix_addr)) {
       /* Get a non-AF_UNIX connection ready for connection_exit_connect() */
       tor_addr_copy(&TO_CONN(conn)->addr, &chosen_port->real_addr);
       TO_CONN(conn)->port = chosen_port->real_port;
@@ -1749,7 +1752,7 @@ hs_get_extend_info_from_lspecs(const smartlist_t *lspecs,
     switch (link_specifier_get_ls_type(ls)) {
     case LS_IPV4:
       /* Skip if we already seen a v4. If direct_conn is true, we skip this
-       * block because fascist_firewall_choose_address_ls() will set ap. If
+       * block because reachable_addr_choose_from_ls() will set ap. If
        * direct_conn is false, set ap to the first IPv4 address and port in
        * the link specifiers.*/
       if (have_v4 || direct_conn) continue;
@@ -1781,7 +1784,7 @@ hs_get_extend_info_from_lspecs(const smartlist_t *lspecs,
 
   /* Choose a preferred address first, but fall back to an allowed address. */
   if (direct_conn)
-    fascist_firewall_choose_address_ls(lspecs, 0, &ap);
+    reachable_addr_choose_from_ls(lspecs, 0, &ap);
 
   /* Legacy ID is mandatory, and we require an IP address. */
   if (!tor_addr_port_is_valid_ap(&ap, 0)) {
@@ -1817,7 +1820,7 @@ hs_get_extend_info_from_lspecs(const smartlist_t *lspecs,
 
 /***********************************************************************/
 
-/** Initialize the entire HS subsytem. This is called in tor_init() before any
+/** Initialize the entire HS subsystem. This is called in tor_init() before any
  * torrc options are loaded. Only for >= v3. */
 void
 hs_init(void)

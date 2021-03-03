@@ -67,8 +67,8 @@ log_unsafe_socks_warning(int socks_protocol, const char *address,
              "Tor only an IP address. Applications that do DNS resolves "
              "themselves may leak information. Consider using Socks4A "
              "(e.g. via privoxy or socat) instead. For more information, "
-             "please see https://wiki.torproject.org/TheOnionRouter/"
-             "TorFAQ#SOCKSAndDNS.%s",
+             "please see https://2019.www.torproject.org/docs/faq.html.en"
+             "#WarningsAboutSOCKSandDNSInformationLeaks.%s",
              socks_protocol,
              (int)port,
              safe_socks ? " Rejecting." : "");
@@ -479,7 +479,7 @@ parse_socks5_userpass_auth(const uint8_t *raw_data, socks_request_t *req,
 /**
  * Validate and respond to SOCKS5 username/password request we
  * parsed in parse_socks5_userpass_auth (corresponding to <b>req</b>.
- * Set <b>req->reply</b> to appropriate responsed. Return
+ * Set <b>req->reply</b> to appropriate response. Return
  * SOCKS_RESULT_DONE on success or SOCKS_RESULT_INVALID on failure.
  */
 static socks_result_t
