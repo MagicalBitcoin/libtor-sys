@@ -249,27 +249,7 @@ fn build_tor(libevent: Artifacts) {
     }
     println!(
         "cargo:rustc-link-search=native={}",
-        tor.join("build/src/core").display()
-    );
-    println!(
-        "cargo:rustc-link-search=native={}",
-        tor.join("build/src/lib").display()
-    );
-    println!(
-        "cargo:rustc-link-search=native={}",
-        tor.join("build/src/trunnel").display()
-    );
-    println!(
-        "cargo:rustc-link-search=native={}",
-        tor.join("build/src/ext/ed25519/ref10").display()
-    );
-    println!(
-        "cargo:rustc-link-search=native={}",
-        tor.join("build/src/ext/ed25519/donna").display()
-    );
-    println!(
-        "cargo:rustc-link-search=native={}",
-        tor.join("build/src/ext/keccak-tiny").display()
+        tor.join("build/").display()
     );
 
     println!("cargo:rustc-link-lib=static={}", "event");
@@ -288,47 +268,7 @@ fn build_tor(libevent: Artifacts) {
 
     println!("cargo:rustc-link-lib=static={}", "z");
 
-    println!("cargo:rustc-link-lib=static={}", "curve25519_donna");
-    println!("cargo:rustc-link-lib=static={}", "ed25519_donna");
-    println!("cargo:rustc-link-lib=static={}", "ed25519_ref10");
-    println!("cargo:rustc-link-lib=static={}", "tor-confmgt");
-    println!("cargo:rustc-link-lib=static={}", "tor-app");
-    println!("cargo:rustc-link-lib=static={}", "keccak-tiny");
-    println!("cargo:rustc-link-lib=static={}", "or-trunnel");
-    println!("cargo:rustc-link-lib=static={}", "tor-intmath");
-    println!("cargo:rustc-link-lib=static={}", "tor-lock");
-    println!("cargo:rustc-link-lib=static={}", "tor-malloc");
-    println!("cargo:rustc-link-lib=static={}", "tor-math");
-    println!("cargo:rustc-link-lib=static={}", "tor-memarea");
-    println!("cargo:rustc-link-lib=static={}", "tor-meminfo");
-    println!("cargo:rustc-link-lib=static={}", "tor-osinfo");
-    println!("cargo:rustc-link-lib=static={}", "tor-process");
-    println!("cargo:rustc-link-lib=static={}", "tor-sandbox");
-    println!("cargo:rustc-link-lib=static={}", "tor-smartlist-core");
-    println!("cargo:rustc-link-lib=static={}", "tor-string");
-    println!("cargo:rustc-link-lib=static={}", "tor-term");
-    println!("cargo:rustc-link-lib=static={}", "tor-time");
-    println!("cargo:rustc-link-lib=static={}", "tor-thread");
-    println!("cargo:rustc-link-lib=static={}", "tor-wallclock");
-    println!("cargo:rustc-link-lib=static={}", "tor-log");
-    println!("cargo:rustc-link-lib=static={}", "tor-tls");
-    println!("cargo:rustc-link-lib=static={}", "tor-compress");
-    println!("cargo:rustc-link-lib=static={}", "tor-container");
-    println!("cargo:rustc-link-lib=static={}", "tor-crypt-ops");
-    println!("cargo:rustc-link-lib=static={}", "tor-ctime");
-    println!("cargo:rustc-link-lib=static={}", "tor-encoding");
-    println!("cargo:rustc-link-lib=static={}", "tor-net");
-    println!("cargo:rustc-link-lib=static={}", "tor-err");
-    println!("cargo:rustc-link-lib=static={}", "tor-evloop");
-    println!("cargo:rustc-link-lib=static={}", "tor-fdio");
-    println!("cargo:rustc-link-lib=static={}", "tor-fs");
-    println!("cargo:rustc-link-lib=static={}", "tor-geoip");
-    println!("cargo:rustc-link-lib=static={}", "tor-version");
-    println!("cargo:rustc-link-lib=static={}", "tor-buf");
-    println!("cargo:rustc-link-lib=static={}", "tor-pubsub");
-    println!("cargo:rustc-link-lib=static={}", "tor-dispatch");
-    println!("cargo:rustc-link-lib=static={}", "tor-trace");
-    println!("cargo:rustc-link-lib=static={}", "tor-llharden");
+    println!("cargo:rustc-link-lib=static={}", "tor");
 
     if target.contains("windows") {
         // println!("cargo:rustc-link-search=native=/usr/i686-w64-mingw32/lib");
