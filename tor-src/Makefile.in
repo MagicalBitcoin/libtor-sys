@@ -113,18 +113,16 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-bin_PROGRAMS = src/app/tor$(EXEEXT) src/tools/tor-resolve$(EXEEXT) \
-	src/tools/tor-print-ed-signing-cert$(EXEEXT) $(am__EXEEXT_1)
+bin_PROGRAMS = src/app/tor$(EXEEXT)
 EXTRA_PROGRAMS =
 TESTS = src/test/test-slow$(EXEEXT) src/test/test-memwipe$(EXEEXT) \
 	src/test/test_workqueue$(EXEEXT) src/test/test_keygen.sh \
 	src/test/test_key_expiration.sh src/test/test-timers$(EXEEXT) \
 	$(TESTSCRIPTS)
-noinst_PROGRAMS = $(am__EXEEXT_2) src/test/bench$(EXEEXT) \
-	$(am__EXEEXT_3) src/test/test-ntor-cl$(EXEEXT) \
-	src/test/test-hs-ntor-cl$(EXEEXT) $(am__EXEEXT_4) \
-	$(am__EXEEXT_5) $(am__EXEEXT_6) $(am__EXEEXT_7) \
-	$(am__EXEEXT_8)
+noinst_PROGRAMS = $(am__EXEEXT_1) src/test/bench$(EXEEXT) \
+	$(am__EXEEXT_2) src/test/test-ntor-cl$(EXEEXT) \
+	src/test/test-hs-ntor-cl$(EXEEXT) $(am__EXEEXT_3) \
+	$(am__EXEEXT_4) $(am__EXEEXT_5)
 @UNITTESTS_ENABLED_TRUE@am__append_1 = src/test/libtor-testing.a
 @USE_NSS_TRUE@am__append_2 = @NSS_CFLAGS@
 @USE_NSS_TRUE@am__append_3 = @NSS_LIBS@
@@ -420,15 +418,7 @@ noinst_PROGRAMS = $(am__EXEEXT_2) src/test/bench$(EXEEXT) \
 @UNITTESTS_ENABLED_TRUE@	src/ext/tinytest.c
 
 @UNITTESTS_ENABLED_TRUE@am__append_79 = src/test/test-bt-cl
-@COVERAGE_ENABLED_TRUE@am__append_80 = src/tools/tor-cov-resolve
-
-# ...
-@USE_NSS_FALSE@am__append_81 = src/tools/tor-gencert
-
-# ...
-@COVERAGE_ENABLED_TRUE@@USE_NSS_FALSE@am__append_82 = src/tools/tor-cov-gencert
-@BUILD_LIBTORRUNNER_TRUE@am__append_83 = src/tools/libtorrunner.a
-@LIBFUZZER_ENABLED_TRUE@am__append_84 = -fsanitize-coverage=trace-pc-guard,trace-cmp,trace-div
+@LIBFUZZER_ENABLED_TRUE@am__append_80 = -fsanitize-coverage=trace-pc-guard,trace-cmp,trace-div
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/ax_check_sign.m4 \
@@ -449,12 +439,11 @@ CONFIG_CLEAN_FILES = Doxyfile config.rust \
 	src/config/torrc.minimal src/rust/.cargo/config \
 	scripts/maint/checkOptionDocs.pl warning_flags
 CONFIG_CLEAN_VPATH_FILES =
-@USE_NSS_FALSE@am__EXEEXT_1 = src/tools/tor-gencert$(EXEEXT)
 am__installdirs = "$(DESTDIR)$(bindir)" "$(DESTDIR)$(bindir)" \
 	"$(DESTDIR)$(man1dir)" "$(DESTDIR)$(confdir)" \
 	"$(DESTDIR)$(docdir)" "$(DESTDIR)$(tordatadir)"
-@COVERAGE_ENABLED_TRUE@am__EXEEXT_2 = src/app/tor-cov$(EXEEXT)
-@UNITTESTS_ENABLED_TRUE@am__EXEEXT_3 = src/test/test$(EXEEXT) \
+@COVERAGE_ENABLED_TRUE@am__EXEEXT_1 = src/app/tor-cov$(EXEEXT)
+@UNITTESTS_ENABLED_TRUE@am__EXEEXT_2 = src/test/test$(EXEEXT) \
 @UNITTESTS_ENABLED_TRUE@	src/test/test-slow$(EXEEXT) \
 @UNITTESTS_ENABLED_TRUE@	src/test/test-memwipe$(EXEEXT) \
 @UNITTESTS_ENABLED_TRUE@	src/test/test-process$(EXEEXT) \
@@ -462,11 +451,8 @@ am__installdirs = "$(DESTDIR)$(bindir)" "$(DESTDIR)$(bindir)" \
 @UNITTESTS_ENABLED_TRUE@	src/test/test-switch-id$(EXEEXT) \
 @UNITTESTS_ENABLED_TRUE@	src/test/test-timers$(EXEEXT) \
 @UNITTESTS_ENABLED_TRUE@	src/test/test-rng$(EXEEXT)
-@UNITTESTS_ENABLED_TRUE@am__EXEEXT_4 = src/test/test-bt-cl$(EXEEXT)
-@COVERAGE_ENABLED_TRUE@am__EXEEXT_5 =  \
-@COVERAGE_ENABLED_TRUE@	src/tools/tor-cov-resolve$(EXEEXT)
-@COVERAGE_ENABLED_TRUE@@USE_NSS_FALSE@am__EXEEXT_6 = src/tools/tor-cov-gencert$(EXEEXT)
-@UNITTESTS_ENABLED_TRUE@am__EXEEXT_7 =  \
+@UNITTESTS_ENABLED_TRUE@am__EXEEXT_3 = src/test/test-bt-cl$(EXEEXT)
+@UNITTESTS_ENABLED_TRUE@am__EXEEXT_4 =  \
 @UNITTESTS_ENABLED_TRUE@	src/test/fuzz/fuzz-consensus$(EXEEXT) \
 @UNITTESTS_ENABLED_TRUE@	src/test/fuzz/fuzz-descriptor$(EXEEXT) \
 @UNITTESTS_ENABLED_TRUE@	src/test/fuzz/fuzz-diff$(EXEEXT) \
@@ -481,7 +467,7 @@ am__installdirs = "$(DESTDIR)$(bindir)" "$(DESTDIR)$(bindir)" \
 @UNITTESTS_ENABLED_TRUE@	src/test/fuzz/fuzz-socks$(EXEEXT) \
 @UNITTESTS_ENABLED_TRUE@	src/test/fuzz/fuzz-strops$(EXEEXT) \
 @UNITTESTS_ENABLED_TRUE@	src/test/fuzz/fuzz-vrs$(EXEEXT)
-@LIBFUZZER_ENABLED_TRUE@am__EXEEXT_8 = src/test/fuzz/lf-fuzz-consensus$(EXEEXT) \
+@LIBFUZZER_ENABLED_TRUE@am__EXEEXT_5 = src/test/fuzz/lf-fuzz-consensus$(EXEEXT) \
 @LIBFUZZER_ENABLED_TRUE@	src/test/fuzz/lf-fuzz-descriptor$(EXEEXT) \
 @LIBFUZZER_ENABLED_TRUE@	src/test/fuzz/lf-fuzz-diff$(EXEEXT) \
 @LIBFUZZER_ENABLED_TRUE@	src/test/fuzz/lf-fuzz-diff-apply$(EXEEXT) \
@@ -2135,15 +2121,6 @@ am__src_test_fuzz_liboss_fuzz_vrs_a_SOURCES_DIST =  \
 @OSS_FUZZ_ENABLED_TRUE@@UNITTESTS_ENABLED_TRUE@am_src_test_fuzz_liboss_fuzz_vrs_a_OBJECTS = $(am__objects_100)
 src_test_fuzz_liboss_fuzz_vrs_a_OBJECTS =  \
 	$(am_src_test_fuzz_liboss_fuzz_vrs_a_OBJECTS)
-src_tools_libtorrunner_a_AR = $(AR) $(ARFLAGS)
-src_tools_libtorrunner_a_LIBADD =
-am__src_tools_libtorrunner_a_SOURCES_DIST = src/tools/tor_runner.c \
-	src/feature/api/tor_api.c
-@BUILD_LIBTORRUNNER_TRUE@am_src_tools_libtorrunner_a_OBJECTS =  \
-@BUILD_LIBTORRUNNER_TRUE@	src/tools/tor_runner.$(OBJEXT) \
-@BUILD_LIBTORRUNNER_TRUE@	src/feature/api/tor_api.$(OBJEXT)
-src_tools_libtorrunner_a_OBJECTS =  \
-	$(am_src_tools_libtorrunner_a_OBJECTS)
 src_trunnel_libor_trunnel_testing_a_AR = $(AR) $(ARFLAGS)
 src_trunnel_libor_trunnel_testing_a_LIBADD =
 am__src_trunnel_libor_trunnel_testing_a_SOURCES_DIST =  \
@@ -2817,54 +2794,6 @@ src_test_test_workqueue_DEPENDENCIES = src/test/libtor-testing.a \
 src_test_test_workqueue_LINK = $(CCLD) \
 	$(src_test_test_workqueue_CFLAGS) $(CFLAGS) \
 	$(src_test_test_workqueue_LDFLAGS) $(LDFLAGS) -o $@
-am__src_tools_tor_cov_gencert_SOURCES_DIST = src/tools/tor-gencert.c
-@COVERAGE_ENABLED_TRUE@@USE_NSS_FALSE@am_src_tools_tor_cov_gencert_OBJECTS = src/tools/tor_cov_gencert-tor-gencert.$(OBJEXT)
-src_tools_tor_cov_gencert_OBJECTS =  \
-	$(am_src_tools_tor_cov_gencert_OBJECTS)
-@COVERAGE_ENABLED_TRUE@@USE_NSS_FALSE@src_tools_tor_cov_gencert_DEPENDENCIES = $(TOR_CRYPTO_TESTING_LIBS) \
-@COVERAGE_ENABLED_TRUE@@USE_NSS_FALSE@	$(TOR_UTIL_TESTING_LIBS) \
-@COVERAGE_ENABLED_TRUE@@USE_NSS_FALSE@	$(am__DEPENDENCIES_3)
-src_tools_tor_cov_gencert_LINK = $(CCLD) \
-	$(src_tools_tor_cov_gencert_CFLAGS) $(CFLAGS) \
-	$(src_tools_tor_cov_gencert_LDFLAGS) $(LDFLAGS) -o $@
-am__src_tools_tor_cov_resolve_SOURCES_DIST = src/tools/tor-resolve.c
-@COVERAGE_ENABLED_TRUE@am_src_tools_tor_cov_resolve_OBJECTS = src/tools/tor_cov_resolve-tor-resolve.$(OBJEXT)
-src_tools_tor_cov_resolve_OBJECTS =  \
-	$(am_src_tools_tor_cov_resolve_OBJECTS)
-@COVERAGE_ENABLED_TRUE@src_tools_tor_cov_resolve_DEPENDENCIES =  \
-@COVERAGE_ENABLED_TRUE@	src/trunnel/libor-trunnel.a \
-@COVERAGE_ENABLED_TRUE@	$(TOR_UTIL_TESTING_LIBS) \
-@COVERAGE_ENABLED_TRUE@	$(TOR_CRYPTO_TESTING_LIBS) \
-@COVERAGE_ENABLED_TRUE@	$(am__DEPENDENCIES_3)
-src_tools_tor_cov_resolve_LINK = $(CCLD) \
-	$(src_tools_tor_cov_resolve_CFLAGS) $(CFLAGS) \
-	$(src_tools_tor_cov_resolve_LDFLAGS) $(LDFLAGS) -o $@
-am__src_tools_tor_gencert_SOURCES_DIST = src/tools/tor-gencert.c
-@USE_NSS_FALSE@am_src_tools_tor_gencert_OBJECTS =  \
-@USE_NSS_FALSE@	src/tools/tor-gencert.$(OBJEXT)
-src_tools_tor_gencert_OBJECTS = $(am_src_tools_tor_gencert_OBJECTS)
-@USE_NSS_FALSE@src_tools_tor_gencert_DEPENDENCIES =  \
-@USE_NSS_FALSE@	$(TOR_CRYPTO_LIBS) $(TOR_UTIL_LIBS) \
-@USE_NSS_FALSE@	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_3)
-src_tools_tor_gencert_LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
-	$(src_tools_tor_gencert_LDFLAGS) $(LDFLAGS) -o $@
-am_src_tools_tor_print_ed_signing_cert_OBJECTS =  \
-	src/tools/tor-print-ed-signing-cert.$(OBJEXT)
-src_tools_tor_print_ed_signing_cert_OBJECTS =  \
-	$(am_src_tools_tor_print_ed_signing_cert_OBJECTS)
-src_tools_tor_print_ed_signing_cert_DEPENDENCIES =  \
-	src/trunnel/libor-trunnel.a $(TOR_CRYPTO_LIBS) \
-	$(TOR_UTIL_LIBS) $(am__DEPENDENCIES_3)
-src_tools_tor_print_ed_signing_cert_LINK = $(CCLD) $(AM_CFLAGS) \
-	$(CFLAGS) $(src_tools_tor_print_ed_signing_cert_LDFLAGS) \
-	$(LDFLAGS) -o $@
-am_src_tools_tor_resolve_OBJECTS = src/tools/tor-resolve.$(OBJEXT)
-src_tools_tor_resolve_OBJECTS = $(am_src_tools_tor_resolve_OBJECTS)
-src_tools_tor_resolve_DEPENDENCIES = src/trunnel/libor-trunnel.a \
-	$(TOR_UTIL_LIBS) $(TOR_CRYPTO_LIBS) $(am__DEPENDENCIES_3) \
-	$(am__DEPENDENCIES_1)
-src_tools_tor_resolve_LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
-	$(src_tools_tor_resolve_LDFLAGS) $(LDFLAGS) -o $@
 am__vpath_adj_setup = srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`;
 am__vpath_adj = case $$p in \
     $(srcdir)/*) f=`echo "$$p" | sed "s|^$$srcdirstrip/||"`;; \
@@ -3890,12 +3819,6 @@ am__depfiles_remade = src/app/config/$(DEPDIR)/config.Po \
 	src/test/fuzz/$(DEPDIR)/liboss_fuzz_strops_a-fuzzing_common.Po \
 	src/test/fuzz/$(DEPDIR)/liboss_fuzz_vrs_a-fuzz_vrs.Po \
 	src/test/fuzz/$(DEPDIR)/liboss_fuzz_vrs_a-fuzzing_common.Po \
-	src/tools/$(DEPDIR)/tor-gencert.Po \
-	src/tools/$(DEPDIR)/tor-print-ed-signing-cert.Po \
-	src/tools/$(DEPDIR)/tor-resolve.Po \
-	src/tools/$(DEPDIR)/tor_cov_gencert-tor-gencert.Po \
-	src/tools/$(DEPDIR)/tor_cov_resolve-tor-resolve.Po \
-	src/tools/$(DEPDIR)/tor_runner.Po \
 	src/trunnel/$(DEPDIR)/libor_trunnel_a-channelpadding_negotiation.Po \
 	src/trunnel/$(DEPDIR)/libor_trunnel_a-circpad_negotiation.Po \
 	src/trunnel/$(DEPDIR)/libor_trunnel_a-ed25519_cert.Po \
@@ -4028,7 +3951,6 @@ SOURCES = $(src_core_libtor_app_testing_a_SOURCES) \
 	$(src_test_fuzz_liboss_fuzz_socks_a_SOURCES) \
 	$(src_test_fuzz_liboss_fuzz_strops_a_SOURCES) \
 	$(src_test_fuzz_liboss_fuzz_vrs_a_SOURCES) \
-	$(src_tools_libtorrunner_a_SOURCES) \
 	$(src_trunnel_libor_trunnel_testing_a_SOURCES) \
 	$(src_trunnel_libor_trunnel_a_SOURCES) $(src_app_tor_SOURCES) \
 	$(src_app_tor_cov_SOURCES) $(src_test_bench_SOURCES) \
@@ -4067,12 +3989,7 @@ SOURCES = $(src_core_libtor_app_testing_a_SOURCES) \
 	$(src_test_test_rng_SOURCES) $(src_test_test_slow_SOURCES) \
 	$(src_test_test_switch_id_SOURCES) \
 	$(src_test_test_timers_SOURCES) \
-	$(src_test_test_workqueue_SOURCES) \
-	$(src_tools_tor_cov_gencert_SOURCES) \
-	$(src_tools_tor_cov_resolve_SOURCES) \
-	$(src_tools_tor_gencert_SOURCES) \
-	$(src_tools_tor_print_ed_signing_cert_SOURCES) \
-	$(src_tools_tor_resolve_SOURCES)
+	$(src_test_test_workqueue_SOURCES)
 DIST_SOURCES = $(am__src_core_libtor_app_testing_a_SOURCES_DIST) \
 	$(am__src_core_libtor_app_a_SOURCES_DIST) \
 	$(src_ext_ed25519_donna_libed25519_donna_a_SOURCES) \
@@ -4164,7 +4081,6 @@ DIST_SOURCES = $(am__src_core_libtor_app_testing_a_SOURCES_DIST) \
 	$(am__src_test_fuzz_liboss_fuzz_socks_a_SOURCES_DIST) \
 	$(am__src_test_fuzz_liboss_fuzz_strops_a_SOURCES_DIST) \
 	$(am__src_test_fuzz_liboss_fuzz_vrs_a_SOURCES_DIST) \
-	$(am__src_tools_libtorrunner_a_SOURCES_DIST) \
 	$(am__src_trunnel_libor_trunnel_testing_a_SOURCES_DIST) \
 	$(src_trunnel_libor_trunnel_a_SOURCES) $(src_app_tor_SOURCES) \
 	$(am__src_app_tor_cov_SOURCES_DIST) $(src_test_bench_SOURCES) \
@@ -4205,12 +4121,7 @@ DIST_SOURCES = $(am__src_core_libtor_app_testing_a_SOURCES_DIST) \
 	$(am__src_test_test_slow_SOURCES_DIST) \
 	$(src_test_test_switch_id_SOURCES) \
 	$(src_test_test_timers_SOURCES) \
-	$(src_test_test_workqueue_SOURCES) \
-	$(am__src_tools_tor_cov_gencert_SOURCES_DIST) \
-	$(am__src_tools_tor_cov_resolve_SOURCES_DIST) \
-	$(am__src_tools_tor_gencert_SOURCES_DIST) \
-	$(src_tools_tor_print_ed_signing_cert_SOURCES) \
-	$(src_tools_tor_resolve_SOURCES)
+	$(src_test_test_workqueue_SOURCES)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -4863,8 +4774,7 @@ am__DIST_COMMON = $(srcdir)/Doxyfile.in $(srcdir)/Makefile.in \
 	$(srcdir)/src/rust/include.am \
 	$(srcdir)/src/rust/tor_rust/include.am \
 	$(srcdir)/src/test/fuzz/include.am \
-	$(srcdir)/src/test/include.am $(srcdir)/src/tools/include.am \
-	$(srcdir)/src/trunnel/include.am \
+	$(srcdir)/src/test/include.am $(srcdir)/src/trunnel/include.am \
 	$(srcdir)/src/win32/include.am $(srcdir)/warning_flags.in \
 	$(top_srcdir)/contrib/operator-tools/tor.logrotate.in \
 	$(top_srcdir)/scripts/maint/checkOptionDocs.pl.in \
@@ -5095,8 +5005,7 @@ noinst_LIBRARIES = $(LIBED25519_REF10) $(LIBED25519_DONNA) \
 	src/lib/libtor-version.a $(am__append_56) \
 	src/lib/libtor-wallclock.a $(am__append_57) \
 	src/trunnel/libor-trunnel.a $(am__append_58) \
-	src/core/libtor-app.a $(am__append_59) $(am__append_83) \
-	$(OSS_FUZZ_FUZZERS)
+	src/core/libtor-app.a $(am__append_59) $(OSS_FUZZ_FUZZERS)
 EXTRA_DIST = src/ext/ext.md src/ext/timeouts/bench/bench-add.lua \
 	src/ext/timeouts/bench/bench-aux.lua \
 	src/ext/timeouts/bench/bench.c \
@@ -6872,57 +6781,6 @@ src_test_test_hs_ntor_cl_AM_CPPFLAGS = \
 
 @UNITTESTS_ENABLED_TRUE@src_test_test_bt_cl_CFLAGS = $(AM_CFLAGS) $(TEST_CFLAGS)
 @UNITTESTS_ENABLED_TRUE@src_test_test_bt_cl_CPPFLAGS = $(src_test_AM_CPPFLAGS) $(TEST_CPPFLAGS)
-src_tools_tor_resolve_SOURCES = src/tools/tor-resolve.c
-src_tools_tor_resolve_LDFLAGS = @TOR_LDFLAGS_openssl@
-src_tools_tor_resolve_LDADD = \
-	src/trunnel/libor-trunnel.a \
-	$(TOR_UTIL_LIBS) \
-        $(TOR_CRYPTO_LIBS) $(TOR_LIBS_CRYPTLIB)\
-	$(rust_ldadd) \
-	@TOR_LIB_MATH@ @TOR_LIB_WS32@ @TOR_LIB_IPHLPAPI@ @TOR_LIB_SHLWAPI@ @TOR_LIB_USERENV@
-
-@COVERAGE_ENABLED_TRUE@src_tools_tor_cov_resolve_SOURCES = src/tools/tor-resolve.c
-@COVERAGE_ENABLED_TRUE@src_tools_tor_cov_resolve_CPPFLAGS = $(AM_CPPFLAGS) $(TEST_CPPFLAGS)
-@COVERAGE_ENABLED_TRUE@src_tools_tor_cov_resolve_CFLAGS = $(AM_CFLAGS) $(TEST_CFLAGS)
-@COVERAGE_ENABLED_TRUE@src_tools_tor_cov_resolve_LDFLAGS = @TOR_LDFLAGS_openssl@
-@COVERAGE_ENABLED_TRUE@src_tools_tor_cov_resolve_LDADD = \
-@COVERAGE_ENABLED_TRUE@	src/trunnel/libor-trunnel.a \
-@COVERAGE_ENABLED_TRUE@	$(TOR_UTIL_TESTING_LIBS) \
-@COVERAGE_ENABLED_TRUE@	$(TOR_CRYPTO_TESTING_LIBS) $(TOR_LIBS_CRYPTLIB) \
-@COVERAGE_ENABLED_TRUE@	@TOR_LIB_MATH@ @TOR_LIB_WS32@
-
-@USE_NSS_FALSE@src_tools_tor_gencert_SOURCES = src/tools/tor-gencert.c
-@USE_NSS_FALSE@src_tools_tor_gencert_LDFLAGS = @TOR_LDFLAGS_zlib@ $(TOR_LDFLAGS_CRYPTLIB)
-@USE_NSS_FALSE@src_tools_tor_gencert_LDADD = \
-@USE_NSS_FALSE@	$(TOR_CRYPTO_LIBS) \
-@USE_NSS_FALSE@	$(TOR_UTIL_LIBS) \
-@USE_NSS_FALSE@	$(rust_ldadd) \
-@USE_NSS_FALSE@	@TOR_LIB_MATH@ @TOR_ZLIB_LIBS@ $(TOR_LIBS_CRYPTLIB) \
-@USE_NSS_FALSE@	@TOR_LIB_WS32@ @TOR_LIB_IPHLPAPI@ @TOR_LIB_SHLWAPI@ @TOR_LIB_GDI@ @TOR_LIB_USERENV@ @CURVE25519_LIBS@
-
-src_tools_tor_print_ed_signing_cert_SOURCES = src/tools/tor-print-ed-signing-cert.c
-src_tools_tor_print_ed_signing_cert_LDFLAGS = @TOR_LDFLAGS_zlib@ @TOR_LDFLAGS_openssl@
-src_tools_tor_print_ed_signing_cert_LDADD = \
-	src/trunnel/libor-trunnel.a \
-        $(TOR_CRYPTO_LIBS) \
-        $(TOR_UTIL_LIBS) \
-	@TOR_LIB_MATH@ $(TOR_LIBS_CRYPTLIB) \
-	@TOR_LIB_WS32@ @TOR_LIB_USERENV@ @TOR_LIB_SHLWAPI@ @TOR_LIB_GDI@
-
-@COVERAGE_ENABLED_TRUE@@USE_NSS_FALSE@src_tools_tor_cov_gencert_SOURCES = src/tools/tor-gencert.c
-@COVERAGE_ENABLED_TRUE@@USE_NSS_FALSE@src_tools_tor_cov_gencert_CPPFLAGS = $(AM_CPPFLAGS) $(TEST_CPPFLAGS)
-@COVERAGE_ENABLED_TRUE@@USE_NSS_FALSE@src_tools_tor_cov_gencert_CFLAGS = $(AM_CFLAGS) $(TEST_CFLAGS)
-@COVERAGE_ENABLED_TRUE@@USE_NSS_FALSE@src_tools_tor_cov_gencert_LDFLAGS = @TOR_LDFLAGS_zlib@ $(TOR_LDFLAGS_CRYPTLIB)
-@COVERAGE_ENABLED_TRUE@@USE_NSS_FALSE@src_tools_tor_cov_gencert_LDADD = \
-@COVERAGE_ENABLED_TRUE@@USE_NSS_FALSE@    $(TOR_CRYPTO_TESTING_LIBS) \
-@COVERAGE_ENABLED_TRUE@@USE_NSS_FALSE@    $(TOR_UTIL_TESTING_LIBS) \
-@COVERAGE_ENABLED_TRUE@@USE_NSS_FALSE@    @TOR_LIB_MATH@ @TOR_ZLIB_LIBS@ $(TOR_LIBS_CRYPTLIB) \
-@COVERAGE_ENABLED_TRUE@@USE_NSS_FALSE@    @TOR_LIB_WS32@ @TOR_LIB_IPHLPAPI@ @TOR_LIB_SHLWAPI@ @TOR_LIB_GDI@ @CURVE25519_LIBS@
-
-@BUILD_LIBTORRUNNER_TRUE@src_tools_libtorrunner_a_SOURCES = \
-@BUILD_LIBTORRUNNER_TRUE@        src/tools/tor_runner.c \
-@BUILD_LIBTORRUNNER_TRUE@        src/feature/api/tor_api.c
-
 confdir = $(sysconfdir)/tor
 tordatadir = $(datadir)/tor
 conf_DATA = src/config/torrc.sample
@@ -7310,9 +7168,9 @@ all_mans = doc/man/tor doc/man/tor-gencert doc/man/tor-resolve doc/man/torify do
 @USE_ASCIIDOC_FALSE@man_in = 
 asciidoc_product = $(nodist_man1_MANS) $(doc_DATA)
 AM_ETAGSFLAGS = --regex='{c}/MOCK_IMPL([^,]+,\W*\([a-zA-Z0-9_]+\)\W*,/\1/s'
-@COVERAGE_ENABLED_FALSE@TEST_CFLAGS = $(am__append_84)
+@COVERAGE_ENABLED_FALSE@TEST_CFLAGS = $(am__append_80)
 @COVERAGE_ENABLED_TRUE@TEST_CFLAGS = -fno-inline -fprofile-arcs \
-@COVERAGE_ENABLED_TRUE@	-ftest-coverage $(am__append_84)
+@COVERAGE_ENABLED_TRUE@	-ftest-coverage $(am__append_80)
 @COVERAGE_ENABLED_FALSE@TEST_CPPFLAGS = -DTOR_UNIT_TESTS @TOR_MODULES_ALL_ENABLED@
 @COVERAGE_ENABLED_TRUE@@DISABLE_ASSERTS_IN_UNIT_TESTS_FALSE@TEST_CPPFLAGS = -DTOR_UNIT_TESTS -DTOR_COVERAGE @TOR_MODULES_ALL_ENABLED@
 @COVERAGE_ENABLED_TRUE@@DISABLE_ASSERTS_IN_UNIT_TESTS_TRUE@TEST_CPPFLAGS = -DTOR_UNIT_TESTS -DTOR_COVERAGE -DDISABLE_ASSERTS_IN_UNIT_TESTS @TOR_MODULES_ALL_ENABLED@
@@ -7345,7 +7203,7 @@ all: orconfig.h
 .SUFFIXES: .c .log .o .obj .test .test$(EXEEXT) .trs
 am--refresh: Makefile
 	@:
-$(srcdir)/Makefile.in:  $(srcdir)/Makefile.am $(srcdir)/src/include.am $(srcdir)/src/ext/include.am $(srcdir)/src/lib/arch/include.am $(srcdir)/src/lib/buf/include.am $(srcdir)/src/lib/err/include.am $(srcdir)/src/lib/cc/include.am $(srcdir)/src/lib/ctime/include.am $(srcdir)/src/lib/compress/include.am $(srcdir)/src/lib/conf/include.am $(srcdir)/src/lib/confmgt/include.am $(srcdir)/src/lib/container/include.am $(srcdir)/src/lib/crypt_ops/include.am $(srcdir)/src/lib/defs/include.am $(srcdir)/src/lib/dispatch/include.am $(srcdir)/src/lib/encoding/include.am $(srcdir)/src/lib/evloop/include.am $(srcdir)/src/lib/fdio/include.am $(srcdir)/src/lib/fs/include.am $(srcdir)/src/lib/geoip/include.am $(srcdir)/src/lib/include.libdonna.am $(srcdir)/src/lib/intmath/include.am $(srcdir)/src/lib/llharden/include.am $(srcdir)/src/lib/lock/include.am $(srcdir)/src/lib/log/include.am $(srcdir)/src/lib/malloc/include.am $(srcdir)/src/lib/math/include.am $(srcdir)/src/lib/memarea/include.am $(srcdir)/src/lib/meminfo/include.am $(srcdir)/src/lib/metrics/include.am $(srcdir)/src/lib/net/include.am $(srcdir)/src/lib/osinfo/include.am $(srcdir)/src/lib/process/include.am $(srcdir)/src/lib/pubsub/include.am $(srcdir)/src/lib/sandbox/include.am $(srcdir)/src/lib/string/include.am $(srcdir)/src/lib/subsys/include.am $(srcdir)/src/lib/smartlist_core/include.am $(srcdir)/src/lib/term/include.am $(srcdir)/src/lib/testsupport/include.am $(srcdir)/src/lib/thread/include.am $(srcdir)/src/lib/time/include.am $(srcdir)/src/lib/tls/include.am $(srcdir)/src/lib/trace/include.am $(srcdir)/src/lib/trace/usdt/include.am $(srcdir)/src/lib/trace/lttng/include.am $(srcdir)/src/lib/version/include.am $(srcdir)/src/lib/wallclock/include.am $(srcdir)/src/trunnel/include.am $(srcdir)/src/core/crypto/include.am $(srcdir)/src/core/mainloop/include.am $(srcdir)/src/core/or/include.am $(srcdir)/src/core/proto/include.am $(srcdir)/src/feature/api/include.am $(srcdir)/src/feature/client/include.am $(srcdir)/src/feature/control/include.am $(srcdir)/src/feature/dirauth/include.am $(srcdir)/src/feature/dircache/include.am $(srcdir)/src/feature/dirclient/include.am $(srcdir)/src/feature/dircommon/include.am $(srcdir)/src/feature/dirparse/include.am $(srcdir)/src/feature/hibernate/include.am $(srcdir)/src/feature/hs_common/include.am $(srcdir)/src/feature/hs/include.am $(srcdir)/src/feature/keymgt/include.am $(srcdir)/src/feature/metrics/include.am $(srcdir)/src/feature/nodelist/include.am $(srcdir)/src/feature/relay/include.am $(srcdir)/src/feature/rend/include.am $(srcdir)/src/feature/stats/include.am $(srcdir)/src/app/config/include.am $(srcdir)/src/app/main/include.am $(srcdir)/src/core/include.am $(srcdir)/src/app/include.am $(srcdir)/src/rust/include.am $(srcdir)/src/rust/tor_rust/include.am $(srcdir)/src/test/include.am $(srcdir)/src/tools/include.am $(srcdir)/src/win32/include.am $(srcdir)/src/config/include.am $(srcdir)/src/test/fuzz/include.am $(srcdir)/doc/include.am $(srcdir)/contrib/include.am $(am__configure_deps)
+$(srcdir)/Makefile.in:  $(srcdir)/Makefile.am $(srcdir)/src/include.am $(srcdir)/src/ext/include.am $(srcdir)/src/lib/arch/include.am $(srcdir)/src/lib/buf/include.am $(srcdir)/src/lib/err/include.am $(srcdir)/src/lib/cc/include.am $(srcdir)/src/lib/ctime/include.am $(srcdir)/src/lib/compress/include.am $(srcdir)/src/lib/conf/include.am $(srcdir)/src/lib/confmgt/include.am $(srcdir)/src/lib/container/include.am $(srcdir)/src/lib/crypt_ops/include.am $(srcdir)/src/lib/defs/include.am $(srcdir)/src/lib/dispatch/include.am $(srcdir)/src/lib/encoding/include.am $(srcdir)/src/lib/evloop/include.am $(srcdir)/src/lib/fdio/include.am $(srcdir)/src/lib/fs/include.am $(srcdir)/src/lib/geoip/include.am $(srcdir)/src/lib/include.libdonna.am $(srcdir)/src/lib/intmath/include.am $(srcdir)/src/lib/llharden/include.am $(srcdir)/src/lib/lock/include.am $(srcdir)/src/lib/log/include.am $(srcdir)/src/lib/malloc/include.am $(srcdir)/src/lib/math/include.am $(srcdir)/src/lib/memarea/include.am $(srcdir)/src/lib/meminfo/include.am $(srcdir)/src/lib/metrics/include.am $(srcdir)/src/lib/net/include.am $(srcdir)/src/lib/osinfo/include.am $(srcdir)/src/lib/process/include.am $(srcdir)/src/lib/pubsub/include.am $(srcdir)/src/lib/sandbox/include.am $(srcdir)/src/lib/string/include.am $(srcdir)/src/lib/subsys/include.am $(srcdir)/src/lib/smartlist_core/include.am $(srcdir)/src/lib/term/include.am $(srcdir)/src/lib/testsupport/include.am $(srcdir)/src/lib/thread/include.am $(srcdir)/src/lib/time/include.am $(srcdir)/src/lib/tls/include.am $(srcdir)/src/lib/trace/include.am $(srcdir)/src/lib/trace/usdt/include.am $(srcdir)/src/lib/trace/lttng/include.am $(srcdir)/src/lib/version/include.am $(srcdir)/src/lib/wallclock/include.am $(srcdir)/src/trunnel/include.am $(srcdir)/src/core/crypto/include.am $(srcdir)/src/core/mainloop/include.am $(srcdir)/src/core/or/include.am $(srcdir)/src/core/proto/include.am $(srcdir)/src/feature/api/include.am $(srcdir)/src/feature/client/include.am $(srcdir)/src/feature/control/include.am $(srcdir)/src/feature/dirauth/include.am $(srcdir)/src/feature/dircache/include.am $(srcdir)/src/feature/dirclient/include.am $(srcdir)/src/feature/dircommon/include.am $(srcdir)/src/feature/dirparse/include.am $(srcdir)/src/feature/hibernate/include.am $(srcdir)/src/feature/hs_common/include.am $(srcdir)/src/feature/hs/include.am $(srcdir)/src/feature/keymgt/include.am $(srcdir)/src/feature/metrics/include.am $(srcdir)/src/feature/nodelist/include.am $(srcdir)/src/feature/relay/include.am $(srcdir)/src/feature/rend/include.am $(srcdir)/src/feature/stats/include.am $(srcdir)/src/app/config/include.am $(srcdir)/src/app/main/include.am $(srcdir)/src/core/include.am $(srcdir)/src/app/include.am $(srcdir)/src/rust/include.am $(srcdir)/src/rust/tor_rust/include.am $(srcdir)/src/test/include.am $(srcdir)/src/win32/include.am $(srcdir)/src/config/include.am $(srcdir)/src/test/fuzz/include.am $(srcdir)/doc/include.am $(srcdir)/contrib/include.am $(am__configure_deps)
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
 	    *$$dep*) \
@@ -7367,7 +7225,7 @@ Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	    echo ' cd $(top_builddir) && $(SHELL) ./config.status $@ $(am__maybe_remake_depfiles)'; \
 	    cd $(top_builddir) && $(SHELL) ./config.status $@ $(am__maybe_remake_depfiles);; \
 	esac;
-$(srcdir)/src/include.am $(srcdir)/src/ext/include.am $(srcdir)/src/lib/arch/include.am $(srcdir)/src/lib/buf/include.am $(srcdir)/src/lib/err/include.am $(srcdir)/src/lib/cc/include.am $(srcdir)/src/lib/ctime/include.am $(srcdir)/src/lib/compress/include.am $(srcdir)/src/lib/conf/include.am $(srcdir)/src/lib/confmgt/include.am $(srcdir)/src/lib/container/include.am $(srcdir)/src/lib/crypt_ops/include.am $(srcdir)/src/lib/defs/include.am $(srcdir)/src/lib/dispatch/include.am $(srcdir)/src/lib/encoding/include.am $(srcdir)/src/lib/evloop/include.am $(srcdir)/src/lib/fdio/include.am $(srcdir)/src/lib/fs/include.am $(srcdir)/src/lib/geoip/include.am $(srcdir)/src/lib/include.libdonna.am $(srcdir)/src/lib/intmath/include.am $(srcdir)/src/lib/llharden/include.am $(srcdir)/src/lib/lock/include.am $(srcdir)/src/lib/log/include.am $(srcdir)/src/lib/malloc/include.am $(srcdir)/src/lib/math/include.am $(srcdir)/src/lib/memarea/include.am $(srcdir)/src/lib/meminfo/include.am $(srcdir)/src/lib/metrics/include.am $(srcdir)/src/lib/net/include.am $(srcdir)/src/lib/osinfo/include.am $(srcdir)/src/lib/process/include.am $(srcdir)/src/lib/pubsub/include.am $(srcdir)/src/lib/sandbox/include.am $(srcdir)/src/lib/string/include.am $(srcdir)/src/lib/subsys/include.am $(srcdir)/src/lib/smartlist_core/include.am $(srcdir)/src/lib/term/include.am $(srcdir)/src/lib/testsupport/include.am $(srcdir)/src/lib/thread/include.am $(srcdir)/src/lib/time/include.am $(srcdir)/src/lib/tls/include.am $(srcdir)/src/lib/trace/include.am $(srcdir)/src/lib/trace/usdt/include.am $(srcdir)/src/lib/trace/lttng/include.am $(srcdir)/src/lib/version/include.am $(srcdir)/src/lib/wallclock/include.am $(srcdir)/src/trunnel/include.am $(srcdir)/src/core/crypto/include.am $(srcdir)/src/core/mainloop/include.am $(srcdir)/src/core/or/include.am $(srcdir)/src/core/proto/include.am $(srcdir)/src/feature/api/include.am $(srcdir)/src/feature/client/include.am $(srcdir)/src/feature/control/include.am $(srcdir)/src/feature/dirauth/include.am $(srcdir)/src/feature/dircache/include.am $(srcdir)/src/feature/dirclient/include.am $(srcdir)/src/feature/dircommon/include.am $(srcdir)/src/feature/dirparse/include.am $(srcdir)/src/feature/hibernate/include.am $(srcdir)/src/feature/hs_common/include.am $(srcdir)/src/feature/hs/include.am $(srcdir)/src/feature/keymgt/include.am $(srcdir)/src/feature/metrics/include.am $(srcdir)/src/feature/nodelist/include.am $(srcdir)/src/feature/relay/include.am $(srcdir)/src/feature/rend/include.am $(srcdir)/src/feature/stats/include.am $(srcdir)/src/app/config/include.am $(srcdir)/src/app/main/include.am $(srcdir)/src/core/include.am $(srcdir)/src/app/include.am $(srcdir)/src/rust/include.am $(srcdir)/src/rust/tor_rust/include.am $(srcdir)/src/test/include.am $(srcdir)/src/tools/include.am $(srcdir)/src/win32/include.am $(srcdir)/src/config/include.am $(srcdir)/src/test/fuzz/include.am $(srcdir)/doc/include.am $(srcdir)/contrib/include.am $(am__empty):
+$(srcdir)/src/include.am $(srcdir)/src/ext/include.am $(srcdir)/src/lib/arch/include.am $(srcdir)/src/lib/buf/include.am $(srcdir)/src/lib/err/include.am $(srcdir)/src/lib/cc/include.am $(srcdir)/src/lib/ctime/include.am $(srcdir)/src/lib/compress/include.am $(srcdir)/src/lib/conf/include.am $(srcdir)/src/lib/confmgt/include.am $(srcdir)/src/lib/container/include.am $(srcdir)/src/lib/crypt_ops/include.am $(srcdir)/src/lib/defs/include.am $(srcdir)/src/lib/dispatch/include.am $(srcdir)/src/lib/encoding/include.am $(srcdir)/src/lib/evloop/include.am $(srcdir)/src/lib/fdio/include.am $(srcdir)/src/lib/fs/include.am $(srcdir)/src/lib/geoip/include.am $(srcdir)/src/lib/include.libdonna.am $(srcdir)/src/lib/intmath/include.am $(srcdir)/src/lib/llharden/include.am $(srcdir)/src/lib/lock/include.am $(srcdir)/src/lib/log/include.am $(srcdir)/src/lib/malloc/include.am $(srcdir)/src/lib/math/include.am $(srcdir)/src/lib/memarea/include.am $(srcdir)/src/lib/meminfo/include.am $(srcdir)/src/lib/metrics/include.am $(srcdir)/src/lib/net/include.am $(srcdir)/src/lib/osinfo/include.am $(srcdir)/src/lib/process/include.am $(srcdir)/src/lib/pubsub/include.am $(srcdir)/src/lib/sandbox/include.am $(srcdir)/src/lib/string/include.am $(srcdir)/src/lib/subsys/include.am $(srcdir)/src/lib/smartlist_core/include.am $(srcdir)/src/lib/term/include.am $(srcdir)/src/lib/testsupport/include.am $(srcdir)/src/lib/thread/include.am $(srcdir)/src/lib/time/include.am $(srcdir)/src/lib/tls/include.am $(srcdir)/src/lib/trace/include.am $(srcdir)/src/lib/trace/usdt/include.am $(srcdir)/src/lib/trace/lttng/include.am $(srcdir)/src/lib/version/include.am $(srcdir)/src/lib/wallclock/include.am $(srcdir)/src/trunnel/include.am $(srcdir)/src/core/crypto/include.am $(srcdir)/src/core/mainloop/include.am $(srcdir)/src/core/or/include.am $(srcdir)/src/core/proto/include.am $(srcdir)/src/feature/api/include.am $(srcdir)/src/feature/client/include.am $(srcdir)/src/feature/control/include.am $(srcdir)/src/feature/dirauth/include.am $(srcdir)/src/feature/dircache/include.am $(srcdir)/src/feature/dirclient/include.am $(srcdir)/src/feature/dircommon/include.am $(srcdir)/src/feature/dirparse/include.am $(srcdir)/src/feature/hibernate/include.am $(srcdir)/src/feature/hs_common/include.am $(srcdir)/src/feature/hs/include.am $(srcdir)/src/feature/keymgt/include.am $(srcdir)/src/feature/metrics/include.am $(srcdir)/src/feature/nodelist/include.am $(srcdir)/src/feature/relay/include.am $(srcdir)/src/feature/rend/include.am $(srcdir)/src/feature/stats/include.am $(srcdir)/src/app/config/include.am $(srcdir)/src/app/main/include.am $(srcdir)/src/core/include.am $(srcdir)/src/app/include.am $(srcdir)/src/rust/include.am $(srcdir)/src/rust/tor_rust/include.am $(srcdir)/src/test/include.am $(srcdir)/src/win32/include.am $(srcdir)/src/config/include.am $(srcdir)/src/test/fuzz/include.am $(srcdir)/doc/include.am $(srcdir)/contrib/include.am $(am__empty):
 
 $(top_builddir)/config.status: $(top_srcdir)/configure $(CONFIG_STATUS_DEPENDENCIES)
 	$(SHELL) ./config.status --recheck
@@ -10470,19 +10328,6 @@ src/test/fuzz/liboss-fuzz-vrs.a: $(src_test_fuzz_liboss_fuzz_vrs_a_OBJECTS) $(sr
 	$(AM_V_at)-rm -f src/test/fuzz/liboss-fuzz-vrs.a
 	$(AM_V_AR)$(src_test_fuzz_liboss_fuzz_vrs_a_AR) src/test/fuzz/liboss-fuzz-vrs.a $(src_test_fuzz_liboss_fuzz_vrs_a_OBJECTS) $(src_test_fuzz_liboss_fuzz_vrs_a_LIBADD)
 	$(AM_V_at)$(RANLIB) src/test/fuzz/liboss-fuzz-vrs.a
-src/tools/$(am__dirstamp):
-	@$(MKDIR_P) src/tools
-	@: > src/tools/$(am__dirstamp)
-src/tools/$(DEPDIR)/$(am__dirstamp):
-	@$(MKDIR_P) src/tools/$(DEPDIR)
-	@: > src/tools/$(DEPDIR)/$(am__dirstamp)
-src/tools/tor_runner.$(OBJEXT): src/tools/$(am__dirstamp) \
-	src/tools/$(DEPDIR)/$(am__dirstamp)
-
-src/tools/libtorrunner.a: $(src_tools_libtorrunner_a_OBJECTS) $(src_tools_libtorrunner_a_DEPENDENCIES) $(EXTRA_src_tools_libtorrunner_a_DEPENDENCIES) src/tools/$(am__dirstamp)
-	$(AM_V_at)-rm -f src/tools/libtorrunner.a
-	$(AM_V_AR)$(src_tools_libtorrunner_a_AR) src/tools/libtorrunner.a $(src_tools_libtorrunner_a_OBJECTS) $(src_tools_libtorrunner_a_LIBADD)
-	$(AM_V_at)$(RANLIB) src/tools/libtorrunner.a
 src/ext/trunnel/$(am__dirstamp):
 	@$(MKDIR_P) src/ext/trunnel
 	@: > src/ext/trunnel/$(am__dirstamp)
@@ -11242,36 +11087,6 @@ src/test/test_workqueue-test_workqueue.$(OBJEXT):  \
 src/test/test_workqueue$(EXEEXT): $(src_test_test_workqueue_OBJECTS) $(src_test_test_workqueue_DEPENDENCIES) $(EXTRA_src_test_test_workqueue_DEPENDENCIES) src/test/$(am__dirstamp)
 	@rm -f src/test/test_workqueue$(EXEEXT)
 	$(AM_V_CCLD)$(src_test_test_workqueue_LINK) $(src_test_test_workqueue_OBJECTS) $(src_test_test_workqueue_LDADD) $(LIBS)
-src/tools/tor_cov_gencert-tor-gencert.$(OBJEXT):  \
-	src/tools/$(am__dirstamp) src/tools/$(DEPDIR)/$(am__dirstamp)
-
-src/tools/tor-cov-gencert$(EXEEXT): $(src_tools_tor_cov_gencert_OBJECTS) $(src_tools_tor_cov_gencert_DEPENDENCIES) $(EXTRA_src_tools_tor_cov_gencert_DEPENDENCIES) src/tools/$(am__dirstamp)
-	@rm -f src/tools/tor-cov-gencert$(EXEEXT)
-	$(AM_V_CCLD)$(src_tools_tor_cov_gencert_LINK) $(src_tools_tor_cov_gencert_OBJECTS) $(src_tools_tor_cov_gencert_LDADD) $(LIBS)
-src/tools/tor_cov_resolve-tor-resolve.$(OBJEXT):  \
-	src/tools/$(am__dirstamp) src/tools/$(DEPDIR)/$(am__dirstamp)
-
-src/tools/tor-cov-resolve$(EXEEXT): $(src_tools_tor_cov_resolve_OBJECTS) $(src_tools_tor_cov_resolve_DEPENDENCIES) $(EXTRA_src_tools_tor_cov_resolve_DEPENDENCIES) src/tools/$(am__dirstamp)
-	@rm -f src/tools/tor-cov-resolve$(EXEEXT)
-	$(AM_V_CCLD)$(src_tools_tor_cov_resolve_LINK) $(src_tools_tor_cov_resolve_OBJECTS) $(src_tools_tor_cov_resolve_LDADD) $(LIBS)
-src/tools/tor-gencert.$(OBJEXT): src/tools/$(am__dirstamp) \
-	src/tools/$(DEPDIR)/$(am__dirstamp)
-
-src/tools/tor-gencert$(EXEEXT): $(src_tools_tor_gencert_OBJECTS) $(src_tools_tor_gencert_DEPENDENCIES) $(EXTRA_src_tools_tor_gencert_DEPENDENCIES) src/tools/$(am__dirstamp)
-	@rm -f src/tools/tor-gencert$(EXEEXT)
-	$(AM_V_CCLD)$(src_tools_tor_gencert_LINK) $(src_tools_tor_gencert_OBJECTS) $(src_tools_tor_gencert_LDADD) $(LIBS)
-src/tools/tor-print-ed-signing-cert.$(OBJEXT):  \
-	src/tools/$(am__dirstamp) src/tools/$(DEPDIR)/$(am__dirstamp)
-
-src/tools/tor-print-ed-signing-cert$(EXEEXT): $(src_tools_tor_print_ed_signing_cert_OBJECTS) $(src_tools_tor_print_ed_signing_cert_DEPENDENCIES) $(EXTRA_src_tools_tor_print_ed_signing_cert_DEPENDENCIES) src/tools/$(am__dirstamp)
-	@rm -f src/tools/tor-print-ed-signing-cert$(EXEEXT)
-	$(AM_V_CCLD)$(src_tools_tor_print_ed_signing_cert_LINK) $(src_tools_tor_print_ed_signing_cert_OBJECTS) $(src_tools_tor_print_ed_signing_cert_LDADD) $(LIBS)
-src/tools/tor-resolve.$(OBJEXT): src/tools/$(am__dirstamp) \
-	src/tools/$(DEPDIR)/$(am__dirstamp)
-
-src/tools/tor-resolve$(EXEEXT): $(src_tools_tor_resolve_OBJECTS) $(src_tools_tor_resolve_DEPENDENCIES) $(EXTRA_src_tools_tor_resolve_DEPENDENCIES) src/tools/$(am__dirstamp)
-	@rm -f src/tools/tor-resolve$(EXEEXT)
-	$(AM_V_CCLD)$(src_tools_tor_resolve_LINK) $(src_tools_tor_resolve_OBJECTS) $(src_tools_tor_resolve_LDADD) $(LIBS)
 install-binSCRIPTS: $(bin_SCRIPTS)
 	@$(NORMAL_INSTALL)
 	@list='$(bin_SCRIPTS)'; test -n "$(bindir)" || list=; \
@@ -11378,7 +11193,6 @@ mostlyclean-compile:
 	-rm -f src/lib/wallclock/*.$(OBJEXT)
 	-rm -f src/test/*.$(OBJEXT)
 	-rm -f src/test/fuzz/*.$(OBJEXT)
-	-rm -f src/tools/*.$(OBJEXT)
 	-rm -f src/trunnel/*.$(OBJEXT)
 	-rm -f src/trunnel/hs/*.$(OBJEXT)
 
@@ -12372,12 +12186,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@src/test/fuzz/$(DEPDIR)/liboss_fuzz_strops_a-fuzzing_common.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/test/fuzz/$(DEPDIR)/liboss_fuzz_vrs_a-fuzz_vrs.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/test/fuzz/$(DEPDIR)/liboss_fuzz_vrs_a-fuzzing_common.Po@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@src/tools/$(DEPDIR)/tor-gencert.Po@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@src/tools/$(DEPDIR)/tor-print-ed-signing-cert.Po@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@src/tools/$(DEPDIR)/tor-resolve.Po@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@src/tools/$(DEPDIR)/tor_cov_gencert-tor-gencert.Po@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@src/tools/$(DEPDIR)/tor_cov_resolve-tor-resolve.Po@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@src/tools/$(DEPDIR)/tor_runner.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/trunnel/$(DEPDIR)/libor_trunnel_a-channelpadding_negotiation.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/trunnel/$(DEPDIR)/libor_trunnel_a-circpad_negotiation.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/trunnel/$(DEPDIR)/libor_trunnel_a-ed25519_cert.Po@am__quote@ # am--include-marker
@@ -22084,34 +21892,6 @@ src/test/test_workqueue-test_workqueue.obj: src/test/test_workqueue.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='src/test/test_workqueue.c' object='src/test/test_workqueue-test_workqueue.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(src_test_test_workqueue_CPPFLAGS) $(CPPFLAGS) $(src_test_test_workqueue_CFLAGS) $(CFLAGS) -c -o src/test/test_workqueue-test_workqueue.obj `if test -f 'src/test/test_workqueue.c'; then $(CYGPATH_W) 'src/test/test_workqueue.c'; else $(CYGPATH_W) '$(srcdir)/src/test/test_workqueue.c'; fi`
-
-src/tools/tor_cov_gencert-tor-gencert.o: src/tools/tor-gencert.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(src_tools_tor_cov_gencert_CPPFLAGS) $(CPPFLAGS) $(src_tools_tor_cov_gencert_CFLAGS) $(CFLAGS) -MT src/tools/tor_cov_gencert-tor-gencert.o -MD -MP -MF src/tools/$(DEPDIR)/tor_cov_gencert-tor-gencert.Tpo -c -o src/tools/tor_cov_gencert-tor-gencert.o `test -f 'src/tools/tor-gencert.c' || echo '$(srcdir)/'`src/tools/tor-gencert.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) src/tools/$(DEPDIR)/tor_cov_gencert-tor-gencert.Tpo src/tools/$(DEPDIR)/tor_cov_gencert-tor-gencert.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='src/tools/tor-gencert.c' object='src/tools/tor_cov_gencert-tor-gencert.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(src_tools_tor_cov_gencert_CPPFLAGS) $(CPPFLAGS) $(src_tools_tor_cov_gencert_CFLAGS) $(CFLAGS) -c -o src/tools/tor_cov_gencert-tor-gencert.o `test -f 'src/tools/tor-gencert.c' || echo '$(srcdir)/'`src/tools/tor-gencert.c
-
-src/tools/tor_cov_gencert-tor-gencert.obj: src/tools/tor-gencert.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(src_tools_tor_cov_gencert_CPPFLAGS) $(CPPFLAGS) $(src_tools_tor_cov_gencert_CFLAGS) $(CFLAGS) -MT src/tools/tor_cov_gencert-tor-gencert.obj -MD -MP -MF src/tools/$(DEPDIR)/tor_cov_gencert-tor-gencert.Tpo -c -o src/tools/tor_cov_gencert-tor-gencert.obj `if test -f 'src/tools/tor-gencert.c'; then $(CYGPATH_W) 'src/tools/tor-gencert.c'; else $(CYGPATH_W) '$(srcdir)/src/tools/tor-gencert.c'; fi`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) src/tools/$(DEPDIR)/tor_cov_gencert-tor-gencert.Tpo src/tools/$(DEPDIR)/tor_cov_gencert-tor-gencert.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='src/tools/tor-gencert.c' object='src/tools/tor_cov_gencert-tor-gencert.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(src_tools_tor_cov_gencert_CPPFLAGS) $(CPPFLAGS) $(src_tools_tor_cov_gencert_CFLAGS) $(CFLAGS) -c -o src/tools/tor_cov_gencert-tor-gencert.obj `if test -f 'src/tools/tor-gencert.c'; then $(CYGPATH_W) 'src/tools/tor-gencert.c'; else $(CYGPATH_W) '$(srcdir)/src/tools/tor-gencert.c'; fi`
-
-src/tools/tor_cov_resolve-tor-resolve.o: src/tools/tor-resolve.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(src_tools_tor_cov_resolve_CPPFLAGS) $(CPPFLAGS) $(src_tools_tor_cov_resolve_CFLAGS) $(CFLAGS) -MT src/tools/tor_cov_resolve-tor-resolve.o -MD -MP -MF src/tools/$(DEPDIR)/tor_cov_resolve-tor-resolve.Tpo -c -o src/tools/tor_cov_resolve-tor-resolve.o `test -f 'src/tools/tor-resolve.c' || echo '$(srcdir)/'`src/tools/tor-resolve.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) src/tools/$(DEPDIR)/tor_cov_resolve-tor-resolve.Tpo src/tools/$(DEPDIR)/tor_cov_resolve-tor-resolve.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='src/tools/tor-resolve.c' object='src/tools/tor_cov_resolve-tor-resolve.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(src_tools_tor_cov_resolve_CPPFLAGS) $(CPPFLAGS) $(src_tools_tor_cov_resolve_CFLAGS) $(CFLAGS) -c -o src/tools/tor_cov_resolve-tor-resolve.o `test -f 'src/tools/tor-resolve.c' || echo '$(srcdir)/'`src/tools/tor-resolve.c
-
-src/tools/tor_cov_resolve-tor-resolve.obj: src/tools/tor-resolve.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(src_tools_tor_cov_resolve_CPPFLAGS) $(CPPFLAGS) $(src_tools_tor_cov_resolve_CFLAGS) $(CFLAGS) -MT src/tools/tor_cov_resolve-tor-resolve.obj -MD -MP -MF src/tools/$(DEPDIR)/tor_cov_resolve-tor-resolve.Tpo -c -o src/tools/tor_cov_resolve-tor-resolve.obj `if test -f 'src/tools/tor-resolve.c'; then $(CYGPATH_W) 'src/tools/tor-resolve.c'; else $(CYGPATH_W) '$(srcdir)/src/tools/tor-resolve.c'; fi`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) src/tools/$(DEPDIR)/tor_cov_resolve-tor-resolve.Tpo src/tools/$(DEPDIR)/tor_cov_resolve-tor-resolve.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='src/tools/tor-resolve.c' object='src/tools/tor_cov_resolve-tor-resolve.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(src_tools_tor_cov_resolve_CPPFLAGS) $(CPPFLAGS) $(src_tools_tor_cov_resolve_CFLAGS) $(CFLAGS) -c -o src/tools/tor_cov_resolve-tor-resolve.obj `if test -f 'src/tools/tor-resolve.c'; then $(CYGPATH_W) 'src/tools/tor-resolve.c'; else $(CYGPATH_W) '$(srcdir)/src/tools/tor-resolve.c'; fi`
 install-man1: $(nodist_man1_MANS)
 	@$(NORMAL_INSTALL)
 	@list1='$(nodist_man1_MANS)'; \
@@ -23015,8 +22795,6 @@ distclean-generic:
 	-rm -f src/test/$(am__dirstamp)
 	-rm -f src/test/fuzz/$(DEPDIR)/$(am__dirstamp)
 	-rm -f src/test/fuzz/$(am__dirstamp)
-	-rm -f src/tools/$(DEPDIR)/$(am__dirstamp)
-	-rm -f src/tools/$(am__dirstamp)
 	-rm -f src/trunnel/$(DEPDIR)/$(am__dirstamp)
 	-rm -f src/trunnel/$(am__dirstamp)
 	-rm -f src/trunnel/hs/$(DEPDIR)/$(am__dirstamp)
@@ -24021,12 +23799,6 @@ distclean: distclean-am
 	-rm -f src/test/fuzz/$(DEPDIR)/liboss_fuzz_strops_a-fuzzing_common.Po
 	-rm -f src/test/fuzz/$(DEPDIR)/liboss_fuzz_vrs_a-fuzz_vrs.Po
 	-rm -f src/test/fuzz/$(DEPDIR)/liboss_fuzz_vrs_a-fuzzing_common.Po
-	-rm -f src/tools/$(DEPDIR)/tor-gencert.Po
-	-rm -f src/tools/$(DEPDIR)/tor-print-ed-signing-cert.Po
-	-rm -f src/tools/$(DEPDIR)/tor-resolve.Po
-	-rm -f src/tools/$(DEPDIR)/tor_cov_gencert-tor-gencert.Po
-	-rm -f src/tools/$(DEPDIR)/tor_cov_resolve-tor-resolve.Po
-	-rm -f src/tools/$(DEPDIR)/tor_runner.Po
 	-rm -f src/trunnel/$(DEPDIR)/libor_trunnel_a-channelpadding_negotiation.Po
 	-rm -f src/trunnel/$(DEPDIR)/libor_trunnel_a-circpad_negotiation.Po
 	-rm -f src/trunnel/$(DEPDIR)/libor_trunnel_a-ed25519_cert.Po
@@ -25086,12 +24858,6 @@ maintainer-clean: maintainer-clean-am
 	-rm -f src/test/fuzz/$(DEPDIR)/liboss_fuzz_strops_a-fuzzing_common.Po
 	-rm -f src/test/fuzz/$(DEPDIR)/liboss_fuzz_vrs_a-fuzz_vrs.Po
 	-rm -f src/test/fuzz/$(DEPDIR)/liboss_fuzz_vrs_a-fuzzing_common.Po
-	-rm -f src/tools/$(DEPDIR)/tor-gencert.Po
-	-rm -f src/tools/$(DEPDIR)/tor-print-ed-signing-cert.Po
-	-rm -f src/tools/$(DEPDIR)/tor-resolve.Po
-	-rm -f src/tools/$(DEPDIR)/tor_cov_gencert-tor-gencert.Po
-	-rm -f src/tools/$(DEPDIR)/tor_cov_resolve-tor-resolve.Po
-	-rm -f src/tools/$(DEPDIR)/tor_runner.Po
 	-rm -f src/trunnel/$(DEPDIR)/libor_trunnel_a-channelpadding_negotiation.Po
 	-rm -f src/trunnel/$(DEPDIR)/libor_trunnel_a-circpad_negotiation.Po
 	-rm -f src/trunnel/$(DEPDIR)/libor_trunnel_a-ed25519_cert.Po
