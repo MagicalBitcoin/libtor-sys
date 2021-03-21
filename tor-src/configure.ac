@@ -4,7 +4,7 @@ dnl Copyright (c) 2007-2019, The Tor Project, Inc.
 dnl See LICENSE for licensing information
 
 AC_PREREQ([2.63])
-AC_INIT([tor],[0.4.5.6])
+AC_INIT([tor],[0.4.5.7])
 AC_CONFIG_SRCDIR([src/app/main/tor_main.c])
 AC_CONFIG_MACRO_DIR([m4])
 
@@ -16,7 +16,7 @@ configure_flags="$*"
 # version number changes.  Tor uses it to make sure that it
 # only shuts down for missing "required protocols" when those protocols
 # are listed as required by a consensus after this date.
-AC_DEFINE(APPROX_RELEASE_DATE, ["2021-02-15"], # for 0.4.5.6
+AC_DEFINE(APPROX_RELEASE_DATE, ["2021-03-15"], # for 0.4.5.7
           [Approximate date when this software was released. (Updated when the version changes.)])
 
 # "foreign" means we don't follow GNU package layout standards
@@ -1145,7 +1145,7 @@ AC_RUN_IFELSE([AC_LANG_SOURCE([AC_LANG_PROGRAM([[
 ]])])], [openssl_ver_mismatch=no], [
    # This is a kludge to figure out whether compilation failed, or whether
    # running the program failed.
-   if test "$ac_retval" == "1"; then
+   if test "$ac_retval" = "1"; then
       openssl_ver_mismatch=inconclusive
    else
       openssl_ver_mismatch=yes
@@ -2131,7 +2131,6 @@ AS_CASE([$malloc],
 
   [system], [
      # handle this later, including the jemalloc fallback
-    AC_CHECK_FUNCS(mallinfo)
   ],
 
   [AC_MSG_ERROR([--with-malloc=`$with_malloc' not supported, see --help])

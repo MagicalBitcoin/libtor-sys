@@ -6,7 +6,7 @@
 /* All assert failures are fatal */
 #undef ALL_BUGS_ARE_FATAL
 
-/* # for 0.4.5.6 Approximate date when this software was released. (Updated
+/* # for 0.4.5.7 Approximate date when this software was released. (Updated
    when the version changes.) */
 #undef APPROX_RELEASE_DATE
 
@@ -291,9 +291,6 @@
 
 /* Define to 1 if you have the `madvise' function. */
 #undef HAVE_MADVISE
-
-/* Define to 1 if you have the `mallinfo' function. */
-#undef HAVE_MALLINFO
 
 /* Define to 1 if you have the <malloc.h> header file. */
 #undef HAVE_MALLOC_H
