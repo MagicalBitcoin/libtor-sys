@@ -293,13 +293,13 @@ fn build_tor(libevent: Artifacts) {
             }
         }
 
-        println!("cargo:rustc-link-lib=static={}", "crypt32");
-        println!("cargo:rustc-link-lib=static={}", "iphlpapi");
-        println!("cargo:rustc-link-lib=static={}", "ws2_32");
-        println!("cargo:rustc-link-lib=static={}", "gdi32");
+        println!("cargo:rustc-link-lib={}", "crypt32");
+        println!("cargo:rustc-link-lib={}", "iphlpapi");
+        println!("cargo:rustc-link-lib={}", "ws2_32");
+        println!("cargo:rustc-link-lib={}", "gdi32");
 
-        println!("cargo:rustc-link-lib=static={}", "shell32");
-        println!("cargo:rustc-link-lib=static={}", "ssp");
+        println!("cargo:rustc-link-lib={}", "shell32");
+        println!("cargo:rustc-link-lib={}", "ssp");
 
         println!("cargo:rustc-link-lib={}", "shlwapi");
     }
