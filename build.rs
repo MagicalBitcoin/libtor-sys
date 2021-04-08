@@ -300,6 +300,8 @@ fn build_tor(libevent: Artifacts) {
 
         println!("cargo:rustc-link-lib=static={}", "shell32");
         println!("cargo:rustc-link-lib=static={}", "ssp");
+
+        println!("cargo:rustc-link-lib={}", "shlwapi");
     }
 
     fs::create_dir_all(tor.join("include")).unwrap();
