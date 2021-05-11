@@ -231,7 +231,7 @@ fn build_tor(libevent: Artifacts) {
         let zlib_include_dir = zlib_dir.join("include");
         cflags += &format!(" -I{}", zlib_include_dir.display());
 
-        zlib_dir.push("build");
+        zlib_dir.push("lib");
 
         config.with("zlib-dir", zlib_dir.to_str());
         // .env("CFLAGS", format!("-I{}", zlib_include_dir.display()));
