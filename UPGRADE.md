@@ -4,8 +4,7 @@
 patch -d tor-src -p0 < patches/tor-*
 
 # remove those, otherwise cargo skips those folders while packing the crate
-rm tor-src/src/rust/Cargo.toml
-rm tor-src/src/rust/tor_rust/Cargo.toml
+find tor-src -type f -name Cargo.toml -exec rm -vf '{}' \;
 
 cd tor-src
 sh autogen.sh
