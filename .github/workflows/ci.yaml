@@ -22,8 +22,8 @@ jobs:
           toolchain: ${{ matrix.channel }}
       - uses: actions-rs/cargo@v1
         with:
-          command: build
-          args: -vv --features=${{ matrix.features }}
+          command: test
+          args: -vv --features=${{ matrix.features }} --no-run
     strategy:
       matrix:
         channel: [stable, beta]
@@ -49,8 +49,8 @@ jobs:
       - run: brew install automake
       - uses: actions-rs/cargo@v1
         with:
-          command: build
-          args: --features=${{ matrix.features }} --target ${{ matrix.target }} -vv
+          command: test
+          args: --features=${{ matrix.features }} --target ${{ matrix.target }} -vv --no-run
     strategy:
       matrix:
         channel: [stable, beta]
@@ -82,8 +82,8 @@ jobs:
       - run: echo "$ANDROID_SDK_ROOT/ndk-bundle/toolchains/llvm/prebuilt/linux-x86_64/bin" >> $GITHUB_PATH
       - uses: actions-rs/cargo@v1
         with:
-          command: build
-          args: --features=${{ matrix.features }} --target ${{ matrix.target }} -vv
+          command: test
+          args: --features=${{ matrix.features }} --target ${{ matrix.target }} -vv --no-run
     strategy:
       matrix:
         channel: [stable, beta]
@@ -115,8 +115,8 @@ jobs:
       - run: sudo apt-get install -y gcc-mingw-w64-x86-64 gcc-mingw-w64-i686
       - uses: actions-rs/cargo@v1
         with:
-          command: build
-          args: --features=${{ matrix.features }} --target ${{ matrix.target }} -vv
+          command: test
+          args: --features=${{ matrix.features }} --target ${{ matrix.target }} -vv --no-run
     strategy:
       matrix:
         channel: [stable, beta]
