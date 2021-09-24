@@ -1,0 +1,10 @@
+--- ./src/core/proto/include.am
++++ ./src/core/proto/include.am
+@@ -3,7 +3,6 @@
+ LIBTOR_APP_A_SOURCES += 				\
+ 	src/core/proto/proto_cell.c		\
+ 	src/core/proto/proto_control0.c		\
+-	src/core/proto/proto_ext_or.c		\
+ 	src/core/proto/proto_haproxy.c		\
+ 	src/core/proto/proto_http.c		\
+ 	src/core/proto/proto_socks.c
