@@ -112,7 +112,7 @@ jobs:
           override: true
           toolchain: ${{ matrix.channel }}
           target: ${{ matrix.target }}
-      - run: sudo apt-get install -y gcc-mingw-w64-x86-64 gcc-mingw-w64-i686
+      - run: sudo apt-get install -y gcc-mingw-w64-x86-64 gcc-mingw-w64-i686 libnpth-mingw-w64-dev
       - uses: actions-rs/cargo@v1
         with:
           command: test
