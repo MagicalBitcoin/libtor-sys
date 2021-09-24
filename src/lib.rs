@@ -44,3 +44,12 @@ extern "C" {
     pub fn tor_main_configuration_free(config: *mut tor_main_configuration_t);
     pub fn tor_run_main(configuration: *const tor_main_configuration_t) -> c_int;
 }
+
+// 32-bit MingW toolchains have historically used SJLJ exception handling, but Rust uses Dwarf2,
+// which causes linking errors. Workaround this by providing a dummy exception handling callback.
+#[cfg(all(target_os = "windows", target_env = "gnu", target_pointer_width = "32"))]
+#[no_mangle]
+pub extern "C" fn _Unwind_Resume() {}
+#[cfg(all(target_os = "windows", target_env = "gnu", target_pointer_width = "32"))]
+#[no_mangle]
+pub extern "C" fn _Unwind_RaiseException() {}
