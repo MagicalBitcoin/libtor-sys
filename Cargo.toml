@@ -26,7 +26,7 @@ zstd-sys = { version = "1.6", optional = true }
 
 [build-dependencies]
 cc = "1.0"
-autotools = "0.2"
+autotools = "^0.2.2"
 fs_extra = "1.1"
 
 [lib]
