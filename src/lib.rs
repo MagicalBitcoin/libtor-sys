@@ -53,3 +53,25 @@ pub extern "C" fn _Unwind_Resume() {}
 #[cfg(all(target_os = "windows", target_env = "gnu", target_pointer_width = "32"))]
 #[no_mangle]
 pub extern "C" fn _Unwind_RaiseException() {}
+
+#[cfg(test)]
+mod test {
+    #[test]
+    fn test_tor_version() {
+        use super::*;
+        use std::ffi::CString;
+
+        let args = [
+            CString::new("tor").unwrap(),
+            CString::new("--version").unwrap(),
+        ];
+        let args_ptr = [args[0].as_ptr(), args[1].as_ptr()];
+
+        unsafe {
+            let config = tor_main_configuration_new();
+            tor_main_configuration_set_command_line(config, 2, args_ptr.as_ptr());
+            tor_run_main(config);
+            tor_main_configuration_free(config);
+        }
+    }
+}
