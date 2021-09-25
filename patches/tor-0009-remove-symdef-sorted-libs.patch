@@ -1,0 +1,16 @@
+--- ./scripts/build/combine_libs
++++ ./scripts/build/combine_libs
+@@ -26,6 +26,12 @@ for input in "$@"; do
+     mkdir "$dir"
+     cd "$dir">/dev/null
+     "${AR:-ar}" x "$abs"
++
++    # Delete the "__.SYMDEF SORTED" file if present, it will be generated
++    # by ranlib at the end on the combined library
++    if [ -f "__.SYMDEF SORTED" ]; then
++        rm -f "__.SYMDEF SORTED"
++    fi
+ done
+ 
+ cd "$TMPDIR" >/dev/null
+
