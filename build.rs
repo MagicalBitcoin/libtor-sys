@@ -157,6 +157,7 @@ fn build_tor(libevent: Artifacts) {
         .disable("module-relay", None)
         .disable("module-dircache", None)
         .disable("seccomp", None)
+        .disable("libscrypt", None)
         .disable("rust", None);
     let mut cflags = String::new();
     cflags += &format!(" {}", compiler.cflags_env().into_string().unwrap());
