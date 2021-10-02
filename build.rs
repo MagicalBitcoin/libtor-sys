@@ -258,6 +258,10 @@ fn build_tor(libevent: Artifacts) {
         println!("cargo:rustc-link-lib=static={}", "event_pthreads");
     }
 
+    println!("cargo:rustc-link-lib=static={}", "z");
+
+    println!("cargo:rustc-link-lib=static={}", "tor");
+
     if openssl_dir.is_some() {
         println!("cargo:rustc-link-lib=static={}", "crypto");
         println!("cargo:rustc-link-lib=static={}", "ssl");
@@ -265,10 +269,6 @@ fn build_tor(libevent: Artifacts) {
         println!("cargo:rustc-link-lib={}", "crypto");
         println!("cargo:rustc-link-lib={}", "ssl");
     }
-
-    println!("cargo:rustc-link-lib=static={}", "z");
-
-    println!("cargo:rustc-link-lib=static={}", "tor");
 
     if target.contains("windows") {
         // println!("cargo:rustc-link-search=native=/usr/i686-w64-mingw32/lib");
