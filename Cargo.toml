@@ -35,7 +35,7 @@ path = "src/lib.rs"
 
 [features]
 vendored-openssl = ["openssl-sys/vendored"]
-vendored-lzma = ["lzma-sys", "with-lzma"]
+vendored-lzma = ["lzma-sys", "lzma-sys/static", "with-lzma"]
 vendored-zstd = ["zstd-sys", "with-zstd"]
 with-lzma = []
 with-zstd = []
