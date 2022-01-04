@@ -287,13 +287,12 @@ fi
 #############################################################################
 # Determine the version of Tor.
 
-TOR_VERSION=$(grep -m 1 AC_INIT configure.ac | sed -e 's/.*\[//; s/\].*//;')
+TOR_VERSION=$(grep -m 1 AC_INIT "${CI_SRCDIR}"/configure.ac | sed -e 's/.*\[//; s/\].*//;')
 
 # Use variables like these when we need to behave differently depending on
 # Tor version.  Only create the variables we need.
 TOR_VER_AT_LEAST_043=no
 TOR_VER_AT_LEAST_044=no
-TOR_VER_AT_LEAST_046=no
 
 # These are the currently supported Tor versions; no need to work with anything
 # ancient in this script.
@@ -321,7 +320,6 @@ case "$TOR_VERSION" in
     0.4.6.*)
         TOR_VER_AT_LEAST_043=yes
         TOR_VER_AT_LEAST_044=yes
-        TOR_VER_AT_LEAST_046=yes
         ;;
 esac
 
@@ -470,10 +468,9 @@ fi
 
 if [[ "${STEM}" = "yes" ]]; then
    start_section "Stem"
-   EXCLUDE_TESTS=""
-   if [[ "${TOR_VER_AT_LEAST_046}" = 'yes' ]]; then
-     EXCLUDE_TESTS="--exclude-test control.controller.test_ephemeral_hidden_services_v2 --exclude-test control.controller.test_hidden_services_conf --exclude-test control.controller.test_with_ephemeral_hidden_services_basic_auth --exclude-test control.controller.test_without_ephemeral_hidden_services --exclude-test control.controller.test_with_ephemeral_hidden_services_basic_auth_no_credentials"
-   fi
+   # 0.3.5 and onward have now disabled onion service v2 so we need to exclude
+   # these Stem tests from now on.
+   EXCLUDE_TESTS="--exclude-test control.controller.test_ephemeral_hidden_services_v2 --exclude-test control.controller.test_hidden_services_conf --exclude-test control.controller.test_with_ephemeral_hidden_services_basic_auth --exclude-test control.controller.test_without_ephemeral_hidden_services --exclude-test control.controller.test_with_ephemeral_hidden_services_basic_auth_no_credentials"
    if [[ "${TOR_VER_AT_LEAST_044}" = 'yes' ]]; then
      # XXXX This should probably be part of some test-stem make target.
 
