@@ -87,7 +87,11 @@ fn build_libevent() -> Artifacts {
     let libevent = config.build();
 
     let mut libs = vec!["event".to_string()];
-    if !target.contains("windows") {
+    if target.contains("windows") {
+        // Statically link libssp-0.dll (part of mingw), otherwise it would have to be shipped
+        // together with the executable
+        println!("cargo:rustc-link-lib=static=ssp");
+    } else {
         // Windows targets don't build event_pthreads
         libs.push("event_pthreads".to_string());
     }
