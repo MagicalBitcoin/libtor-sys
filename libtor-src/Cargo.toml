@@ -1,0 +1,27 @@
+[package]
+name = "libtor-src"
+version = "46.9.1+0.4.6.9"
+authors = ["Alekos Filini <alekos.filini@gmail.com>"]
+license = "MIT"
+homepage = "https://github.com/MagicalBitcoin/libtor-sys"
+repository = "https://github.com/MagicalBitcoin/libtor-sys"
+documentation = "https://docs.rs/libtor-src/"
+description = "Source code of Tor and Libevent for libtor-sys"
+keywords = ["tor"]
+readme = "README.md"
+exclude = [
+    "tor-src/ChangeLog",
+    "tor-src/ReleaseNotes",
+]
+
+build = "build.rs"
+
+[dependencies]
+
+[build-dependencies]
+fs_extra = "1.1"
+
+[features]
+default = ["use-git-apply"]
+use-git-apply = []
+use-gnu-patch = []

@@ -1,13 +1,17 @@
 extern crate autotools;
 extern crate cc;
-extern crate fs_extra;
+extern crate libtor_src;
 
 use std::env;
 use std::fs;
-use std::path::{Path, PathBuf};
+use std::path::PathBuf;
 use std::process::Command;
 
-use fs_extra::dir::{copy, remove, CopyOptions};
+macro_rules! std_env_expected {
+    ($name:expr) => {{
+        std::env::var($name).expect(&format!("{} expected", $name))
+    }};
+}
 
 pub struct Artifacts {
     pub root: PathBuf,
@@ -27,47 +31,43 @@ impl Artifacts {
     }
 }
 
-pub fn autoreconf(path: &PathBuf) -> Result<(), Vec<u8>> {
-    match Command::new("autoreconf")
-        .current_dir(path)
-        .args(&["--force", "--install"])
-        .output()
-    {
-        Ok(output) => {
-            if !output.status.success() {
-                Err(output.stderr)
-            } else {
-                Ok(())
-            }
-        }
-        Err(e) => Err(format!("{:?}", e).as_bytes().to_vec()),
-    }
-}
+// pub fn autoreconf(path: &PathBuf) -> Result<(), Vec<u8>> {
+//     match Command::new("autoreconf")
+//         .current_dir(path)
+//         .args(&["--force", "--install"])
+//         .output()
+//     {
+//         Ok(output) => {
+//             if !output.status.success() {
+//                 Err(output.stderr)
+//             } else {
+//                 Ok(())
+//             }
+//         }
+//         Err(e) => Err(format!("{:?}", e).as_bytes().to_vec()),
+//     }
+// }
 
 fn build_libevent() -> Artifacts {
     // TODO: cmake on windows
-    let target = env::var("TARGET").expect("TARGET expected");
-    let host = env::var("HOST").expect("HOST expected");
+    let target = std_env_expected!("TARGET");
+    let host = std_env_expected!("HOST");
 
     let mut cc = cc::Build::new();
     cc.target(&target).host(&host);
     let compiler = cc.get_compiler();
-    let root = PathBuf::from(env::var("OUT_DIR").expect("OUT_DIR expected")).join("libevent");
-    fs::create_dir_all(&root).expect("Cannot create `libevent` in `OUT_DIR`");
 
-    let original_src = Path::new(env!("CARGO_MANIFEST_DIR")).join("libevent-src");
-    let path = Path::new(root.to_str().unwrap()).join("libevent-src");
-    if path.exists() {
-        remove(&path).expect("Unable to remove libevent's src folder");
-    }
-    copy(original_src, &root, &CopyOptions::new()).expect("Unable to copy libevent's src folder");
+    let root = PathBuf::from(env::var("OUT_DIR").expect("missing OUT_DIR")).join("libevent");
+    fs::create_dir_all(&root).expect("Cannot write to `OUT_DIR`");
 
-    if let Err(e) = autoreconf(&path) {
-        println!(
-            "cargo:warning=Failed to run `autoreconf`: {:?}",
-            String::from_utf8(e)
-        );
-    }
+    let path = libtor_src::get_libevent_dir();
+
+    // if let Err(e) = autoreconf(&path) {
+    //     println!(
+    //         "cargo:warning=Failed to run `autoreconf`: {:?}",
+    //         String::from_utf8(e)
+    //     );
+    // }
 
     let mut config = autotools::Config::new(path.clone());
     config
@@ -108,8 +108,8 @@ fn build_libevent() -> Artifacts {
 }
 
 fn build_tor(libevent: Artifacts) {
-    let target = env::var("TARGET").expect("TARGET expected");
-    let host = env::var("HOST").expect("HOST expected");
+    let target = std_env_expected!("TARGET");
+    let host = std_env_expected!("HOST");
 
     let mut cc = cc::Build::new();
     cc.target(&target).host(&host);
@@ -124,20 +124,14 @@ fn build_tor(libevent: Artifacts) {
     let lzma_dir = env::var("DEP_LZMA_ROOT").ok().map(PathBuf::from);
     let zstd_dir = env::var("DEP_ZSTD_ROOT").ok().map(PathBuf::from);
 
-    let original_src = Path::new(env!("CARGO_MANIFEST_DIR")).join("tor-src");
-    let root = PathBuf::from(env::var("OUT_DIR").expect("OUT_DIR expected"));
-    let path = PathBuf::from(root.to_str().unwrap()).join("tor-src");
-    if path.exists() {
-        remove(&path).expect("Unable to remove Tor's src folder");
-    }
-    copy(original_src, &root, &CopyOptions::new()).expect("Unable to copy Tor's src folder");
+    let path = libtor_src::get_tor_dir();
 
-    if let Err(e) = autoreconf(&path) {
-        println!(
-            "cargo:warning=Failed to run `autoreconf`: {:?}",
-            String::from_utf8(e)
-        );
-    }
+    // if let Err(e) = autoreconf(&path) {
+    //     println!(
+    //         "cargo:warning=Failed to run `autoreconf`: {:?}",
+    //         String::from_utf8(e)
+    //     );
+    // }
 
     // lzma and zstd are enabled by default, but it doesn't fail if it can't find it
     let mut config = autotools::Config::new(path.clone());
@@ -184,7 +178,7 @@ fn build_tor(libevent: Artifacts) {
             .enable("static-openssl", None);
     }
     if let Some(dir) = &lzma_dir {
-        let lzma_include = env::var("DEP_LZMA_INCLUDE").expect("Missing `DEP_LZMA_INCLUDE`");
+        let lzma_include = std_env_expected!("DEP_LZMA_INCLUDE");
 
         config.env("LZMA_CFLAGS", format!("-I{}", lzma_include));
         config.env("LZMA_LIBS", dir.join("liblzma.a").to_str().unwrap());
@@ -192,7 +186,7 @@ fn build_tor(libevent: Artifacts) {
         println!("cargo:rustc-link-lib=static={}", "lzma");
     }
     if let Some(dir) = &zstd_dir {
-        let lzma_include = env::var("DEP_ZSTD_INCLUDE").expect("Missing `DEP_ZSTD_INCLUDE`");
+        let lzma_include = std_env_expected!("DEP_ZSTD_INCLUDE");
 
         config.env("ZSTD_CFLAGS", format!("-I{}", lzma_include));
         config.env("ZSTD_LIBS", dir.join("libzstd.a").to_str().unwrap());
@@ -220,18 +214,13 @@ fn build_tor(libevent: Artifacts) {
             .to_str()
             .unwrap();
 
-        // provides stdin and stderr
-        cc::Build::new()
-            .file("fake-stdio/stdio.c")
-            .compile("libfakestdio.a");
-
         config
             .enable("android", None)
             .with("zlib-dir", Some(&sysroot_lib));
 
         println!("cargo:rustc-link-search=native={}", sysroot_lib);
     } else {
-        let mut zlib_dir = PathBuf::from(env::var("DEP_Z_ROOT").expect("DEP_Z_ROOT expected"));
+        let mut zlib_dir = PathBuf::from(std_env_expected!("DEP_Z_ROOT"));
 
         let zlib_include_dir = zlib_dir.join("include");
         cflags += &format!(" -I{}", zlib_include_dir.display());
@@ -318,8 +307,6 @@ fn build_tor(libevent: Artifacts) {
     println!("cargo:include={}/include", tor.to_str().unwrap());
 
     println!("cargo:rerun-if-changed=build.rs");
-    println!("cargo:rerun-if-changed=tor-src");
-    println!("cargo:rerun-if-changed=libevent-src");
 }
 
 fn main() {

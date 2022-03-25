@@ -9,11 +9,6 @@ documentation = "https://docs.rs/libtor-sys/"
 description = "Rust crate that internally compiles Tor and its dependencies"
 keywords = ["tor", "daemon"]
 readme = "README.md"
-exclude = [
-    "patches",
-    "tor-src/ChangeLog",
-    "tor-src/ReleaseNotes",
-]
 
 build = "build.rs"
 links = "tor"
@@ -25,9 +20,9 @@ lzma-sys = { version = "0.1", optional = true }
 zstd-sys = { version = "1.6", optional = true }
 
 [build-dependencies]
+libtor-src = { path = "./libtor-src" }
 cc = "1.0"
 autotools = "^0.2.2"
-fs_extra = "1.1"
 
 [lib]
 name = "tor_sys"
@@ -39,3 +34,6 @@ vendored-lzma = ["lzma-sys", "lzma-sys/static", "with-lzma"]
 vendored-zstd = ["zstd-sys", "with-zstd"]
 with-lzma = []
 with-zstd = []
+
+[workspace]
+members = ["libtor-src"]
