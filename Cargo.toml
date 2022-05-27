@@ -20,7 +20,7 @@ lzma-sys = { version = "0.1", optional = true }
 zstd-sys = { version = "1.6", optional = true }
 
 [build-dependencies]
-libtor-src = { path = "./libtor-src" }
+libtor-src = "47.7"
 cc = "1.0"
 autotools = "^0.2.2"
 
