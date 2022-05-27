@@ -1,8 +1,8 @@
 --- ./src/include.am
 +++ ./src/include.am
-@@ -87,7 +87,6 @@ include src/app/include.am
+@@ -86,7 +86,6 @@ include src/core/include.am
+ include src/app/include.am
  
- include src/rust/include.am
  include src/test/include.am
 -include src/tools/include.am
  include src/win32/include.am
