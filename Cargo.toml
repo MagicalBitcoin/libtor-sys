@@ -1,6 +1,6 @@
 [package]
 name = "libtor-sys"
-version = "47.7.0+0.4.7.x"
+version = "47.8.0+0.4.7.x"
 authors = ["Alekos Filini <alekos.filini@gmail.com>"]
 license = "MIT"
 homepage = "https://github.com/MagicalBitcoin/libtor-sys"
@@ -20,7 +20,7 @@ lzma-sys = { version = "0.1", optional = true }
 zstd-sys = { version = "1.6", optional = true }
 
 [build-dependencies]
-libtor-src = "47.7"
+libtor-src = "47.8"
 cc = "1.0"
 autotools = "^0.2.2"
 
