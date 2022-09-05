@@ -79,11 +79,28 @@ jobs:
           toolchain: ${{ matrix.channel }}
           target: ${{ matrix.target }}
       # Add NDK toolchain to `PATH`
-      - run: echo "$ANDROID_SDK_ROOT/ndk/21.4.7075529/toolchains/llvm/prebuilt/linux-x86_64/bin" >> $GITHUB_PATH
+      - run: echo "$ANDROID_NDK/toolchains/llvm/prebuilt/linux-x86_64/bin" >> $GITHUB_PATH
+      - run: echo "TARGET_AR=llvm-ar" >> $GITHUB_ENV
+      - run: echo "RUSTFLAGS=-C panic=abort" >> $GITHUB_ENV
+      - if: ${{ matrix.target == 'aarch64-linux-android' }}
+        run: |
+          echo "CC_aarch64_linux_android=aarch64-linux-android24-clang" >> $GITHUB_ENV
+          echo "RUSTFLAGS=-C panic=abort" >> $GITHUB_ENV
+      - if: ${{ matrix.target == 'armv7-linux-androideabi' }}
+        run: |
+          echo "CC_armv7_linux_androideabi=armv7a-linux-androideabi24-clang" >> $GITHUB_ENV
+          echo "RUSTFLAGS=-C panic=abort" >> $GITHUB_ENV
+      - if: ${{ matrix.target == 'i686-linux-android' }}
+        run: |
+          echo "CC_i686_linux_android=i686-linux-android24-clang" >> $GITHUB_ENV
+          echo "RUSTFLAGS=-C panic=abort" >> $GITHUB_ENV
+      - if: ${{ matrix.target == 'x86_64-linux-android' }}
+        run: |
+          echo "CC_x86_64_linux_android=x86_64-linux-android24-clang" >> $GITHUB_ENV
       - uses: actions-rs/cargo@v1
         with:
-          command: test
-          args: --features=${{ matrix.features }} --target ${{ matrix.target }} -vv --no-run
+          command: build
+          args: --features=${{ matrix.features }} --target ${{ matrix.target }} -vv
     strategy:
       matrix:
         channel: [stable, beta]
